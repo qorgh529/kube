@@ -4,7 +4,15 @@
 `0. 전체 흐름` 탭에서 전체 그림을 보고, `1` ~ `9` 탭을 차례로 넘기면 단계별 진행 상황을 볼 수 있습니다.
 각 단계에서 동작 중인 컴포넌트는 **주황색 테두리**로, 데이터가 오가는 화살표는 **빨간색 애니메이션**으로 표시됩니다.
 
-## 여는 방법
+## HTML 버전 (추천)
+
+`pod-creation-flow.html` 을 브라우저로 열면 바로 볼 수 있습니다 (인터넷 연결 불필요, 파일 하나로 동작).
+
+- 위쪽 단계 버튼을 누르거나 **◀ 이전 / 다음 ▶**, 키보드 **← →** 로 이동
+- **▶ 자동 재생**(또는 Space)을 누르면 ①~⑨ 단계가 4.5초 간격으로 자동으로 진행됩니다
+- 진행 중인 요청은 움직이는 빨간 화살표, 일하는 컴포넌트는 주황 테두리로 표시되고 Pod 상태가 단계별로 바뀝니다
+
+## draw.io 버전 여는 방법
 
 1. https://app.diagrams.net 접속 → `File > Open from > Device` → `pod-creation-flow.drawio` 선택
    (또는 VS Code 의 *Draw.io Integration* 확장으로 바로 열기)
@@ -56,8 +64,9 @@ spec:
 
 ## 다이어그램 수정
 
-다이어그램은 `generate.py` 로 생성됩니다. 단계 설명이나 배치를 바꾸려면 스크립트를 수정한 뒤 다시 실행하세요.
+두 파일 모두 `generate.py` 의 단계 데이터(`STEPS`)로 생성됩니다. 단계 설명이나 배치를 바꾸려면 스크립트를 수정한 뒤 다시 실행하세요.
 
 ```bash
-python3 generate.py   # → pod-creation-flow.drawio
+python3 generate.py        # → pod-creation-flow.drawio
+python3 generate_html.py   # → pod-creation-flow.html
 ```
