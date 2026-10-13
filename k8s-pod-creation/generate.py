@@ -18,20 +18,41 @@ NODE_Y = [90, 310, 530]
 # objects: etcd 에 저장된 오브젝트 상태, pods: 워커 노드 위 Pod 상태
 STEPS = [
     dict(
-        tab="0. 전체 흐름",
-        title="전체 흐름 한눈에 보기 (①~⑨)",
+        tab="전체 흐름",
+        title="전체 흐름 한눈에 보기 (⓪~⑩)",
         active_nodes=[], active_edges="ALL",
         objects="final", pods="running",
         desc=(
             "<b>명령:</b> <code>kubectl apply -f nginx-deploy.yaml</code> (replicas: 6) "
-            "또는 <code>kubectl create deployment nginx --image=nginx --replicas=6</code><br><br>"
-            "① kubectl → API Server 요청 &nbsp; ② 인증/인가/Admission &nbsp; ③ etcd 저장 후 응답 &nbsp; "
+            "또는 <code>kubectl create deployment nginx --image=nginx --replicas=6</code> "
+            "&nbsp;|&nbsp; <b>환경:</b> Google Cloud(GCE VM 3대, asia-northeast3 a/b/c)<br><br>"
+            "⓪ (사전) cloud-controller-manager 가 GCP API 로 노드 초기화 &nbsp; ① kubectl → API Server 요청 &nbsp; ② 인증/인가/Admission &nbsp; ③ etcd 저장 후 응답 &nbsp; "
             "④ Deployment Controller → ReplicaSet 생성 &nbsp; ⑤ ReplicaSet Controller → Pod 6개 생성<br>"
             "⑥ Scheduler → 노드 배정(Binding) &nbsp; ⑦ kubelet 이 자기 노드의 Pod 감지 &nbsp; "
-            "⑧ CRI(containerd)·CNI 로 컨테이너 실행 &nbsp; ⑨ 상태 보고 → Running 6/6<br><br>"
+            "⑧ CRI(containerd)·CNI 로 컨테이너 실행 &nbsp; ⑨ 상태 보고 → Running 6/6<br>"
+            "⑩ (확장) Service type=LoadBalancer → cloud-controller-manager 가 GCP Load Balancer 생성<br><br>"
             "<b>핵심:</b> 모든 컴포넌트는 서로 직접 대화하지 않고 <b>오직 kube-apiserver 를 통해서만</b> 통신하며, "
             "각자 API Server 를 <b>watch</b> 하다가 '원하는 상태(desired)'와 '현재 상태(current)'의 차이를 메우는 "
-            "<b>Reconciliation Loop</b> 로 동작합니다. 아래 탭(페이지)을 순서대로 넘겨 보세요."
+            "<b>Reconciliation Loop</b> 로 동작합니다. 클라우드(GCP)와 대화하는 것은 "
+            "<b>cloud-controller-manager</b> 뿐입니다. 탭(페이지)을 순서대로 넘겨 보세요."
+        ),
+    ),
+    dict(
+        tab="0. 노드 준비",
+        title="⓪ (사전 단계) cloud-controller-manager 가 GCP 로 노드 초기화",
+        active_nodes=["ccm", "gcp", "kubelet0", "kubelet1", "kubelet2"],
+        active_edges=["e_ccm", "e_gcp", "e_kl0", "e_kl1", "e_kl2"],
+        objects="nodes", pods="none",
+        edge_labels={"e_ccm": "⓪ watch Node<br>→ 라벨·taint 갱신", "e_gcp": "⓪ GCE API<br>VM 조회",
+                     **{f"e_kl{i}": "⓪ Node 등록<br>(uninitialized taint)" for i in range(3)}},
+        desc=(
+            "• kubectl 명령 <b>이전에</b> 이미 끝나 있는 일: GCE VM 이 부팅되면 kubelet 이 <code>--cloud-provider=external</code> 로 "
+            "자신을 Node 로 등록 → taint <code>node.cloudprovider.kubernetes.io/uninitialized</code> 가 붙어 Pod 배정 불가<br>"
+            "• <b>cloud-controller-manager(CCM)</b> 의 <b>Node Controller</b> 가 새 Node 를 감지 → <b>GCP Compute Engine API</b> 로 VM 조회<br>"
+            "• Node 에 <code>spec.providerID: gce://my-project/asia-northeast3-a/node-1</code>, 내부/외부 IP, "
+            "<code>topology.kubernetes.io/zone</code>·<code>node.kubernetes.io/instance-type</code> 라벨 기록 후 taint 제거 → Ready<br>"
+            "• <b>Route Controller</b> 는 노드별 Pod CIDR(10.244.x.0/24) 을 <b>VPC Route</b> 로 등록, VM 이 삭제되면 Node Lifecycle 이 Node 오브젝트 정리<br>"
+            "• kube-controller-manager(c-m) 는 클라우드를 모른다. <b>클라우드 의존 로직은 CCM 으로 분리</b>되어 있다(GKE 에서는 Google 이 관리)."
         ),
     ),
     dict(
@@ -110,7 +131,8 @@ STEPS = [
             "• Scheduler 는 <code>spec.nodeName</code> 이 빈 Pod 을 watch → 스케줄링 큐에 6개 적재<br>"
             "• <b>Filtering</b>: CPU/메모리 requests 여유, nodeSelector, Affinity, Taint/Toleration, 포트 충돌 등으로 후보 노드 거르기<br>"
             "• <b>Scoring</b>: 리소스 균형, Pod 분산(topology spread), 이미지 존재 여부 등으로 점수 → 최고점 노드 선택<br>"
-            "• <b>Binding</b>: API Server 에 Binding 요청 → Pod 의 nodeName 이 node-1/2/3 으로 기록 (예: 노드당 2개)<br>"
+            "• <b>Binding</b>: API Server 에 Binding 요청 → Pod 의 nodeName 이 node-1/2/3 으로 기록 (존마다 2개씩)<br>"
+            "• ⓪ 에서 CCM 이 붙인 <code>topology.kubernetes.io/zone</code> 라벨 덕분에 Pod 을 <b>존(a/b/c)별로 분산</b>할 수 있다<br>"
             "• Scheduler 는 '어디에 둘지'만 결정한다. 실제 실행은 하지 않는다."
         ),
     ),
@@ -158,6 +180,25 @@ STEPS = [
             "• <code>kubectl get pods</code> → <b>6개 Pod 모두 Running</b>. 이후 Pod 하나가 죽으면 ⑤부터 다시 반복(자가 치유)."
         ),
     ),
+    dict(
+        tab="10. LB 노출",
+        title="⑩ (확장) Service type=LoadBalancer → CCM 이 GCP Load Balancer 생성",
+        active_nodes=["kubectl", "ccm", "gcp", "kp0", "kp1", "kp2", "objects"],
+        active_edges=["e_kubectl", "e_ccm", "e_gcp", "e_kl0", "e_kl1", "e_kl2"],
+        objects="service", pods="running",
+        edge_labels={"e_kubectl": "⑩ kubectl expose<br>--type=LoadBalancer", "e_ccm": "⑩ watch Service<br>→ status.loadBalancer",
+                     "e_gcp": "⑩ LB·방화벽<br>생성",
+                     **{f"e_kl{i}": "⑩ EndpointSlice watch<br>(kube-proxy)" for i in range(3)}},
+        desc=(
+            "• 6개 Pod 을 외부에 공개: <code>kubectl expose deployment nginx --type=LoadBalancer --port=80</code> → Service 가 etcd 에 저장<br>"
+            "• EndpointSlice Controller 가 Ready 상태인 Pod IP 6개를 EndpointSlice 에 등록, 각 노드의 <b>kube-proxy</b> 가 iptables/IPVS 규칙 갱신<br>"
+            "• CCM 의 <b>Service Controller</b> 가 type=LoadBalancer 를 감지 → <b>GCP API</b> 로 외부 IP, Forwarding Rule, "
+            "Backend(인스턴스 그룹/NEG), Health Check, Firewall Rule 생성<br>"
+            "• 생성된 외부 IP 를 <code>status.loadBalancer.ingress</code> 에 기록 → <code>kubectl get svc</code> 의 EXTERNAL-IP 가 "
+            "<code>&lt;pending&gt;</code> 에서 <b>34.64.x.x</b> 로 바뀜<br>"
+            "• 트래픽 경로: 인터넷 → GCP Load Balancer → 노드 → kube-proxy 규칙 → 6개 nginx Pod 중 하나"
+        ),
+    ),
 ]
 
 # 전체 화면(0번 탭)의 화살표 라벨
@@ -167,7 +208,9 @@ OVERVIEW_LABELS = {
     "e_etcd": "③④⑤⑥⑨ 읽기/쓰기",
     "e_cm": "④ ReplicaSet 생성<br>⑤ Pod × 6 생성",
     "e_sched": "⑥ Binding<br>(nodeName 지정)",
-    **{f"e_kl{i}": "⑦ watch / ⑨ status" for i in range(3)},
+    **{f"e_kl{i}": "⓪⑦⑨ watch / status" for i in range(3)},
+    "e_ccm": "⓪ 노드 초기화<br>⑩ LB 상태 기록",
+    "e_gcp": "⓪⑩<br>GCP API",
     **{f"e_cri{i}": "⑧ CRI" for i in range(3)},
 }
 
@@ -210,6 +253,8 @@ class Page:
         else:
             on = cid in self.s["active_edges"]
             label = self.s.get("edge_labels", {}).get(cid, "") if on else ""
+            if cid in ("e_kl0", "e_kl2"):
+                label = ""
             color, width, anim = (C_EDGE_ACTIVE, 3, 1) if on else (C_EDGE_IDLE, 1.5, 0)
         st = (f"edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;"
               f"strokeColor={color};strokeWidth={width};flowAnimation={anim};fontSize=11;"
@@ -241,7 +286,7 @@ class Page:
             self.vertex(f"chip{k}", st["tab"],
                         f"rounded=1;html=1;arcSize=40;fillColor={fill};strokeColor=none;fontColor={font};"
                         f"fontSize=12;fontStyle={1 if cur else 0};",
-                        30 + k * 154, 46, 148, 28)
+                        30 + k * 129, 46, 123, 28)
 
         # 클라이언트
         self.vertex("client", "", box_style("#F8F9FA", "#868E96", self.active("client"),
@@ -261,9 +306,23 @@ class Page:
                     "rounded=1;html=1;whiteSpace=wrap;fillColor=#FFF9DB;strokeColor=#FAB005;fontSize=10;",
                     65, 400, 150, 40)
 
+        # 클라우드(GCP) API — 클러스터 바깥
+        self.vertex("gcp", "<b style='font-size:14px'>☁ Cloud Provider API</b><br>"
+                    "<b style='color:#1A73E8'>Google Cloud (GCP)</b><br><br>"
+                    "<div style='text-align:left;font-size:11px;line-height:1.6'>"
+                    "• Compute Engine API (VM = 노드)<br>• VPC Routes · Firewall<br>"
+                    "• Cloud Load Balancing<br>• Persistent Disk (CSI)</div>",
+                    box_style("#E8F0FE", "#4285F4", self.active("gcp"), "strokeWidth=2;"), 30, 520, 195, 230)
+
+        # 쿠버네티스 클러스터 경계
+        self.vertex("cluster", "", "rounded=1;html=1;arcSize=2;fillColor=none;strokeColor=#868E96;dashed=1;"
+                    "strokeWidth=1.5;", 278, 82, 1302, 778)
+        self.vertex("cluster_lbl", "<b>☸ Kubernetes cluster</b> <span style='font-size:11px'>(Google Cloud 위 GCE VM)</span>",
+                    "text;html=1;fontSize=14;fontColor=#495057;align=right;", 1080, 820, 480, 26)
+
         # 컨트롤 플레인
         self.vertex("cp", "", "rounded=1;html=1;arcSize=3;fillColor=#EDF2FF;strokeColor=#4263EB;"
-                    "strokeWidth=2;", 290, 90, 650, 650)
+                    "strokeWidth=2;", 290, 90, 650, 760)
         self.vertex("cp_lbl", "<b>☸ Control Plane (Master Node)</b>",
                     "text;html=1;fontSize=15;fontColor=#364FC7;align=left;", 305, 95, 400, 28)
 
@@ -294,20 +353,25 @@ class Page:
         self.vertex("objects", self.objects_html(),
                     box_style("#FFFFFF", "#0CA678", self.active("objects"),
                               "align=left;verticalAlign=top;spacingLeft=8;spacingTop=4;fontSize=11;dashed=1;"),
-                    310, 530, 360, 190)
+                    310, 640, 360, 195)
+
+        self.vertex("ccm", "<b>cloud-controller-manager</b> <span style='font-size:11px'>(c-c-m, GCP)</span><br>"
+                    "<span style='font-size:11px'>Node · Route · Service Controller<br>클라우드와 대화하는 유일한 컴포넌트</span>",
+                    box_style("#E8F0FE", "#4285F4", self.active("ccm")), 310, 530, 360, 90)
 
         # 워커 노드
         for n, y in enumerate(NODE_Y):
             self.vertex(f"node{n}", "", "rounded=1;html=1;arcSize=4;fillColor=#F4FCE3;strokeColor=#5C940D;"
                         "strokeWidth=2;", 990, y, 580, 200)
-            self.vertex(f"node{n}_lbl", f"<b>🖥 Worker Node-{n + 1}</b>",
-                        "text;html=1;fontSize=13;fontColor=#2B8A3E;align=left;", 1000, y + 4, 200, 24)
+            self.vertex(f"node{n}_lbl", f"<b>🖥 Worker Node-{n + 1}</b> <span style='font-size:11px;color:#5C940D'>"
+                        f"GCE VM · e2-standard-4 · asia-northeast3-{'abc'[n]}</span>",
+                        "text;html=1;fontSize=13;fontColor=#2B8A3E;align=left;", 1000, y + 4, 470, 24)
             self.vertex(f"kubelet{n}", "<b>kubelet</b><br><span style='font-size:10px'>노드 에이전트</span>",
                         box_style("#FFF4E6", "#F76707", self.active(f"kubelet{n}")), 1010, y + 40, 150, 55)
             self.vertex(f"rt{n}", "<b>Container Runtime</b><br><span style='font-size:10px'>containerd + CNI</span>",
                         box_style("#E3FAFC", "#1098AD", self.active(f"rt{n}")), 1010, y + 125, 150, 55)
-            self.vertex(f"kp{n}", "kube-proxy", "rounded=1;html=1;fillColor=#F8F9FA;strokeColor=#ADB5BD;"
-                        "fontSize=10;fontColor=#868E96;", 1200, y + 6, 80, 22)
+            self.vertex(f"kp{n}", "kube-proxy", box_style("#F8F9FA", "#ADB5BD", self.active(f"kp{n}"),
+                                                          "fontSize=10;fontColor=#495057;"), 1480, y + 6, 80, 24)
             for p in range(2):
                 self.pod(n, p, 1230 + p * 170, y + 35)
 
@@ -324,6 +388,10 @@ class Page:
                   "exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.2;entryY=0;entryDx=0;entryDy=0;", both=True)
         self.edge("e_sched", "sched", "apiserver",
                   "exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.8;entryY=0;entryDx=0;entryDy=0;", both=True)
+        self.edge("e_ccm", "ccm", "apiserver",
+                  "exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.12;entryY=1;entryDx=0;entryDy=0;", both=True)
+        self.edge("e_gcp", "ccm", "gcp",
+                  "exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.24;entryDx=0;entryDy=0;")
         for n, y in enumerate(NODE_Y):
             ky = y + 67
             self.edge(f"e_kl{n}", "apiserver", f"kubelet{n}",
@@ -340,11 +408,11 @@ class Page:
         # 설명 패널
         self.vertex("desc", f"<b style='font-size:15px;color:{C_ACTIVE}'>{s['title']}</b><br><br>{s['desc']}",
                     "rounded=1;html=1;whiteSpace=wrap;arcSize=4;fillColor=#FFFFFF;strokeColor=#ADB5BD;"
-                    "align=left;verticalAlign=top;spacing=14;fontSize=13;", 30, 760, 1540, 200)
+                    "align=left;verticalAlign=top;spacing=14;fontSize=13;", 30, 875, 1540, 215)
         if self.i != 0:
-            nxt = "다음 단계 ▶ 아래 탭에서 다음 페이지" if self.i < len(STEPS) - 1 else "끝 ✔ 6/6 Running"
+            nxt = "다음 단계 ▶ 아래 탭에서 다음 페이지" if self.i < len(STEPS) - 1 else "끝 ✔ 외부 IP 로 6개 Pod 서비스"
             self.vertex("hint", nxt, "text;html=1;fontSize=11;fontColor=#868E96;align=right;",
-                        1270, 962, 300, 20)
+                        1270, 1092, 300, 20)
         return self.root
 
     def pod(self, n, p, x, y):
@@ -375,9 +443,15 @@ class Page:
     def objects_html(self):
         o = self.s["objects"]
         head = "<b style='font-size:12px'>📦 etcd 에 저장된 오브젝트</b><br>"
+        node = ("✔ Node × 3 — <b style='color:#2B8A3E'>Ready</b>, zone a/b/c, "
+                "providerID <code>gce://…</code>")
+        if o == "nodes":
+            return head + ("✔ Node × 3 — <b style='color:#1A73E8'>초기화 중</b> "
+                           "(uninitialized taint → 제거)<br>"
+                           "<span style='color:#ADB5BD'>Deployment · ReplicaSet · Pod 없음</span>")
         if o == "none":
-            return head + "<br><span style='color:#ADB5BD'>(아직 아무것도 저장되지 않음)</span>"
-        lines = ["✔ Deployment <b>nginx</b> (replicas: 6)"]
+            return head + node + "<br><span style='color:#ADB5BD'>Deployment 아직 없음</span>"
+        lines = [node, "✔ Deployment <b>nginx</b> (replicas: 6)"]
         if o == "deploy":
             lines.append("<span style='color:#ADB5BD'>ReplicaSet 없음 · Pod 0개</span>")
         if o != "deploy":
@@ -393,8 +467,12 @@ class Page:
         }.get(o)
         if pod_line:
             lines.append(pod_line)
-        if o == "final":
+        if o in ("final", "service"):
             lines.append("✔ Deployment status: <b>6/6 AVAILABLE</b>")
+        if o == "service":
+            lines.append("✔ Pod × 6 — <b style='color:#2B8A3E'>Running, Ready 6/6</b>")
+            lines.append("✔ Service <b>nginx</b> (LoadBalancer) — EXTERNAL-IP <b style='color:#1A73E8'>34.64.x.x</b>")
+            lines.append("✔ EndpointSlice — Pod IP × 6")
         return head + "<br>".join(lines)
 
 
@@ -404,7 +482,7 @@ def main():
         d = ET.SubElement(mxfile, "diagram", id=f"step-{i}", name=step["tab"])
         model = ET.SubElement(d, "mxGraphModel", dx="1600", dy="1050", grid="0", gridSize="10",
                               guides="1", tooltips="1", connect="1", arrows="1", fold="1", page="1",
-                              pageScale="1", pageWidth="1600", pageHeight="1000", math="0", shadow="0",
+                              pageScale="1", pageWidth="1600", pageHeight="1120", math="0", shadow="0",
                               background="#FFFFFF")
         model.append(Page(i, step).build())
     ET.indent(mxfile)

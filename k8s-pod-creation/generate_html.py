@@ -11,7 +11,7 @@ from generate import STEPS, Page
 OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "pod-creation-flow.html")
 
 # 다이어그램 영역 (draw.io 좌표계 기준) — 제목·탭·설명은 HTML 로 따로 그린다
-VX, VY, VW, VH = 20, 85, 1560, 665
+VX, VY, VW, VH = 20, 78, 1560, 785
 SKIP = ("title", "desc", "hint")
 
 
@@ -147,7 +147,7 @@ TEMPLATE = r"""<!doctype html>
   .sub { color: var(--muted); font-size: 14px; margin: 0 0 16px; }
   .sub code { background: #EEF0F3; padding: 1px 6px; border-radius: 4px; }
 
-  .chips { display: grid; grid-template-columns: repeat(10, 1fr); gap: 6px; margin-bottom: 12px; }
+  .chips { display: grid; grid-template-columns: repeat(12, 1fr); gap: 6px; margin-bottom: 12px; }
   .chip { border: 0; border-radius: 999px; padding: 8px 4px; font: inherit; font-size: 12.5px; cursor: pointer;
           background: #E9ECEF; color: #495057; transition: background .25s, color .25s; white-space: nowrap;
           overflow: hidden; text-overflow: ellipsis; }
@@ -189,7 +189,7 @@ TEMPLATE = r"""<!doctype html>
   .desc { margin-top: 14px; background: var(--panel); border: 1px solid var(--line); border-left: 5px solid var(--accent);
           border-radius: 12px; padding: 16px 20px; font-size: 15px; line-height: 1.75; }
   .desc h2 { margin: 0 0 8px; font-size: 18px; color: var(--accent); }
-  .desc code { background: #F1F3F5; padding: 1px 6px; border-radius: 4px; font-size: 13.5px;
+  .desc code { background: #F1F3F5; padding: 1px 6px; border-radius: 4px; font-size: 13.5px; overflow-wrap: anywhere;
                font-family: ui-monospace, Menlo, Consolas, monospace; }
   .legend { display: flex; gap: 18px; flex-wrap: wrap; color: var(--muted); font-size: 12.5px; margin-top: 10px; }
   .legend span::before { content: ""; display: inline-block; width: 22px; height: 0; vertical-align: middle;
@@ -199,7 +199,7 @@ TEMPLATE = r"""<!doctype html>
   .legend .l3::before { width: 14px; height: 10px; border: 3px solid var(--accent); border-radius: 3px; }
 
   @media (max-width: 900px) {
-    .chips { grid-template-columns: repeat(5, 1fr); }
+    .chips { grid-template-columns: repeat(4, 1fr); }
     .ctl .hint { display: none; }
     .ctl .title { width: 100%; margin: 4px 0 0; font-size: 15px; }
     .desc { font-size: 14px; padding: 14px; }
@@ -213,7 +213,7 @@ TEMPLATE = r"""<!doctype html>
 <body>
 <div class="wrap">
   <h1>kubectl 로 Pod 6개를 만들 때 쿠버네티스 클러스터 안에서 일어나는 일</h1>
-  <p class="sub"><code>kubectl apply -f nginx-deploy.yaml</code> (Deployment, replicas: 6) — 단계를 눌러 보거나 ▶ 자동 재생을 켜 보세요.</p>
+  <p class="sub"><code>kubectl apply -f nginx-deploy.yaml</code> (Deployment, replicas: 6) · Google Cloud(GCE) 위 클러스터 — 단계를 눌러 보거나 ▶ 자동 재생을 켜 보세요.</p>
 
   <nav class="chips" id="chips" aria-label="단계"></nav>
   <div class="ctl">
