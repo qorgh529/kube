@@ -225,9 +225,121 @@ footer{margin-top:60px;color:var(--faint);font-size:13px}
   details.more>summary{display:none}
   details.more>*{display:block}
 }
+
+/* ===== readability ===== */
+:root{--hl-key:#7cc4ff;--hl-str:#a6e3a1;--hl-cmd:#ffb86b;--hl-flag:#d0b3ff;--hl-com:#8ea0bd;--ok:#0b7a5a;--ok-soft:#e7f6f0;--bad:#b42318;--bad-soft:#fdeceb}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--ok:#4cd3a4;--ok-soft:#11261f;--bad:#ff7b72;--bad-soft:#2b1515}}
+:root[data-theme="dark"]{--ok:#4cd3a4;--ok-soft:#11261f;--bad:#ff7b72;--bad-soft:#2b1515}
+#progress{position:fixed;top:0;left:0;height:3px;width:0;background:var(--accent);z-index:40;transition:width .1s linear}
+#toTop{position:fixed;right:18px;bottom:18px;z-index:25;width:44px;height:44px;border-radius:50%;
+  border:1px solid var(--border);background:var(--surface);color:var(--text);font-size:18px;cursor:pointer;
+  box-shadow:0 4px 14px rgba(0,0,0,.15);opacity:0;pointer-events:none;transition:opacity .2s}
+#toTop.show{opacity:1;pointer-events:auto}
+.part-title{border-bottom:3px solid var(--accent)}
+.part-title h2{color:var(--text)}
+.day-head{padding-bottom:12px;margin-bottom:14px;border-bottom:1px solid var(--border)}
+article h4{font-size:19px;margin:34px 0 10px;padding:6px 12px;border-left:5px solid var(--accent);
+  background:var(--accent-soft);border-radius:0 8px 8px 0;color:var(--text)}
+article h5{font-size:16px;margin:22px 0 8px;color:var(--accent-ink)}
+article h5::before{content:"▸ ";color:var(--accent)}
+.box{border-left-width:5px;padding:13px 18px}
+.box>.lbl{font-size:12.5px;padding:1px 8px;border-radius:5px;background:var(--surface);margin-bottom:6px}
+pre{font-size:14px;line-height:1.65;border:1px solid rgba(255,255,255,.06)}
+pre code .k{color:var(--hl-key)}
+pre code .s{color:var(--hl-str)}
+pre code .x{color:var(--hl-cmd);font-weight:600}
+pre code .f{color:var(--hl-flag)}
+pre code .c,pre code .cm{color:var(--hl-com);font-style:italic}
+tr:nth-child(even) td{background:color-mix(in srgb,var(--surface-2) 60%,transparent)}
+tr:hover td{background:var(--accent-soft)}
+td:first-child{font-weight:600}
+.task{background:var(--surface-2);border:1px solid var(--border);border-left:4px solid var(--tip);
+  border-radius:0 10px 10px 0;padding:12px 16px;margin:14px 0}
+.task h5{color:var(--tip)}
+.task h5::before{content:""}
+
+.hero-new{margin-top:14px}
+.hero-new .card{text-decoration:none;color:var(--text);background:var(--surface);transition:border-color .15s}
+.hero-new .card:hover{border-color:var(--accent)}
+/* ===== code explanation ===== */
+.cx-title{display:flex;align-items:center;gap:8px}
+details.cx{margin:16px 0;border:1px solid var(--border);border-radius:12px;background:var(--surface);overflow:hidden}
+details.cx>summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:10px;padding:11px 16px;
+  background:var(--surface-2);font-weight:700;font-size:15px;border-bottom:1px solid transparent}
+details.cx[open]>summary{border-bottom-color:var(--border)}
+details.cx>summary::-webkit-details-marker{display:none}
+details.cx>summary::before{content:"▶";font-size:11px;color:var(--faint);transition:transform .15s}
+details.cx[open]>summary::before{transform:rotate(90deg)}
+.cx-tag{flex:none;font-size:11.5px;font-weight:800;color:#fff;background:var(--tip);border-radius:5px;padding:2px 8px}
+.cx-body{padding:4px 16px 14px}
+.cx-body pre{margin:12px 0}
+ol.cx-l{list-style:none;padding:0;margin:8px 0 0;counter-reset:cx}
+ol.cx-l>li{counter-increment:cx;display:grid;grid-template-columns:minmax(0,34%) minmax(0,1fr);gap:4px 16px;
+  padding:10px 0;border-top:1px dashed var(--border);max-width:none}
+ol.cx-l>li:first-child{border-top:0}
+.cx-code{font-family:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;font-size:12.8px;line-height:1.5;
+  color:var(--accent-ink);background:var(--accent-soft);border-radius:7px;padding:5px 9px;align-self:start;overflow-wrap:anywhere}
+.cx-code::before{content:counter(cx);display:inline-grid;place-items:center;width:18px;height:18px;margin-right:6px;
+  border-radius:50%;background:var(--accent);color:#fff;font:700 11px "Noto Sans KR",sans-serif;vertical-align:1px}
+.cx-d{font-size:14.5px;line-height:1.65}
+.cx-d p{margin:0 0 4px;max-width:none}
+.cx-d .w::before,.cx-d .y::before{display:inline-block;font-size:11px;font-weight:800;border-radius:4px;padding:0 6px;margin-right:6px;vertical-align:1px}
+.cx-d .w::before{content:"하는 일";background:var(--surface-2);color:var(--muted);border:1px solid var(--border)}
+.cx-d .y::before{content:"왜";background:var(--key-soft);color:var(--key);border:1px solid var(--key-border)}
+.cx-head{display:flex;align-items:center;gap:10px;margin:30px 0 4px}
+.cx-head h4{margin:0;flex:1}
+.cx-head .btn{flex:none}
+
+/* ===== quiz ===== */
+.quiz-bar{position:sticky;top:57px;z-index:15;display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;
+  background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:10px 14px;margin:18px 0 6px;box-shadow:var(--shadow)}
+.qb-score{font-size:15px;white-space:nowrap}
+.qb-score b{font-size:20px;color:var(--accent)}
+.qb-pts{margin-left:6px;font-weight:700;color:var(--key)}
+.qb-prog{flex:1;min-width:120px;height:8px;background:var(--surface-2);border-radius:99px;overflow:hidden}
+.qb-prog i{display:block;height:100%;width:0;background:var(--accent);transition:width .2s}
+.qb-btns{display:flex;flex-wrap:wrap;gap:6px}
+.qhelp{font-size:13.5px;margin:4px 0 10px}
+.qcard{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:18px 20px;margin:14px 0;box-shadow:var(--shadow)}
+.qcard.ok{border-color:var(--tip-border)}
+.qcard.no{border-color:var(--warn-border)}
+.qhead{display:flex;gap:10px;align-items:flex-start}
+.qnum{flex:none;min-width:34px;height:34px;border-radius:10px;background:var(--accent);color:#fff;font-weight:800;display:grid;place-items:center;font-size:14px}
+.qcard.ok .qnum{background:var(--ok)}
+.qcard.no .qnum{background:var(--bad)}
+.qtext{font-weight:600;line-height:1.6;flex:1}
+.qtag{display:inline-block;font-size:11.5px;font-weight:700;color:var(--muted);border:1px solid var(--border);border-radius:5px;padding:0 6px;margin-bottom:4px}
+.qopts{list-style:none;padding:0;margin:12px 0 0;display:grid;gap:7px}
+.qopts li{margin:0;max-width:none}
+.qopts button{width:100%;text-align:left;display:flex;gap:10px;align-items:flex-start;font:inherit;font-size:15px;line-height:1.55;
+  color:var(--text);background:var(--surface-2);border:1px solid var(--border);border-radius:9px;padding:9px 12px;cursor:pointer}
+.qopts button:hover:not(:disabled){border-color:var(--accent)}
+.qopts button:disabled{cursor:default}
+.qopts .on{flex:none;font-weight:800;color:var(--muted)}
+.qopts button.right{background:var(--ok-soft);border-color:var(--ok);color:var(--text)}
+.qopts button.right .on{color:var(--ok)}
+.qopts button.wrong{background:var(--bad-soft);border-color:var(--bad)}
+.qopts button.wrong .on{color:var(--bad)}
+.qex{display:none;margin-top:12px;padding:11px 14px;border-radius:9px;background:var(--note-soft);border:1px solid var(--note-border);font-size:14.5px}
+.qcard.done .qex{display:block}
+.qex b.ans{color:var(--note)}
+.qcard[hidden]{display:none}
+
+@media (max-width:960px){
+  ol.cx-l>li{grid-template-columns:minmax(0,1fr)}
+  .quiz-bar{top:53px}
+  article h4{font-size:17.5px}
+  #toTop{right:12px;bottom:12px}
+}
+@media print{
+  #progress,#toTop,.quiz-bar,.copy{display:none}
+  details.cx>*{display:block}
+  .qex{display:block}
+}
 </style>
 </head>
 <body>
+<div id="progress" aria-hidden="true"></div>
 <header class="topbar">
   <button class="btn" id="menuBtn" aria-label="목차 열기">☰ 목차</button>
   <div class="brand">
@@ -239,6 +351,7 @@ footer{margin-top:60px;color:var(--faint);font-size:13px}
     <a href="#essentials">핵심 총정리</a>
     <a href="#theory">이론</a>
     <a href="#labs">실습</a>
+    <a href="#quiz">예상 문제</a>
     <a href="#cheatsheet">명령어·용어</a>
   </nav>
   <div class="tools">
@@ -254,6 +367,7 @@ footer{margin-top:60px;color:var(--faint);font-size:13px}
   <a href="#env">실습 환경과 쇼핑몰</a>
   <a href="#essentials">★ 핵심 총정리</a>
   <h4>이론</h4>
+  <a href="#doc">공식 문서 개요</a>
   <a href="#d1">1일차 · 개요와 설치</a>
   <a href="#d2">2일차 · Pod와 설정 분리</a>
   <a href="#d3">3일차 · 노드 관리·컨트롤러</a>
@@ -279,6 +393,8 @@ footer{margin-top:60px;color:var(--faint);font-size:13px}
   <a href="#lab11">Lab11 · Volume</a>
   <a href="#lab12">Lab12 · AWS 연동</a>
   <a href="#labE">LabE · EKS 이전</a>
+  <h4>시험 대비</h4>
+  <a href="#quiz">★ 예상 문제 40</a>
   <h4>부록</h4>
   <a href="#cheatsheet">명령어 치트시트</a>
   <a href="#symptoms">증상 → 원인 지도</a>
@@ -293,6 +409,11 @@ footer{margin-top:60px;color:var(--faint);font-size:13px}
   <h1>Kubernetes 7일 과정 — 이론 · 실습 정리</h1>
   <p>노션 「Kubernetes(7days)」의 <b>이론 1~8일차, 부록, 실습 Lab01~Lab12와 LabE</b>를 처음 배우는 사람도 따라올 수 있게 다시 정리했습니다.</p>
   <p>각 날짜마다 <b style="color:var(--key)">★ 핵심</b> 박스, <b style="color:var(--tip)">💡 쉬운 비유</b>, <b style="color:var(--warn)">⚠ 자주 하는 실수</b>를 구분해 두었습니다. 위의 <b>★ 핵심만 보기</b> 버튼을 누르면 자세한 설명이 접히고 핵심만 남습니다.</p>
+  <div class="grid3 hero-new">
+    <a class="card" href="#lab03"><h6>🔍 코드 해설</h6><p>모든 실습의 실제 명령·YAML을 줄 단위로 <b>하는 일</b>과 <b>왜</b>로 풀었습니다.</p></a>
+    <a class="card" href="#doc"><h6>📘 공식 문서 · 강의 자료 보강</h6><p>공식 개요·컴포넌트, 강의 PDF(RS·Deployment, 워크로드, Service)를 반영했습니다.</p></a>
+    <a class="card" href="#quiz"><h6>📝 예상 문제 40</h6><p>Docker 성취도 평가 형식의 4지선다. 바로 채점되고 해설이 나옵니다.</p></a>
+  </div>
   <div class="chips">
     <span class="chip">Kubernetes v1.36</span><span class="chip">kubeadm</span><span class="chip">containerd 2.x</span>
     <span class="chip">Calico VXLAN</span><span class="chip">Helm · Gateway API</span><span class="chip">AWS EBS · ALB</span><span class="chip">Amazon EKS</span>
@@ -450,6 +571,98 @@ footer{margin-top:60px;color:var(--faint);font-size:13px}
 <div class="part-title"><h2>이론</h2><span>1~8일차 + 부록</span></div>
 
 <!-- ---------------- Day 1 ---------------- -->
+<!-- ---------------- 공식 문서 개요 ---------------- -->
+<article class="day" id="doc">
+<div class="day-head"><div class="day-num ap">DOC</div>
+<div><h3>공식 문서로 보는 쿠버네티스 개요</h3><p>kubernetes.io/ko/docs/concepts/overview · 이름의 뜻 · 배포 방식의 변화 · 기능 · 쿠버네티스가 아닌 것 · 구성요소</p></div></div>
+<p class="lead">수업 1일차 내용을 <b>공식 문서(쿠버네티스 개요 · 쿠버네티스 컴포넌트)</b> 기준으로 다시 정리했습니다. 시험에 자주 나오는 "옳은 것 / 옳지 않은 것" 문제의 출처가 대부분 여기입니다.</p>
+
+<h4>1. 쿠버네티스란</h4>
+<div class="box key"><span class="lbl">★ 공식 정의</span><p>쿠버네티스는 <b>컨테이너화된 워크로드와 서비스를 관리</b>하기 위한 이식성이 있고 확장 가능한 <b>오픈소스 플랫폼</b>으로, <b>선언적 구성과 자동화</b>를 모두 지원합니다.</p></div>
+<div class="grid3">
+<div class="card"><h6>이름의 뜻</h6><p>그리스어로 <b>조타수·파일럿</b>. 배(컨테이너선)의 키를 잡는 사람이라는 뜻입니다.</p></div>
+<div class="card"><h6>K8s</h6><p>K와 s 사이 글자 <b>8개</b>(ubernete)를 숫자로 줄인 약어입니다.</p></div>
+<div class="card"><h6>출발</h6><p>구글이 <b>2014년</b> 오픈소스로 공개. 구글의 15년 이상 대규모 운영 경험(Borg)과 커뮤니티 아이디어가 바탕입니다.</p></div>
+</div>
+
+<h4>2. 배포 방식은 어떻게 바뀌어 왔나</h4>
+<div class="flow">
+  <div class="s"><b>전통적 배포</b>물리 서버에 앱을 직접 설치</div><span class="ar">→</span>
+  <div class="s"><b>가상화 배포</b>한 서버에 여러 VM</div><span class="ar">→</span>
+  <div class="s"><b>컨테이너 배포</b>OS(커널)를 공유하는 가벼운 격리</div>
+</div>
+<div class="tbl"><table>
+<tr><th>시대</th><th>방식</th><th>문제 · 장점</th></tr>
+<tr><td>전통적 배포</td><td>물리 서버 한 대에 여러 앱</td><td>자원 경계가 없어 한 앱이 자원을 독차지하면 다른 앱 성능이 떨어짐. 앱마다 서버를 따로 두면 비용 낭비.</td></tr>
+<tr><td>가상화 배포</td><td>하이퍼바이저 위 여러 VM, VM마다 <b>자기 OS 전체</b></td><td>앱 격리·보안 수준 향상, 자원 활용률과 확장성 개선. 대신 VM마다 OS가 있어 무겁다.</td></tr>
+<tr><td>컨테이너 배포</td><td>호스트 OS(커널)를 <b>공유</b>, 격리 속성을 완화</td><td>VM보다 가볍고 빠름. 자체 파일 시스템·CPU 점유율·메모리·프로세스 공간을 가지며 클라우드·OS 배포판 간 <b>이식 가능</b>.</td></tr>
+</table></div>
+<details class="more"><summary>컨테이너가 인기 있는 이유 (공식 문서의 장점 목록)</summary>
+<ul>
+<li><b>기민한 생성과 배포</b> — VM 이미지보다 컨테이너 이미지를 만들기 쉽고 빠름</li>
+<li><b>지속적인 개발 · 통합 · 배포(CI/CD)</b> — 이미지가 불변이라 빠르고 쉬운 롤백</li>
+<li><b>개발과 운영의 관심사 분리</b> — 배포 시점이 아닌 빌드·릴리스 시점에 이미지를 만들어 인프라와 앱을 분리</li>
+<li><b>가시성(observability)</b> — OS 수준 정보뿐 아니라 앱 상태와 신호까지 확인</li>
+<li><b>개발 · 테스트 · 운영 환경의 일관성</b> — 노트북에서처럼 클라우드에서도 동일하게 구동</li>
+<li><b>클라우드 · OS 배포판 간 이식성</b> — Ubuntu, RHEL, 온프레미스, 주요 퍼블릭 클라우드 어디서든</li>
+<li><b>애플리케이션 중심 관리</b> — 가상 하드웨어의 OS가 아닌 논리적 리소스로 앱을 실행</li>
+<li><b>느슨하게 결합된 분산 마이크로서비스</b> — 하나의 큰 단일 머신이 아닌 작은 독립 조각으로 동적 배포·관리</li>
+<li><b>리소스 격리</b> — 예측 가능한 앱 성능</li>
+<li><b>자원 사용량</b> — 고효율 고집적</li>
+</ul></details>
+
+<h4>3. 쿠버네티스가 해 주는 것 (기능 10가지)</h4>
+<div class="tbl"><table>
+<tr><th>공식 기능</th><th>뜻</th><th>수업에서 본 곳</th></tr>
+<tr><td><b>서비스 디스커버리와 로드 밸런싱</b></td><td>DNS 이름이나 IP로 컨테이너를 노출하고, 트래픽이 많으면 분산</td><td>Service · CoreDNS (4일차)</td></tr>
+<tr><td><b>스토리지 오케스트레이션</b></td><td>로컬·퍼블릭 클라우드 등 원하는 저장소를 자동 탑재</td><td>PV·PVC·NFS·EBS (6·7일차)</td></tr>
+<tr><td><b>자동화된 롤아웃과 롤백</b></td><td>원하는 상태를 서술하면 현재 상태를 통제된 속도로 바꿈</td><td>Deployment (3일차)</td></tr>
+<tr><td><b>자동화된 빈 패킹(bin packing)</b></td><td>컨테이너별 CPU·메모리 요청을 보고 노드에 알맞게 배치</td><td>requests · 스케줄러 (5일차)</td></tr>
+<tr><td><b>자동화된 복구(self-healing)</b></td><td>실패한 컨테이너 재시작·교체, 헬스 체크에 응답하지 않으면 죽이고, 준비 전까지 클라이언트에 알리지 않음</td><td>ReplicaSet · Probe (3·5일차)</td></tr>
+<tr><td><b>시크릿과 구성 관리</b></td><td>비밀번호·토큰·SSH 키를 이미지 재빌드 없이 배포·업데이트</td><td>ConfigMap · Secret (2일차)</td></tr>
+<tr><td><b>배치 실행</b></td><td>배치·CI 워크로드 관리, 실패한 컨테이너 교체</td><td>Job · CronJob (4일차)</td></tr>
+<tr><td><b>수평 확장</b></td><td>명령·UI·CPU 사용량에 따라 앱을 늘리고 줄임</td><td>HPA (5일차)</td></tr>
+<tr><td><b>IPv4/IPv6 이중 스택</b></td><td>Pod와 Service에 IPv4·IPv6 주소 할당</td><td>—</td></tr>
+<tr><td><b>확장성을 위한 설계</b></td><td>업스트림 소스 수정 없이 기능 추가(CRD 등)</td><td>Gateway API CRD · Helm (6일차)</td></tr>
+</table></div>
+
+<h4>4. 쿠버네티스가 <u>아닌</u> 것</h4>
+<p>쿠버네티스는 PaaS처럼 보이는 기능(배포·확장·로드 밸런싱)을 주지만 <b>전통적인 올인원 PaaS가 아닙니다.</b> 중요한 것은 사용자가 고르도록 남겨 둡니다.</p>
+<div class="box warn"><span class="lbl">⚠ 시험 단골 — "옳지 않은 것"의 정답 후보</span><ul>
+<li>지원하는 애플리케이션 유형을 <b>제한하지 않는다</b>. 컨테이너로 돌릴 수 있으면 상태 유지·비유지·데이터 처리 모두 가능.</li>
+<li><b>소스 코드를 배포하지 않으며 애플리케이션을 빌드하지 않는다.</b> CI/CD 워크플로는 조직의 선택.</li>
+<li>미들웨어·데이터베이스·캐시·스토리지 같은 <b>애플리케이션 레벨 서비스를 기본 제공하지 않는다.</b></li>
+<li>로깅·모니터링·경보 솔루션을 <b>강요하지 않는다</b>(개념 증명용 통합과 메트릭 수집·노출 메커니즘만 제공).</li>
+<li>설정 언어(예: Jsonnet)를 제공하거나 <b>강요하지 않는다</b>. 선언적 API만 제공.</li>
+<li>기계 설정·유지보수·관리·자가 치유를 위한 포괄적 시스템을 제공하지 않는다.</li>
+<li>단순한 오케스트레이션 시스템이 아니다. A→B→C처럼 정해진 워크플로를 실행하는 대신, <b>독립적이고 조합 가능한 제어 프로세스</b>들이 현재 상태를 원하는 상태로 계속 이끌어 간다. 그래서 중앙 통제가 필요 없고 견고합니다.</li>
+</ul></div>
+
+<h4>5. 구성요소 한 장 정리 (공식 컴포넌트 문서)</h4>
+<div class="arch">
+<div class="n cp"><h6>컨트롤 플레인</h6>
+<div class="c"><b>kube-apiserver</b><small>API를 노출하는 프런트엔드. 수평 확장 가능</small></div>
+<div class="c"><b>etcd</b><small>모든 클러스터 데이터를 담는 키-값 저장소 → 백업 계획 필수</small></div>
+<div class="c"><b>kube-scheduler</b><small>노드가 없는 새 Pod를 감지해 실행할 노드 선택</small></div>
+<div class="c"><b>kube-controller-manager</b><small>노드·Job·EndpointSlice·ServiceAccount 컨트롤러 등을 한 프로세스로 실행</small></div>
+<div class="c"><b>cloud-controller-manager</b><small>(선택) 클라우드 API 연동. 온프레미스·학습 환경에는 없음</small></div>
+</div>
+<div class="n"><h6>노드(모든 노드)</h6>
+<div class="c"><b>kubelet</b><small>PodSpec대로 컨테이너가 Pod에서 동작하도록 관리. 쿠버네티스가 만들지 않은 컨테이너는 관리하지 않음</small></div>
+<div class="c"><b>kube-proxy</b><small>(선택) Service 개념을 구현하는 네트워크 규칙 유지. 같은 일을 하는 네트워크 플러그인을 쓰면 생략 가능</small></div>
+<div class="c"><b>컨테이너 런타임</b><small>containerd · CRI-O 등 CRI 구현체</small></div>
+</div>
+<div class="n"><h6>애드온</h6>
+<div class="c"><b>DNS</b><small>모든 클러스터에 사실상 필수(CoreDNS)</small></div>
+<div class="c"><b>웹 UI(대시보드)</b><small>범용 웹 관리 화면</small></div>
+<div class="c"><b>컨테이너 리소스 모니터링</b><small>시계열 메트릭 수집·조회</small></div>
+<div class="c"><b>클러스터 수준 로깅</b><small>컨테이너 로그를 중앙 저장소로</small></div>
+<div class="c"><b>네트워크 플러그인(CNI)</b><small>Pod에 IP를 주고 Pod 간 통신 구현(Calico)</small></div>
+</div>
+</div>
+<div class="box tip"><span class="lbl">💡 기억법</span><p>컨트롤 플레인은 <b>"결정하고 기록"</b>(apiserver·etcd·scheduler·controller), 노드는 <b>"실행하고 보고"</b>(kubelet·런타임·kube-proxy), 애드온은 <b>"있으면 편하지만 클러스터 기능을 넓히는 것"</b>(DNS·대시보드·모니터링·로깅).</p></div>
+</article>
+
 <article class="day" id="d1">
 <div class="day-head"><div class="day-num">DAY<br>1</div>
 <div><h3>쿠버네티스 개요와 클러스터 설치</h3><p>왜 쿠버네티스인가 · 아키텍처 · 객체와 API · YAML · kubeadm 설치 · kubectl</p></div></div>
@@ -965,6 +1178,57 @@ kubectl diff -f ~/shop/shop-api-deploy.yaml         <span class="c"># 적용 전
 <div class="box warn"><span class="lbl">⚠ 경고</span><p><code>rollout undo</code>는 <b>클러스터만 되돌리고 파일은 그대로</b>입니다. 파일을 고치지 않으면 다음 <code>apply</code>에서 불량 버전이 다시 배포됩니다. ("창고 물건은 바꿨지만 주문서는 그대로")</p></div>
 <div class="box warn"><span class="lbl">⚠ 무중단이 깨지는 가장 흔한 원인</span><p>readiness probe가 없으면 "컨테이너가 떴다 = 준비됐다"로 판단해 준비 안 된 Pod로 트래픽이 갑니다 → 5일차 Probe에서 해결.</p></div>
 
+<h4>8. 📚 강의 자료 보강 — 셀렉터 · RS · 롤링 업데이트 계산</h4>
+<h5>라벨 셀렉터 두 가지 — matchLabels와 matchExpressions</h5>
+<pre><code>selector:
+  matchLabels:
+    app: shop                     <span class="c"># "같다" 조건만</span>
+  matchExpressions:
+    - {key: tier, operator: In, values: [api, web]}     <span class="c"># 목록 중 하나</span>
+    - {key: env,  operator: NotIn, values: [test]}      <span class="c"># 목록에 없음</span>
+    - {key: version, operator: Exists}                  <span class="c"># 키만 있으면</span>
+    - {key: legacy,  operator: DoesNotExist}            <span class="c"># 키가 없으면</span></code></pre>
+<ul>
+<li>두 조건을 함께 쓰면 <b>AND</b>(모두 만족)입니다. <code>Exists</code>·<code>DoesNotExist</code>에는 <code>values</code>를 쓰지 않습니다.</li>
+<li>명령어로는 <code>kubectl get pods -l 'tier in (api,web),env notin (test),version'</code> 처럼 같은 조건을 씁니다.</li>
+</ul>
+<div class="tbl"><table>
+<tr><th>항목</th><th>ReplicationController (예전)</th><th>ReplicaSet (현재)</th></tr>
+<tr><td>API</td><td><code>v1</code></td><td><code>apps/v1</code></td></tr>
+<tr><td>셀렉터</td><td>"같다"(등호 기반)만</td><td><b>집합 기반</b>(In · NotIn · Exists) 가능</td></tr>
+<tr><td>롤링 업데이트</td><td>예전 <code>kubectl rolling-update</code>(제거됨)</td><td>Deployment가 대신 수행</td></tr>
+</table></div>
+<div class="box warn"><span class="lbl">⚠ ReplicaSet만으로는 업데이트가 안 된다</span><p><code>kubectl set image rs/&lt;이름&gt; …</code>로 이미지를 바꾸면 <b>템플릿만 바뀌고 기존 Pod는 그대로</b>입니다. 기존 Pod를 지워야 새 이미지로 다시 만들어집니다. 이 "교체 작업"을 자동으로 해 주는 것이 Deployment입니다.</p></div>
+<ul>
+<li><b>pod-template-hash</b>: Deployment가 ReplicaSet과 Pod에 자동으로 붙이는 라벨. 버전별 ReplicaSet이 서로의 Pod를 가져가지 않게 구분합니다(<code>kubectl get pods --show-labels</code>로 확인).</li>
+<li><b>--cascade=orphan</b>: 부모(RS·Deployment)만 지우고 자식 Pod는 남깁니다. 기본은 <code>background</code>(자식까지 삭제).</li>
+<li><b>--record 대신 change-cause</b>: <code>--record</code>는 폐기 예정이므로 <code>kubernetes.io/change-cause</code> 어노테이션으로 기록합니다(<code>kubectl annotate deploy/shop-api kubernetes.io/change-cause="v2"</code>).</li>
+</ul>
+
+<h5>롤링 업데이트 계산 — replicas 3, maxSurge 25%, maxUnavailable 25%</h5>
+<div class="flow">
+  <div class="s"><b>maxSurge</b>3 × 25% = 0.75 → <b>올림 1</b></div><span class="ar">·</span>
+  <div class="s"><b>maxUnavailable</b>3 × 25% = 0.75 → <b>내림 0</b></div><span class="ar">⇒</span>
+  <div class="s"><b>Pod 총수 최대 4</b> · Available 최소 3</div>
+</div>
+<div class="tbl"><table>
+<tr><th>단계</th><th>v1(옛)</th><th>v2(새)</th><th>설명</th></tr>
+<tr><td>0</td><td>3</td><td>0</td><td>시작</td></tr>
+<tr><td>1</td><td>3</td><td>1 (준비 중)</td><td>surge 1개만큼 새 Pod 생성 → 총 4</td></tr>
+<tr><td>2</td><td>2</td><td>1</td><td>v2가 Ready → v1 하나 종료(Available 3 유지)</td></tr>
+<tr><td>3</td><td>2</td><td>2 (준비 중)</td><td>다시 1개 추가</td></tr>
+<tr><td>4</td><td>1</td><td>2</td><td>Ready 후 v1 하나 종료</td></tr>
+<tr><td>5</td><td>0</td><td>3</td><td>같은 과정을 반복해 완료</td></tr>
+</table></div>
+<div class="box key"><span class="lbl">★ 계산 규칙</span><p><b>maxSurge는 올림, maxUnavailable은 내림.</b> 둘 다 0이면 진행할 수 없으므로 허용되지 않습니다. 둘 다 생략하면 기본 25%/25%입니다.</p></div>
+<div class="tbl"><table>
+<tr><th>Deployment 필드</th><th>기본값</th><th>뜻</th></tr>
+<tr><td><code>progressDeadlineSeconds</code></td><td>600</td><td>이 시간 동안 진행이 없으면 <code>ProgressDeadlineExceeded</code> 표시(자동 롤백 아님)</td></tr>
+<tr><td><code>minReadySeconds</code></td><td>0</td><td>Ready가 된 뒤 이 시간만큼 문제없어야 Available로 셈 → 너무 빠른 교체 방지</td></tr>
+<tr><td><code>revisionHistoryLimit</code></td><td>10</td><td>되돌리기용으로 남겨 둘 옛 ReplicaSet 수(0이면 롤백 불가)</td></tr>
+<tr><td><code>paused</code></td><td>false</td><td><code>kubectl rollout pause/resume</code> — 여러 변경을 모아 한 번에 롤아웃</td></tr>
+</table></div>
+
 <h4 class="kh">3일차 핵심 문장</h4>
 <ol class="keys">
 <li>cordon은 <b>새 Pod만</b> 막고, drain은 <b>기존 Pod까지</b> 내보낸다. 다른 노드에 다시 만드는 것은 컨트롤러다.</li>
@@ -1077,6 +1341,88 @@ kubectl run dnstest --image=busybox:1.37 -n shop --rm -it --restart=Never -- nsl
 <tr><td>3</td><td><code>kubectl describe svc &lt;이름&gt; -n shop</code></td><td>포트 매핑</td></tr>
 <tr><td>4</td><td>보안 그룹</td><td>NodePort인데 외부에서만 안 될 때</td></tr>
 </table></div>
+
+<h4>6. 📚 강의 자료 보강 — 워크로드 옵션과 Service 심화</h4>
+<h5>DaemonSet 업데이트 전략과 노드 다시 붙이기</h5>
+<div class="tbl"><table>
+<tr><th>updateStrategy</th><th>동작</th></tr>
+<tr><td><code>RollingUpdate</code>(기본)</td><td>템플릿이 바뀌면 노드별 Pod를 하나씩 교체(<code>maxUnavailable: 1</code> 기본)</td></tr>
+<tr><td><code>OnDelete</code></td><td>템플릿을 바꿔도 그대로. <b>사람이 Pod를 지워야</b> 새 템플릿으로 다시 생성 → 노드별로 직접 시점을 고를 때</td></tr>
+</table></div>
+<pre><code>kubeadm token create --ttl 1h --print-join-command   <span class="c"># 마스터: 새 조인 명령 출력(기본 토큰은 24시간 후 만료)</span>
+kubeadm reset -f                                     <span class="c"># 워커: 예전 설정 초기화 후</span>
+kubeadm join 10.20.1.10:6443 --token … --discovery-token-ca-cert-hash sha256:…</code></pre>
+<p>노드를 다시 조인하면 DaemonSet Pod가 <b>자동으로</b> 그 노드에 생깁니다.</p>
+
+<h5>StatefulSet podManagementPolicy</h5>
+<div class="tbl"><table>
+<tr><th>값</th><th>동작</th><th>언제</th></tr>
+<tr><td><code>OrderedReady</code>(기본)</td><td>0 → 1 → 2 순서, 앞 Pod가 Ready여야 다음 생성. 삭제는 역순</td><td>주-복제 DB처럼 순서가 중요할 때</td></tr>
+<tr><td><code>Parallel</code></td><td>순서 없이 동시에 생성·삭제</td><td>Pod끼리 의존이 없고 빨리 늘려야 할 때</td></tr>
+</table></div>
+
+<h5>Job의 실행 옵션</h5>
+<pre><code>apiVersion: batch/v1
+kind: Job
+spec:
+  completions: 6              <span class="c"># 총 6번 성공해야 완료</span>
+  parallelism: 2              <span class="c"># 동시에 최대 2개 Pod</span>
+  backoffLimit: 4             <span class="c"># 실패 재시도 상한(기본 6)</span>
+  activeDeadlineSeconds: 60   <span class="c"># 60초가 지나면 성공 여부와 상관없이 종료(Failed)</span>
+  ttlSecondsAfterFinished: 300 <span class="c"># 끝나고 5분 뒤 Job·Pod 자동 삭제</span>
+  template:
+    spec:
+      restartPolicy: Never    <span class="c"># 실패 시 "새 Pod" 생성 / OnFailure면 같은 Pod에서 컨테이너 재시작</span></code></pre>
+<div class="box tip"><span class="lbl">💡 Never와 OnFailure의 차이 보는 법</span><p><code>Never</code>로 실패하는 Job은 <code>kubectl get pods</code>에 <b>Error 상태 Pod가 여러 개</b> 쌓이고, <code>OnFailure</code>는 <b>Pod 하나의 RESTARTS 숫자</b>가 올라갑니다. 실패 로그를 남겨 보고 싶으면 Never가 편합니다.</p></div>
+
+<h5>CronJob 스케줄 읽기 — <code>분 시 일 월 요일</code></h5>
+<div class="tbl"><table>
+<tr><th>표현식</th><th>뜻</th></tr>
+<tr><td><code>*/5 * * * *</code></td><td>5분마다</td></tr>
+<tr><td><code>0 */2 * * *</code></td><td>2시간마다 정각</td></tr>
+<tr><td><code>0 9 1 * *</code></td><td>매월 1일 09:00</td></tr>
+<tr><td><code>0 3 * * 0</code></td><td>매주 일요일 03:00 (0과 7 모두 일요일)</td></tr>
+<tr><td><code>0 3 * * 1-5</code></td><td>평일(월~금) 03:00</td></tr>
+<tr><td><code>0 3 * * 0,6</code></td><td>주말(일·토) 03:00</td></tr>
+<tr><td><code>0 3 1,15 * *</code></td><td>매월 1일과 15일 03:00</td></tr>
+</table></div>
+<ul>
+<li><code>startingDeadlineSeconds</code>: 예정 시각을 놓쳤을 때(컨트롤러 중단 등) 이 시간 안이면 늦게라도 실행, 지나면 건너뜀.</li>
+<li><code>concurrencyPolicy</code>: <b>Allow</b>(기본, 겹쳐 실행) · <b>Forbid</b>(이전 것이 실행 중이면 이번 건 건너뜀) · <b>Replace</b>(이전 것을 중단하고 새로 실행).</li>
+<li>이력은 성공 3개 · 실패 1개가 기본으로 남습니다(<code>successfulJobsHistoryLimit</code> · <code>failedJobsHistoryLimit</code>).</li>
+</ul>
+
+<h5>Service 심화</h5>
+<div class="flow">
+  <div class="s"><b>ClusterIP</b>내부 가상 IP</div><span class="ar">⊂</span>
+  <div class="s"><b>NodePort</b>+ 모든 노드의 포트</div><span class="ar">⊂</span>
+  <div class="s"><b>LoadBalancer</b>+ 외부 IP(LB)</div>
+</div>
+<p>LoadBalancer는 <b>ClusterIP + NodePort + 외부 IP</b>를 모두 가집니다. <code>kubectl get svc</code>의 <code>80:30161/TCP</code>는 "Service 포트 80, 자동 할당된 노드 포트 30161"이라는 뜻입니다.</p>
+<div class="tbl"><table>
+<tr><th>주제</th><th>요점</th></tr>
+<tr><td>ClusterIP 고정</td><td><code>spec.clusterIP: 10.99.0.1</code>처럼 Service CIDR(<code>10.96.0.0/12</code>) 안의 IP를 직접 지정할 수 있음. 보통은 자동 할당</td></tr>
+<tr><td>NodePort 범위</td><td>기본 <b>30000~32767</b>. 범위 밖 번호는 거부됨</td></tr>
+<tr><td>MetalLB</td><td>클라우드가 없는 환경(온프레미스·kubeadm)에서 LoadBalancer에 외부 IP를 주는 애드온. kube-proxy가 IPVS 모드면 <code>strictARP: true</code> 필요. <code>IPAddressPool</code>(나눠 줄 IP 대역) + <code>L2Advertisement</code>(ARP로 알림)를 만든다</td></tr>
+<tr><td>ExternalName</td><td><code>externalName: google.com</code> → DNS에 <b>CNAME</b>만 등록. ClusterIP·셀렉터·프록시 없음. 외부 DB 주소를 내부 이름으로 감출 때</td></tr>
+<tr><td>Headless</td><td><code>clusterIP: None</code> → DNS가 Pod IP 목록을 직접 반환. StatefulSet과 함께 Pod별 DNS</td></tr>
+<tr><td>externalTrafficPolicy: Local</td><td>들어온 노드의 Pod로만 전달 → <b>클라이언트 IP 보존</b>, 대신 Pod 없는 노드는 응답하지 않음</td></tr>
+<tr><td>Service 환경 변수</td><td>Service가 <b>먼저</b> 있어야 이후 생성된 Pod에 <code>SHOP_API_SERVICE_HOST</code> 같은 변수가 들어감(<code>printenv</code>로 확인). 순서에 의존하지 않는 DNS를 권장</td></tr>
+<tr><td><code>kubectl expose</code></td><td><code>kubectl expose deploy shop-api --port=5000 -n shop</code> — Deployment의 셀렉터로 Service를 바로 생성</td></tr>
+</table></div>
+
+<h5>kustomize로 묶어 배포하기 (WordPress + MySQL 예제)</h5>
+<pre><code><span class="c"># kustomization.yaml</span>
+secretGenerator:
+  - name: mysql-pass
+    literals: [password=YOUR_PASSWORD]
+resources:
+  - mysql-deployment.yaml
+  - wordpress-deployment.yaml
+
+kubectl kustomize ./        <span class="c"># 최종 YAML 미리 보기</span>
+kubectl apply -k ./         <span class="c"># 디렉터리 단위로 적용</span></code></pre>
+<div class="box warn"><span class="lbl">⚠ 강의 예제에서 자주 틀리는 곳</span><p>NFS PV 파일에 <code>namespace</code>를 쓰면 안 됩니다. <b>PV는 클러스터 범위</b>, PVC만 네임스페이스에 속합니다. WordPress가 LoadBalancer Service면 kubeadm 환경에서는 MetalLB가 있어야 EXTERNAL-IP가 생깁니다.</p></div>
 
 <h4 class="kh">4일차 핵심 10문장</h4>
 <ol class="keys">
@@ -1697,6 +2043,33 @@ kubectl debug node/cap-node1 -it --image=busybox:1.37 --profile=sysadmin   <span
 </ul></div>
 <p class="detail"><b>(선택) Static Pod 직접 띄우기</b>: kubelet 설정에서 <code>staticPodPath</code>를 찾아 <code>redis:7-alpine</code> Pod 파일을 놓고, 이름에 노드명이 붙는 것·<code>kubectl delete</code>해도 살아나는 것·파일을 지워야 사라지는 것을 관찰한 뒤 <b>반드시 파일 삭제</b>.</p>
 <p class="muted">정리: 누적 실습의 기반이므로 삭제하지 않고, 수업 종료 시 인스턴스를 <b>중지</b>만 합니다.</p>
+<section class="cx-sec"><div class="cx-head"><h4>🔍 코드 해설 — 이 코드가 하는 일과 쓰는 이유</h4><button class="btn cx-toggle" type="button">모두 접기</button></div><p class="muted">따라하기 버전의 실제 명령·manifest에서 핵심 줄만 골라 <b>하는 일</b>과 <b>왜</b>를 나란히 적었습니다.</p><details class="cx" open><summary><span class="cx-tag">코드 해설</span>노드 준비 ① — 커널 모듈과 네트워크 파라미터 (태스크 6)</summary><div class="cx-body"><pre><code>cat &lt;&lt;'EOF2' &gt; /etc/modules-load.d/k8s.conf
+overlay
+br_netfilter
+EOF2
+modprobe overlay
+modprobe br_netfilter
+
+cat &lt;&lt;'EOF2' &gt; /etc/sysctl.d/k8s.conf
+net.bridge.bridge-nf-call-iptables  = 1
+net.bridge.bridge-nf-call-ip6tables = 1
+net.ipv4.ip_forward                 = 1
+EOF2
+sysctl --system &gt; /dev/null</code></pre><ol class="cx-l"><li><div class="cx-code">cat &lt;&lt;'EOF2' &gt; 파일</div><div class="cx-d"><p class="w"><code>EOF2</code>가 나올 때까지의 여러 줄을 파일에 그대로 씁니다(here-document).</p><p class="y">따옴표로 감싼 <code>'EOF2'</code>는 <code>$변수</code>를 치환하지 않아 내용이 글자 그대로 들어갑니다.</p></div></li><li><div class="cx-code">/etc/modules-load.d/k8s.conf</div><div class="cx-d"><p class="w">부팅할 때마다 자동으로 읽어 들일 커널 모듈 목록입니다.</p><p class="y"><code>modprobe</code>는 지금 한 번만 적용됩니다. 재부팅 뒤에도 유지하려면 이 파일이 있어야 합니다.</p></div></li><li><div class="cx-code">overlay</div><div class="cx-d"><p class="w">이미지 레이어를 겹쳐 하나의 파일 시스템처럼 보여 주는 모듈입니다.</p><p class="y">containerd가 컨테이너 루트 파일 시스템을 만들 때 씁니다.</p></div></li><li><div class="cx-code">br_netfilter</div><div class="cx-d"><p class="w">리눅스 브리지를 지나는 패킷도 iptables 규칙을 거치게 합니다.</p><p class="y">Service(ClusterIP) 규칙은 kube-proxy가 만든 iptables에 있습니다. 이 모듈이 없으면 같은 노드 Pod끼리의 Service 통신이 규칙을 건너뜁니다.</p></div></li><li><div class="cx-code">net.ipv4.ip_forward = 1</div><div class="cx-d"><p class="w">노드가 받은 패킷을 다른 인터페이스(Pod 네트워크)로 넘겨 주도록 허용합니다.</p><p class="y">0이면 노드가 라우터 역할을 못 해 다른 노드의 Pod와 통신할 수 없습니다. kubeadm 사전 점검도 실패합니다.</p></div></li><li><div class="cx-code">sysctl --system</div><div class="cx-d"><p class="w"><code>/etc/sysctl.d/</code>의 설정 파일을 모두 다시 읽어 즉시 적용합니다.</p><p class="y">재부팅 없이 바로 반영하기 위해서입니다.</p></div></li></ol></div></details><details class="cx" open><summary><span class="cx-tag">코드 해설</span>노드 준비 ② — containerd 설정 (태스크 7)</summary><div class="cx-body"><pre><code>containerd config default &gt; /etc/containerd/config.toml
+sed -i 's/SystemdCgroup = false/SystemdCgroup = true/' /etc/containerd/config.toml
+sed -i "s|config_path = ''|config_path = '/etc/containerd/certs.d'|" /etc/containerd/config.toml
+containerd -c /etc/containerd/config.toml config dump &gt; /dev/null &amp;&amp; echo "config OK"
+systemctl restart containerd</code></pre><ol class="cx-l"><li><div class="cx-code">containerd config default &gt; …</div><div class="cx-d"><p class="w">기본 설정 전체를 파일로 꺼냅니다.</p><p class="y">설치 직후에는 설정 파일이 거의 비어 있어 고칠 대상이 없습니다. 기본값을 먼저 펼쳐 놓고 필요한 줄만 바꿉니다.</p></div></li><li><div class="cx-code">SystemdCgroup = true</div><div class="cx-d"><p class="w">컨테이너 자원(cgroup)을 systemd가 관리하게 합니다.</p><p class="y">kubelet은 systemd 드라이버를 씁니다. 런타임과 드라이버가 다르면 자원 관리자가 둘이 되어 노드가 불안정해집니다(설치 후 Pod가 계속 재시작되는 대표 원인).</p></div></li><li><div class="cx-code">config_path = '/etc/containerd/certs.d'</div><div class="cx-d"><p class="w">레지스트리별 설정(미러)을 폴더의 <code>hosts.toml</code>에서 읽게 합니다.</p><p class="y">containerd 2.x에서는 예전 <code>registry.mirrors</code> 방식이 없어졌습니다. 미러를 쓰면 Docker Hub 다운로드 횟수 제한을 피할 수 있습니다.</p></div></li><li><div class="cx-code">config dump &gt; /dev/null &amp;&amp; …</div><div class="cx-d"><p class="w">설정 문법을 미리 검증하고, 성공했을 때만 다음 명령을 실행합니다.</p><p class="y">오타 난 설정으로 재시작하면 containerd가 죽고 노드 전체가 멈춥니다. <code>&amp;&amp;</code>는 앞 명령이 성공해야 뒤를 실행합니다.</p></div></li></ol></div></details><details class="cx" open><summary><span class="cx-tag">코드 해설</span>kubeadm 설치와 클러스터 초기화 (태스크 8·10)</summary><div class="cx-body"><pre><code>apt install -y kubelet=$K8S_VER kubeadm=$K8S_VER kubectl=$K8S_VER cri-tools
+apt-mark hold kubelet kubeadm kubectl
+kubeadm init --pod-network-cidr=10.11.0.0/16 --apiserver-advertise-address=10.20.1.10
+mkdir -p $HOME/.kube
+cp -i /etc/kubernetes/admin.conf $HOME/.kube/config</code></pre><ol class="cx-l"><li><div class="cx-code">kubelet=$K8S_VER …</div><div class="cx-d"><p class="w">세 패키지를 <b>같은 버전</b>으로 설치합니다.</p><p class="y">버전이 어긋나면 kubeadm이 만든 설정을 kubelet이 이해하지 못할 수 있습니다.</p></div></li><li><div class="cx-code">apt-mark hold</div><div class="cx-d"><p class="w">이 패키지들을 자동 업그레이드에서 제외합니다.</p><p class="y"><code>apt upgrade</code> 한 번에 클러스터 버전이 노드마다 달라지는 사고를 막습니다. 업그레이드는 <code>kubeadm upgrade</code> 절차로 따로 합니다.</p></div></li><li><div class="cx-code">--pod-network-cidr=10.11.0.0/16</div><div class="cx-d"><p class="w">Pod IP 대역을 정합니다.</p><p class="y">뒤에서 설치할 Calico 설정의 CIDR과 <b>같아야</b> 합니다. VPC 대역(10.20.0.0/16)과 겹치면 라우팅이 꼬입니다.</p></div></li><li><div class="cx-code">--apiserver-advertise-address=10.20.1.10</div><div class="cx-d"><p class="w">API 서버가 다른 노드에 알릴 주소(마스터 사설 IP)입니다.</p><p class="y">워커는 이 주소의 6443 포트로 조인합니다.</p></div></li><li><div class="cx-code">cp /etc/kubernetes/admin.conf ~/.kube/config</div><div class="cx-d"><p class="w">관리자 인증서가 담긴 kubeconfig를 kubectl 기본 위치에 둡니다.</p><p class="y">kubectl은 <code>~/.kube/config</code>를 보고 어느 클러스터에 누구로 접속할지 정합니다. 이 파일이 없으면 <code>localhost:8080 refused</code> 오류가 납니다.</p></div></li></ol></div></details><details class="cx" open><summary><span class="cx-tag">코드 해설</span>CNI(Calico) 설정 바꾸기 (태스크 12)</summary><div class="cx-body"><pre><code>curl -fsSLO https://raw.githubusercontent.com/projectcalico/calico/v3.32.1/manifests/custom-resources.yaml
+sed -i 's|192.168.0.0/16|10.11.0.0/16|; s|encapsulation: VXLANCrossSubnet|encapsulation: VXLAN|' custom-resources.yaml
+kubectl create -f custom-resources.yaml</code></pre><ol class="cx-l"><li><div class="cx-code">curl -fsSLO</div><div class="cx-d"><p class="w"><code>-f</code> 실패 시 에러, <code>-s</code> 조용히, <code>-S</code> 에러만 표시, <code>-L</code> 리다이렉트 따라감, <code>-O</code> 원래 파일명으로 저장.</p><p class="y">설치 스크립트에서 쓰는 관용 조합입니다.</p></div></li><li><div class="cx-code">s|192.168.0.0/16|10.11.0.0/16|</div><div class="cx-d"><p class="w">Calico 기본 Pod 대역을 kubeadm init에 준 값으로 바꿉니다.</p><p class="y">두 값이 다르면 노드가 NotReady로 남거나 Pod IP가 엉뚱한 대역에서 나옵니다.</p></div></li><li><div class="cx-code">encapsulation: VXLAN</div><div class="cx-d"><p class="w">노드 간 Pod 패킷을 항상 VXLAN 터널로 감쌉니다.</p><p class="y">AWS는 VPC가 모르는 IP(10.11.x.x)를 출발지로 한 패킷을 버립니다(소스/대상 확인). 감싸면 바깥 주소가 노드 IP가 되어 통과합니다.</p></div></li><li><div class="cx-code">kubectl create (apply 아님)</div><div class="cx-d"><p class="w">리소스를 새로 만듭니다.</p><p class="y">Calico 문서가 권장하는 방식입니다. CRD처럼 큰 객체는 <code>apply</code>의 last-applied 어노테이션이 크기 제한을 넘을 수 있습니다.</p></div></li></ol></div></details><details class="cx" open><summary><span class="cx-tag">코드 해설</span>복제 전 정리와 동작 검증 (태스크 9·13)</summary><div class="cx-body"><pre><code>truncate -s 0 /etc/machine-id
+cloud-init clean --logs
+POD_A=$(kubectl get pod -l app=pingtest --field-selector spec.nodeName=cap-node1 -o jsonpath='{.items[0].metadata.name}')
+POD_B_IP=$(kubectl get pod -l app=pingtest --field-selector spec.nodeName=cap-node2 -o jsonpath='{.items[0].status.podIP}')
+kubectl exec $POD_A -- curl -s -o /dev/null -w "%{http_code}\n" http://$POD_B_IP</code></pre><ol class="cx-l"><li><div class="cx-code">truncate -s 0 /etc/machine-id</div><div class="cx-d"><p class="w">장비 고유 ID 파일을 비웁니다. 새 인스턴스가 처음 부팅할 때 새로 만들어집니다.</p><p class="y">AMI로 복제한 세 노드의 ID가 같으면 DHCP·네트워크 구성 요소가 같은 장비로 착각합니다.</p></div></li><li><div class="cx-code">cloud-init clean</div><div class="cx-d"><p class="w">첫 부팅 기록을 지웁니다.</p><p class="y">복제된 인스턴스가 "처음 부팅"으로 인식해 호스트 이름·네트워크를 새로 설정하게 합니다.</p></div></li><li><div class="cx-code">$( … )</div><div class="cx-d"><p class="w">괄호 안 명령의 출력을 변수에 담습니다(명령 치환).</p><p class="y">Pod 이름은 매번 무작위라 직접 쓰지 않고 조회해서 씁니다.</p></div></li><li><div class="cx-code">--field-selector spec.nodeName=…</div><div class="cx-d"><p class="w">라벨이 아닌 <b>필드 값</b>으로 거릅니다.</p><p class="y">서로 다른 노드의 Pod 두 개를 고르려면 노드 이름으로 걸러야 합니다.</p></div></li><li><div class="cx-code">-o jsonpath='{.items[0].status.podIP}'</div><div class="cx-d"><p class="w">결과 JSON에서 필요한 값 하나만 꺼냅니다.</p><p class="y">스크립트에서 바로 변수로 쓰기 위해서입니다.</p></div></li><li><div class="cx-code">curl -s -o /dev/null -w "%{http_code}"</div><div class="cx-d"><p class="w">본문은 버리고 HTTP 상태 코드만 출력합니다.</p><p class="y">200이 나오면 노드 간 Pod 통신(CNI)이 정상이라는 뜻입니다.</p></div></li></ol></div></details></section>
 </article>
 
 <!-- Lab03 -->
@@ -1715,6 +2088,59 @@ kubectl create secret generic shop-db-secret -n shop --from-literal=DB_PASSWORD=
 kubectl create configmap shop-web-html -n shop --from-file=index.html=app/shop-web/index.html</code></pre>
 <p>shop-api는 <code>envFrom</code>으로 shop-config 전체 + <code>secretKeyRef</code>로 <code>DB_PASSWORD</code>, shop-web은 <code>shop-web-html</code>을 <code>/usr/share/nginx/html</code>에 마운트. 실행 중 Pod의 env·볼륨은 바꿀 수 없으므로 <b>삭제 후 재생성</b>. 확인: <code>DB_PASSWORD</code>의 <b>길이만</b> 출력해 11, shop-web <code>&lt;title&gt;</code>이 <code>SkillBoost Shop</code>.</p></div>
 <div class="task"><h5>태스크 6 · Label · Annotation</h5><p><code>version=v1</code> 라벨 추가, <code>kubectl get pods -n shop -l 'tier in (web,api)' -L tier,version</code>, shop-api에 어노테이션 <code>owner=shop-team@skillboost.example</code>. 어노테이션 값으로는 <code>-l</code> 조회가 안 되는 이유(셀렉터는 라벨만)를 설명.</p></div>
+<section class="cx-sec"><div class="cx-head"><h4>🔍 코드 해설 — 이 코드가 하는 일과 쓰는 이유</h4><button class="btn cx-toggle" type="button">모두 접기</button></div><p class="muted">따라하기 버전의 실제 명령·manifest에서 핵심 줄만 골라 <b>하는 일</b>과 <b>왜</b>를 나란히 적었습니다.</p><details class="cx" open><summary><span class="cx-tag">코드 해설</span>shop-web Pod — nginx + 네이티브 사이드카</summary><div class="cx-body"><pre><code>apiVersion: v1
+kind: Pod
+metadata:
+  name: shop-web
+  namespace: shop
+  labels:
+    app: shop
+    tier: web
+spec:
+  initContainers:
+    - name: log-agent
+      image: busybox:1.37
+      restartPolicy: Always
+      command: ["sh", "-c", "touch /var/log/nginx/access.log; tail -F /var/log/nginx/access.log"]
+      volumeMounts:
+        - name: logs
+          mountPath: /var/log/nginx
+  containers:
+    - name: nginx
+      image: nginx:1.30-alpine
+      ports:
+        - containerPort: 80
+      volumeMounts:
+        - name: logs
+          mountPath: /var/log/nginx
+  volumes:
+    - name: logs
+      emptyDir: {}</code></pre><ol class="cx-l"><li><div class="cx-code">apiVersion: v1 / kind: Pod</div><div class="cx-d"><p class="w">어떤 API 그룹의 어떤 종류 객체인지 밝힙니다.</p><p class="y">API 서버는 이 두 줄로 어떤 스키마로 검사할지 정합니다. Pod·Service·ConfigMap은 core 그룹이라 <code>v1</code>만 씁니다.</p></div></li><li><div class="cx-code">labels: app: shop, tier: web</div><div class="cx-d"><p class="w">Pod에 이름표를 붙입니다.</p><p class="y">4일차의 Service(<code>selector: tier=web</code>)와 Deployment가 이 라벨로 Pod를 찾습니다. 라벨이 없으면 연결할 방법이 없습니다.</p></div></li><li><div class="cx-code">initContainers + restartPolicy: Always</div><div class="cx-d"><p class="w">앱보다 <b>먼저 시작하고 끝나지 않는</b> 네이티브 사이드카가 됩니다.</p><p class="y">로그 수집기가 먼저 떠 있어야 nginx의 첫 로그를 놓치지 않습니다. 종료할 때는 앱이 먼저 끝나 마지막 로그까지 수집됩니다.</p></div></li><li><div class="cx-code">touch …; tail -F …</div><div class="cx-d"><p class="w">로그 파일이 없으면 만들고, 계속 따라 읽으며 표준 출력으로 보냅니다.</p><p class="y"><code>-F</code>는 파일이 교체·재생성돼도 다시 열어 계속 읽습니다. 표준 출력으로 나가야 <code>kubectl logs -c log-agent</code>로 볼 수 있습니다.</p></div></li><li><div class="cx-code">emptyDir: {} + 두 컨테이너의 같은 mountPath</div><div class="cx-d"><p class="w">Pod가 살아 있는 동안만 있는 빈 폴더를 두 컨테이너가 함께 씁니다.</p><p class="y">Pod 안 컨테이너는 <b>파일 시스템이 분리</b>되어 있습니다. 공유하려면 볼륨을 명시적으로 같이 마운트해야 합니다.</p></div></li><li><div class="cx-code">mountPath: /var/log/nginx (nginx 쪽)</div><div class="cx-d"><p class="w">공식 nginx 이미지의 <code>/dev/stdout</code> 심볼릭 링크를 빈 폴더로 덮습니다.</p><p class="y">덮지 않으면 로그가 파일이 아닌 화면으로 나가 사이드카가 읽을 파일이 생기지 않습니다.</p></div></li></ol></div></details><details class="cx" open><summary><span class="cx-tag">코드 해설</span>ConfigMap · Secret 만들기와 주입</summary><div class="cx-body"><pre><code>kubectl create configmap shop-config -n shop \
+  --from-literal=APP_TITLE="SkillBoost Shop" --from-literal=DB_MODE=memory
+kubectl create secret generic shop-db-secret -n shop --from-literal=DB_PASSWORD='ShopDB#2026'
+
+      envFrom:
+        - configMapRef:
+            name: shop-config
+      env:
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: shop-db-secret
+              key: DB_PASSWORD</code></pre><ol class="cx-l"><li><div class="cx-code">--from-literal=KEY=VALUE</div><div class="cx-d"><p class="w">키-값을 명령줄에서 바로 넣습니다.</p><p class="y">값이 짧을 때 YAML 파일 없이 빠르게 만드는 방법입니다. 파일 내용 전체를 넣을 때는 <code>--from-file</code>을 씁니다.</p></div></li><li><div class="cx-code">secret generic … 'ShopDB#2026'</div><div class="cx-d"><p class="w">일반(Opaque) Secret을 만듭니다. 값은 base64로 저장됩니다.</p><p class="y">작은따옴표로 감싸야 셸이 <code>#</code> 뒤를 주석으로 자르지 않습니다. base64는 <b>암호화가 아닌 인코딩</b>입니다.</p></div></li><li><div class="cx-code">envFrom.configMapRef</div><div class="cx-d"><p class="w">ConfigMap의 <b>모든 키</b>를 한 번에 환경 변수로 넣습니다.</p><p class="y">키가 늘어도 manifest를 고칠 필요가 없습니다.</p></div></li><li><div class="cx-code">env.valueFrom.secretKeyRef</div><div class="cx-d"><p class="w">Secret의 <b>특정 키 하나</b>만 골라 환경 변수로 넣습니다.</p><p class="y">비밀번호처럼 민감한 값은 필요한 것만 골라 넣는 것이 안전합니다. 이미지·YAML에 비밀번호를 쓰지 않아도 됩니다.</p></div></li><li><div class="cx-code">(확인) echo ${#DB_PASSWORD}</div><div class="cx-d"><p class="w">값 대신 <b>길이(11)</b>만 출력합니다.</p><p class="y">화면·로그에 비밀번호가 남지 않게 확인하는 습관입니다.</p></div></li></ol></div></details><details class="cx" open><summary><span class="cx-tag">코드 해설</span>command · args · $(VAR) 치환 연습</summary><div class="cx-body"><pre><code>spec:
+  restartPolicy: Never
+  containers:
+    - name: app
+      image: busybox:1.37
+      env:
+        - name: GREETING
+          value: "hello"
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+      command: ["echo"]
+      args: ["$(GREETING)", "from", "$(POD_NAME)", "$HOSTNAME"]</code></pre><ol class="cx-l"><li><div class="cx-code">restartPolicy: Never</div><div class="cx-d"><p class="w">한 번 실행하고 끝나면 다시 시작하지 않습니다.</p><p class="y"><code>echo</code>는 바로 끝납니다. 기본값 Always면 끝날 때마다 재시작해 CrashLoopBackOff처럼 보입니다.</p></div></li><li><div class="cx-code">fieldRef: metadata.name (Downward API)</div><div class="cx-d"><p class="w">Pod 자신의 정보(이름·노드·IP)를 환경 변수로 받습니다.</p><p class="y">앱이 API 서버에 묻지 않고도 자기 이름을 알 수 있습니다.</p></div></li><li><div class="cx-code">command / args</div><div class="cx-d"><p class="w">Docker의 ENTRYPOINT / CMD를 덮어씁니다.</p><p class="y">이미지를 다시 만들지 않고 실행 명령만 바꿀 수 있습니다.</p></div></li><li><div class="cx-code">$(GREETING) vs $HOSTNAME</div><div class="cx-d"><p class="w"><code>$(VAR)</code>는 <b>쿠버네티스</b>가 env에 정의된 값으로 치환합니다. <code>$HOSTNAME</code>은 셸 문법이라 셸이 없으면 글자 그대로 출력됩니다.</p><p class="y">출력은 <code>hello from lab03-cmd $HOSTNAME</code>입니다. <code>["sh","-c","echo $HOSTNAME"]</code>처럼 셸을 거치면 둘 다 치환됩니다. <b>치환하는 주체가 다르다</b>는 것이 핵심입니다.</p></div></li></ol></div></details></section>
 <div class="box key"><span class="lbl">★ 이 Lab의 핵심</span><p>Pod 안 컨테이너는 <b>IP는 공유, 파일은 분리</b>. 설정은 ConfigMap·Secret으로 이미지 밖에. 떠 있는 Pod의 env·볼륨은 못 바꾸니 <b>지우고 다시</b>. 결과 화면의 "API 연결 실패"는 아직 Service가 없어서 정상.</p></div>
 <details class="more"><summary>심화 문제(8교시)와 선택 과제</summary>
 <ol>
@@ -1734,6 +2160,36 @@ kubectl create configmap shop-web-html -n shop --from-file=index.html=app/shop-w
 <div class="task"><h5>태스크 2 · 노드 라벨과 배치 선택</h5><p><code>cap-node1 → tier=front</code>, <code>cap-node2 → disk=ssd</code>. shop-web에 nodeSelector <code>tier=front</code>(실행 중 Pod의 nodeSelector는 못 바꾸므로 재생성). 없는 라벨 요구 → Pending 사유 확인, <code>disk=ssd</code> <b>preferred</b> affinity → 배치 확인, 실행 중 라벨을 지워도 Pod 유지(IgnoredDuringExecution) 후 라벨 복구.</p></div>
 <div class="task"><h5>태스크 3 · taint와 toleration</h5><p><code>kubectl taint nodes cap-node2 dedicated=db:NoSchedule</code>(유지). <code>disk=ssd</code> nodeSelector만 가진 <code>lab04-db-test</code>는 Pending → toleration 추가 후 cap-node2에서 Running. <b>NoExecute 실험</b>: Pod 3개(① 미허용 ② 30초 허용 ③ 무제한) + <code>maintenance=true:NoExecute</code> → ①즉시, ②약 30초 후 사라지고 ③은 남음 → 실험 taint 제거.</p></div>
 <div class="task"><h5>태스크 4 · cap-node1 정기 점검</h5><p>옵션 없이 drain → 실패 사유 확인(이미 cordon됨) → 필요한 옵션만으로 <code>node/cap-node1 drained</code> → shop-web이 복구되지 않은 이유(<b>컨트롤러 없는 Pod</b>), CoreDNS가 다른 노드에 다시 생긴 이유(<b>Deployment 소속</b>) 설명 → uncordon.</p></div>
+<section class="cx-sec"><div class="cx-head"><h4>🔍 코드 해설 — 이 코드가 하는 일과 쓰는 이유</h4><button class="btn cx-toggle" type="button">모두 접기</button></div><p class="muted">따라하기 버전의 실제 명령·manifest에서 핵심 줄만 골라 <b>하는 일</b>과 <b>왜</b>를 나란히 적었습니다.</p><details class="cx" open><summary><span class="cx-tag">코드 해설</span>노드 상태 한 줄 조회와 cordon</summary><div class="cx-body"><pre><code>kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"  Ready="}{.status.conditions[?(@.type=="Ready")].status}{"  unschedulable="}{.spec.unschedulable}{"\n"}{end}'
+kubectl cordon cap-node1 cap-node2
+kubectl run lab04-probe -n shop --image=busybox:1.37 --restart=Never -- sleep 3600
+kubectl describe pod lab04-probe -n shop | tail -3
+kubectl drain cap-node1 --dry-run=client</code></pre><ol class="cx-l"><li><div class="cx-code">{range .items[*]} … {end}</div><div class="cx-d"><p class="w">노드 목록을 하나씩 돌면서 같은 형식으로 출력합니다(jsonpath 반복문).</p><p class="y">노드가 몇 대든 한 줄씩 깔끔하게 나옵니다.</p></div></li><li><div class="cx-code">conditions[?(@.type=="Ready")]</div><div class="cx-d"><p class="w">조건 배열에서 type이 Ready인 항목만 고릅니다(필터식).</p><p class="y">조건은 배열이라 순서가 바뀔 수 있어 인덱스(<code>[0]</code>)로 고르면 안전하지 않습니다.</p></div></li><li><div class="cx-code">kubectl cordon</div><div class="cx-d"><p class="w">노드에 <code>unschedulable: true</code>를 표시해 <b>새 Pod</b>만 막습니다.</p><p class="y">기존 Pod는 그대로라 서비스 영향 없이 점검을 준비할 수 있습니다.</p></div></li><li><div class="cx-code">--restart=Never … -- sleep 3600</div><div class="cx-d"><p class="w">Deployment가 아닌 단독 Pod를 만들고, <code>--</code> 뒤를 컨테이너 명령으로 넘깁니다.</p><p class="y"><code>--</code>가 없으면 <code>sleep</code>을 kubectl 옵션으로 오해합니다.</p></div></li><li><div class="cx-code">describe … | tail -3</div><div class="cx-d"><p class="w">맨 아래 Events만 봅니다.</p><p class="y">Pending의 이유(<code>0/3 nodes are available: … unschedulable</code>)는 항상 Events에 적힙니다.</p></div></li><li><div class="cx-code">drain --dry-run=client</div><div class="cx-d"><p class="w">실제로 내보내지 않고 무엇이 축출될지만 보여 줍니다.</p><p class="y">운영 노드 점검 전에 영향을 먼저 확인하는 습관입니다.</p></div></li></ol></div></details><details class="cx" open><summary><span class="cx-tag">코드 해설</span>라벨 · nodeSelector · nodeAffinity</summary><div class="cx-body"><pre><code>kubectl label node cap-node1 tier=front
+kubectl get nodes -L tier,disk
+sed -i 's|^spec:|spec:\n  nodeSelector:\n    tier: front|' ~/shop/shop-web.yaml
+
+  affinity:
+    nodeAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+        - weight: 80
+          preference:
+            matchExpressions:
+              - key: disk
+                operator: In
+                values: ["ssd"]</code></pre><ol class="cx-l"><li><div class="cx-code">kubectl label node … tier=front</div><div class="cx-d"><p class="w">노드에 역할 이름표를 붙입니다.</p><p class="y">이후 Pod가 "tier=front인 노드로 가라"고 고를 수 있게 됩니다.</p></div></li><li><div class="cx-code">-L tier,disk</div><div class="cx-d"><p class="w">해당 라벨 값을 <b>열</b>로 추가해 보여 줍니다.</p><p class="y"><code>--show-labels</code>보다 원하는 라벨만 보여 읽기 쉽습니다.</p></div></li><li><div class="cx-code">sed 's|^spec:|spec:\n  nodeSelector:…|'</div><div class="cx-d"><p class="w">파일의 <code>spec:</code> 줄 바로 아래에 nodeSelector를 끼워 넣습니다.</p><p class="y">구분자를 <code>|</code>로 써서 경로의 <code>/</code>와 충돌하지 않게 했습니다. 실행 중 Pod의 nodeSelector는 바꿀 수 없어 파일을 고친 뒤 <b>삭제 → 재생성</b>합니다.</p></div></li><li><div class="cx-code">preferredDuring… / weight: 80</div><div class="cx-d"><p class="w">"되도록 ssd 노드"라는 <b>선호</b>입니다. 점수(1~100)에 가중치를 더합니다.</p><p class="y">조건에 맞는 노드가 없어도 Pending이 되지 않고 다른 노드에 배치됩니다. 반드시 지켜야 하면 <code>required…</code>를 씁니다.</p></div></li><li><div class="cx-code">IgnoredDuringExecution</div><div class="cx-d"><p class="w">배치 <b>이후</b> 노드 라벨이 바뀌어도 Pod를 옮기지 않습니다.</p><p class="y">라벨을 지워도 실행 중 Pod가 유지되는 것을 실습에서 확인합니다.</p></div></li><li><div class="cx-code">matchExpressions operator: In</div><div class="cx-d"><p class="w">키의 값이 목록 중 하나면 일치. 그 밖에 NotIn · Exists · DoesNotExist · Gt · Lt가 있습니다.</p><p class="y"><code>nodeSelector</code>는 "같다"만 되지만 affinity는 조건식을 쓸 수 있습니다.</p></div></li></ol></div></details><details class="cx" open><summary><span class="cx-tag">코드 해설</span>taint · toleration · NoExecute 실험</summary><div class="cx-body"><pre><code>kubectl taint nodes cap-node2 dedicated=db:NoSchedule
+
+  tolerations:
+    - key: "dedicated"
+      operator: "Equal"
+      value: "db"
+      effect: "NoSchedule"
+    - key: "maintenance"
+      operator: "Exists"
+      effect: "NoExecute"
+      tolerationSeconds: 30
+
+kubectl taint nodes cap-node2 maintenance=true:NoExecute-
+kubectl drain cap-node1 --ignore-daemonsets --delete-emptydir-data --force</code></pre><ol class="cx-l"><li><div class="cx-code">taint 형식 key=value:effect</div><div class="cx-d"><p class="w">노드에 "이 조건을 견디는 Pod만 와라"는 표시를 붙입니다.</p><p class="y">DB 전용 노드에 일반 앱이 섞이지 않게 합니다. 라벨(Pod가 고름)과 반대 방향입니다.</p></div></li><li><div class="cx-code">operator: Equal + value</div><div class="cx-d"><p class="w">key·value·effect가 모두 같은 taint만 허용합니다.</p><p class="y"><code>Exists</code>는 value와 상관없이 key만 맞으면 허용합니다.</p></div></li><li><div class="cx-code">effect: NoExecute + tolerationSeconds: 30</div><div class="cx-d"><p class="w">NoExecute taint가 붙으면 30초 동안만 머물고 축출됩니다.</p><p class="y">노드 장애 시 바로 옮기지 않고 잠깐 기다리게 할 때 씁니다. 실제로 쿠버네티스는 not-ready taint에 기본 300초를 자동으로 넣습니다.</p></div></li><li><div class="cx-code">taint … NoExecute- (끝의 -)</div><div class="cx-d"><p class="w">붙였던 taint를 제거합니다.</p><p class="y">라벨 삭제(<code>disk-</code>)와 같은 문법입니다.</p></div></li><li><div class="cx-code">--ignore-daemonsets</div><div class="cx-d"><p class="w">DaemonSet Pod는 축출 대상에서 뺍니다.</p><p class="y">DaemonSet Pod는 지워도 같은 노드에 다시 생기므로 drain이 끝나지 않습니다.</p></div></li><li><div class="cx-code">--delete-emptydir-data</div><div class="cx-d"><p class="w">emptyDir 데이터가 사라지는 것을 승인합니다.</p><p class="y">데이터 손실을 모르고 진행하지 않도록 명시적으로 요구하는 옵션입니다.</p></div></li><li><div class="cx-code">--force</div><div class="cx-d"><p class="w">컨트롤러 없는 Pod(직접 만든 Pod)도 지웁니다.</p><p class="y">이런 Pod는 <b>지워지면 다시 생기지 않습니다</b>. Lab04가 끝나면 shop-web·shop-api가 없는 이유입니다.</p></div></li></ol></div></details></section>
 <div class="box key"><span class="lbl">★ 이 Lab의 핵심</span><p>라벨(Pod가 고름) + taint(노드가 거부)를 <b>짝으로</b> 써서 전용 노드를 만든다. 직접 만든 Pod는 drain 때 <b>사라지고 돌아오지 않는다</b> → 컨트롤러가 필요한 이유.</p></div>
 <details class="more"><summary>심화 문제</summary><ol>
 <li><code>adv-ssd</code>: nodeAffinity <b>required</b> <code>disk In [ssd]</code>(nodeSelector 금지) → toleration 없이 Pending 확인 후 고쳐서 cap-node2 Running</li>
@@ -1750,6 +2206,46 @@ kubectl create configmap shop-web-html -n shop --from-file=index.html=app/shop-w
 <div class="task"><h5>태스크 2 · Deployment 전환</h5><p><code>shop-api</code>·<code>shop-web</code>: replicas 2, nodeSelector <code>tier=front</code>, selector <code>app=shop,tier=api</code>(<b>version 제외</b>), 템플릿 라벨 + <code>version=v1</code>, RollingUpdate maxSurge 1 · maxUnavailable 0 · progressDeadlineSeconds 120, <code>change-cause</code> 어노테이션. 확인: Pod 4개가 cap-node1, replicas를 3으로 늘렸다 되돌려도 <b>ReplicaSet은 하나</b>.</p></div>
 <div class="task"><h5>태스크 3 · 롤링 업데이트</h5><p><b>파일을 수정해</b> v2로(이미지·version 라벨·change-cause) → <code>kubectl diff</code>로 확인 → apply → <code>-w</code>로 "새 Pod Ready 후 옛 Pod 종료" 순서 관찰 → <code>/api/products</code>에 badge 필드, history revision 2.</p></div>
 <div class="task"><h5>태스크 4 · 잘못된 배포와 롤백</h5><p>없는 태그 <code>v3</code> → v3 Pod는 ImagePullBackOff, <b>v2 Pod 2개는 계속 응답</b> → <code>rollout status</code> 오류 종료, <code>Progressing=False (ProgressDeadlineExceeded)</code> → <code>rollout undo</code> → <b>파일도 v2로 되돌려</b> apply 시 새 revision이 생기지 않음.</p></div>
+<section class="cx-sec"><div class="cx-head"><h4>🔍 코드 해설 — 이 코드가 하는 일과 쓰는 이유</h4><button class="btn cx-toggle" type="button">모두 접기</button></div><p class="muted">따라하기 버전의 실제 명령·manifest에서 핵심 줄만 골라 <b>하는 일</b>과 <b>왜</b>를 나란히 적었습니다.</p><details class="cx" open><summary><span class="cx-tag">코드 해설</span>shop-api Deployment manifest</summary><div class="cx-body"><pre><code>apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shop-api
+  namespace: shop
+  annotations:
+    kubernetes.io/change-cause: "v1 최초 배포"
+spec:
+  replicas: 2
+  progressDeadlineSeconds: 120
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: shop
+      tier: api
+  template:
+    metadata:
+      labels:
+        app: shop
+        tier: api
+        version: v1
+    spec:
+      nodeSelector:
+        tier: front
+      containers:
+        - name: api
+          image: ghcr.io/worldvit/skillboost-api:v1</code></pre><ol class="cx-l"><li><div class="cx-code">apiVersion: apps/v1</div><div class="cx-d"><p class="w">Deployment·ReplicaSet·DaemonSet·StatefulSet은 <code>apps</code> 그룹입니다.</p><p class="y">Pod(<code>v1</code>)와 헷갈리기 쉬운 부분입니다. 틀리면 <code>no matches for kind</code> 오류가 납니다.</p></div></li><li><div class="cx-code">kubernetes.io/change-cause</div><div class="cx-d"><p class="w">이 버전을 왜 배포했는지 적는 어노테이션입니다.</p><p class="y"><code>rollout history</code>의 CHANGE-CAUSE 열에 표시됩니다. 예전 <code>--record</code> 옵션을 대신합니다.</p></div></li><li><div class="cx-code">progressDeadlineSeconds: 120</div><div class="cx-d"><p class="w">120초 안에 진행이 없으면 <code>Progressing=False (ProgressDeadlineExceeded)</code>로 표시합니다(기본 600).</p><p class="y">실패를 빨리 알아채기 위해서입니다. 쿠버네티스가 <b>자동으로 롤백하지는 않습니다.</b></p></div></li><li><div class="cx-code">maxSurge: 1 / maxUnavailable: 0</div><div class="cx-d"><p class="w">원하는 개수보다 1개까지 더 띄울 수 있고, Available이 원하는 개수 아래로 내려가면 안 됩니다.</p><p class="y">"새 Pod가 Ready가 된 뒤에 옛 Pod를 내린다"는 순서가 되어 잘못된 이미지로 배포해도 <b>기존 Pod가 계속 서비스</b>합니다.</p></div></li><li><div class="cx-code">selector.matchLabels (version 없음)</div><div class="cx-d"><p class="w">이 Deployment가 관리할 Pod를 고르는 조건입니다. <b>만든 뒤 바꿀 수 없습니다.</b></p><p class="y">여기에 <code>version</code>을 넣으면 v2로 바꿀 때 selector도 바꿔야 해서 업데이트가 불가능해집니다. 변하지 않는 라벨만 넣습니다.</p></div></li><li><div class="cx-code">template.metadata.labels</div><div class="cx-d"><p class="w">새로 만들 Pod에 붙일 라벨입니다. selector의 라벨을 <b>모두 포함</b>해야 합니다.</p><p class="y">포함하지 않으면 API 서버가 <code>selector does not match template labels</code>로 거부합니다.</p></div></li><li><div class="cx-code">template 아래가 바뀔 때만 롤아웃</div><div class="cx-d"><p class="w">image·라벨·env가 바뀌면 새 ReplicaSet이 생깁니다.</p><p class="y"><code>replicas</code>만 바꾸면 같은 ReplicaSet의 개수만 조정됩니다(스케일).</p></div></li></ol></div></details><details class="cx" open><summary><span class="cx-tag">코드 해설</span>파일로 업데이트하고 되돌리기</summary><div class="cx-body"><pre><code>sed -i -e 's|skillboost-api:v1|skillboost-api:v2|' -e 's|version: v1|version: v2|' \
+       -e 's|"v1 최초 배포"|"v2 배지 기능"|' ~/shop/shop-api-deploy.yaml
+kubectl diff -f ~/shop/shop-api-deploy.yaml
+kubectl apply -f ~/shop/shop-api-deploy.yaml
+kubectl rollout status deploy/shop-api -n shop --timeout=150s
+kubectl rollout undo deploy/shop-api -n shop
+kubectl rollout history deploy/shop-api -n shop</code></pre><ol class="cx-l"><li><div class="cx-code">sed -i -e … -e …</div><div class="cx-d"><p class="w">파일 안 여러 곳을 한 번에 바꿉니다.</p><p class="y">이미지·버전 라벨·변경 사유 세 곳을 <b>같이</b> 바꿔야 history와 라벨이 실제 버전과 맞습니다.</p></div></li><li><div class="cx-code">kubectl diff -f</div><div class="cx-d"><p class="w">지금 클러스터 상태와 파일의 차이를 보여 줍니다.</p><p class="y"><code>git diff</code>처럼 적용 전에 무엇이 바뀌는지 확인합니다. 실수로 다른 필드를 바꿨는지 잡아냅니다.</p></div></li><li><div class="cx-code">rollout status --timeout</div><div class="cx-d"><p class="w">롤아웃이 끝날 때까지 기다리고, 실패하면 0이 아닌 종료 코드로 끝납니다.</p><p class="y">스크립트·CI에서 배포 성공 여부를 판단하는 기준이 됩니다.</p></div></li><li><div class="cx-code">rollout undo</div><div class="cx-d"><p class="w">직전 ReplicaSet의 템플릿으로 되돌립니다. 되돌린 결과는 <b>새 revision 번호</b>를 받습니다.</p><p class="y">예: revision 2로 되돌리면 revision 4가 되고 목록에서 2는 사라집니다. 특정 번호는 <code>--to-revision=N</code>.</p></div></li><li><div class="cx-code">(중요) 되돌린 뒤 파일도 수정</div><div class="cx-d"><p class="w"><code>undo</code>는 클러스터만 바꿉니다.</p><p class="y">파일이 v3인 채로 다음에 <code>apply</code>하면 불량 버전이 다시 배포됩니다.</p></div></li></ol></div></details><details class="cx" open><summary><span class="cx-tag">코드 해설</span>ReplicaSet 동작 확인 (연습)</summary><div class="cx-body"><pre><code>kubectl delete pod -n shop $(kubectl get pod -n shop -l app=lab05 -o name | head -1)
+kubectl run lab05-intruder -n shop --image=nginx:1.30-alpine --labels=app=lab05
+kubectl delete rs lab05-rs -n shop --cascade=orphan
+kubectl get pod -n shop -l app=lab05 -o custom-columns=NAME:.metadata.name,OWNER:.metadata.ownerReferences[0].kind</code></pre><ol class="cx-l"><li><div class="cx-code">Pod 하나 삭제</div><div class="cx-d"><p class="w">ReplicaSet이 개수가 모자란 것을 보고 새 이름의 Pod를 만듭니다(자가 복구).</p><p class="y">컨트롤러는 "지금 몇 개인가"를 계속 비교합니다.</p></div></li><li><div class="cx-code">--labels=app=lab05 로 단독 Pod 생성</div><div class="cx-d"><p class="w">같은 라벨의 주인 없는 Pod를 ReplicaSet이 입양하고, 정원 초과라 곧바로 지웁니다.</p><p class="y">컨트롤러는 Pod를 이름이 아니라 <b>라벨로 셉니다.</b> 라벨이 겹치는 Pod를 손으로 만들면 안 되는 이유입니다.</p></div></li><li><div class="cx-code">--cascade=orphan</div><div class="cx-d"><p class="w">ReplicaSet만 지우고 Pod는 남깁니다.</p><p class="y">기본(background)은 자식까지 함께 지웁니다. 남은 Pod의 OWNER 열이 비어 있는 것(<code>&lt;none&gt;</code>)으로 확인합니다.</p></div></li><li><div class="cx-code">ownerReferences[0].kind</div><div class="cx-d"><p class="w">Pod의 부모가 누구인지 기록된 필드입니다.</p><p class="y">Deployment → ReplicaSet → Pod 3층 구조를 직접 눈으로 확인하는 방법입니다.</p></div></li></ol></div></details></section>
 <div class="box key"><span class="lbl">★ 이 Lab의 핵심</span><p>maxUnavailable 0이면 <b>잘못된 배포에도 서비스가 유지</b>된다. 롤백 후 <b>파일을 되돌리지 않으면 다음 apply에서 v3가 다시 배포</b>된다.</p></div>
 <details class="more"><summary>심화 문제(<code>adv</code> 네임스페이스)</summary><ol>
 <li><code>adv-web</code>(replicas 3): Pod 총수가 replicas를 넘지 않고 최대 1개만 빠지는 전략(maxSurge 0 · maxUnavailable 1), 이력 5개·기한 60초</li>
@@ -1771,6 +2267,98 @@ kubectl create configmap shop-web-html -n shop --from-file=index.html=app/shop-w
 <div class="task"><h5>태스크 3 · Job <code>shop-db-seed</code></h5><p>ConfigMap <code>shop-db-seed-sql</code>의 SQL을 mysql 클라이언트로 실행, <b>접속 문자셋 <code>utf8mb4</code> 명시</b>, DB 준비 전 실패 시 같은 Pod에서 재시도(<code>OnFailure</code>), backoffLimit 6. 확인: Complete, <code>products</code> 5행, <code>HEX(name)</code>으로 한글 한 글자가 3바이트.</p>
 <div class="box warn"><span class="lbl">⚠ 한글 깨짐 함정</span><p>문자셋을 명시하지 않으면 mysql 이미지에 한글 로케일이 없어 <b>이중 인코딩</b>됩니다. 셸에서는 정상으로 보이지만 6장 이후 브라우저에서 깨지고, 채점은 행 개수만 봐서 못 잡아냅니다.</p></div></div>
 <div class="task"><h5>태스크 4 · CronJob <code>shop-report</code></h5><p>2분마다, <code>timeZone: Asia/Seoul</code>, <code>concurrencyPolicy: Forbid</code>, 이력 성공 3·실패 1, 시각과 products 행 수 한 줄 출력, backoffLimit 2, 실패 시 새 Pod(<code>Never</code>). <code>kubectl create job --from=cronjob/shop-report</code>로 즉시 실행해 확인. 출력 시각이 한국 시간이 아닌 이유: <code>timeZone</code>은 <b>스케줄 계산</b>에만 쓰이고 컨테이너 시간대는 UTC.</p></div>
+<section class="cx-sec"><div class="cx-head"><h4>🔍 코드 해설 — 이 코드가 하는 일과 쓰는 이유</h4><button class="btn cx-toggle" type="button">모두 접기</button></div><p class="muted">따라하기 버전의 실제 명령·manifest에서 핵심 줄만 골라 <b>하는 일</b>과 <b>왜</b>를 나란히 적었습니다.</p><details class="cx" open><summary><span class="cx-tag">코드 해설</span>DaemonSet — shop-log-agent</summary><div class="cx-body"><pre><code>apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: shop-log-agent
+  namespace: shop
+spec:
+  selector:
+    matchLabels: {app: shop, tier: log-agent}
+  template:
+    metadata:
+      labels: {app: shop, tier: log-agent}
+    spec:
+      tolerations:
+        - key: "dedicated"
+          operator: "Equal"
+          value: "db"
+          effect: "NoSchedule"
+      containers:
+        - name: agent
+          image: busybox:1.37
+          env:
+            - name: NODE_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+          volumeMounts:
+            - name: pod-logs
+              mountPath: /host/var/log/pods
+              readOnly: true
+      volumes:
+        - name: pod-logs
+          hostPath:
+            path: /var/log/pods
+            type: Directory</code></pre><ol class="cx-l"><li><div class="cx-code">kind: DaemonSet (replicas 없음)</div><div class="cx-d"><p class="w">조건에 맞는 <b>노드마다 1개</b>씩 Pod를 둡니다.</p><p class="y">노드 수가 곧 Pod 수입니다. 노드를 추가하면 자동으로 따라 들어갑니다.</p></div></li><li><div class="cx-code">tolerations: dedicated=db</div><div class="cx-d"><p class="w">DB 전용 taint가 있는 cap-node2에도 들어가게 합니다.</p><p class="y">처음에는 toleration 없이 만들어 <code>DESIRED 1</code>을 보고, 추가 후 <code>2</code>가 되는 것을 확인합니다. 마스터는 control-plane taint 때문에 여전히 제외됩니다.</p></div></li><li><div class="cx-code">fieldRef: spec.nodeName</div><div class="cx-d"><p class="w">이 Pod가 실행되는 노드 이름을 환경 변수로 받습니다.</p><p class="y">로그에 "어느 노드의 에이전트인지" 남기기 위해서입니다.</p></div></li><li><div class="cx-code">hostPath: /var/log/pods</div><div class="cx-d"><p class="w"><b>노드</b>의 폴더를 컨테이너에 연결합니다.</p><p class="y">kubelet이 모든 Pod 로그를 이 경로에 씁니다. 로그 수집기는 노드 파일을 읽어야 하므로 DaemonSet + hostPath 조합이 전형적입니다.</p></div></li><li><div class="cx-code">readOnly: true / type: Directory</div><div class="cx-d"><p class="w">읽기만 허용하고, 경로가 이미 있는 폴더여야만 마운트합니다.</p><p class="y">노드 파일을 실수로 바꾸지 않도록 최소 권한으로 엽니다.</p></div></li></ol></div></details><details class="cx" open><summary><span class="cx-tag">코드 해설</span>StatefulSet + Headless Service — shop-db</summary><div class="cx-body"><pre><code>apiVersion: v1
+kind: Service
+metadata: {name: shop-db, namespace: shop}
+spec:
+  clusterIP: None
+  selector: {app: shop, tier: db}
+  ports:
+    - name: mysql
+      port: 3306
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata: {name: shop-db, namespace: shop}
+spec:
+  serviceName: shop-db
+  replicas: 1
+  template:
+    spec:
+      nodeSelector: {disk: ssd}
+      containers:
+        - name: mysql
+          image: mysql:8.4
+          env:
+            - name: MYSQL_RANDOM_ROOT_PASSWORD
+              value: "yes"
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef: {name: shop-db-secret, key: DB_PASSWORD}</code></pre><ol class="cx-l"><li><div class="cx-code">clusterIP: None</div><div class="cx-d"><p class="w">가상 IP 없는 <b>Headless Service</b>를 만듭니다. DNS 조회 시 Pod IP를 직접 돌려줍니다.</p><p class="y">DB는 "아무 Pod나"가 아니라 "0번 Pod"처럼 정확한 대상에 붙어야 합니다.</p></div></li><li><div class="cx-code">serviceName: shop-db</div><div class="cx-d"><p class="w">이 StatefulSet의 Pod에 DNS 이름을 줄 Headless Service를 지정합니다.</p><p class="y">그래서 <code>shop-db-0.shop-db.shop.svc.cluster.local</code>이 생깁니다. 이름이 다르면 Pod별 DNS가 만들어지지 않습니다.</p></div></li><li><div class="cx-code">Pod 이름 shop-db-0</div><div class="cx-d"><p class="w">StatefulSet Pod는 순번으로 이름이 고정됩니다. 지워도 <b>같은 이름</b>으로 다시 생깁니다.</p><p class="y">Job·CronJob이 <code>-h shop-db-0.shop-db</code>처럼 고정 주소로 접속할 수 있습니다.</p></div></li><li><div class="cx-code">MYSQL_RANDOM_ROOT_PASSWORD: "yes"</div><div class="cx-d"><p class="w">root 비밀번호를 무작위로 만들고 공개하지 않습니다.</p><p class="y">앱은 root가 아닌 <code>shop</code> 사용자만 씁니다. 최소 권한 원칙입니다. 값은 반드시 따옴표 문자열이어야 합니다(env 값은 문자열).</p></div></li><li><div class="cx-code">nodeSelector disk=ssd + toleration</div><div class="cx-d"><p class="w">DB를 cap-node2에 고정합니다.</p><p class="y">라벨(가고 싶은 곳)과 toleration(들어갈 자격)이 <b>둘 다</b> 있어야 전용 노드에 배치됩니다.</p></div></li></ol></div></details><details class="cx" open><summary><span class="cx-tag">코드 해설</span>Job — 초기 데이터 적재</summary><div class="cx-body"><pre><code>apiVersion: batch/v1
+kind: Job
+metadata: {name: shop-db-seed, namespace: shop}
+spec:
+  backoffLimit: 6
+  template:
+    spec:
+      restartPolicy: OnFailure
+      containers:
+        - name: seed
+          image: mysql:8.4
+          command: ["sh", "-c", "printf '[client]\\npassword=\"%s\"\\n' \"$DB_PASSWORD\" &gt; /tmp/my.cnf &amp;&amp; mysql --defaults-extra-file=/tmp/my.cnf --default-character-set=utf8mb4 -h shop-db-0.shop-db -u shop shop &lt; /seed/schema-seed.sql &amp;&amp; echo seed-done"]
+          volumeMounts:
+            - name: sql
+              mountPath: /seed
+      volumes:
+        - name: sql
+          configMap:
+            name: shop-db-seed-sql</code></pre><ol class="cx-l"><li><div class="cx-code">apiVersion: batch/v1</div><div class="cx-d"><p class="w">Job·CronJob은 <code>batch</code> 그룹입니다.</p><p class="y">Deployment(<code>apps/v1</code>)와 구분해 외워 둡니다.</p></div></li><li><div class="cx-code">backoffLimit: 6</div><div class="cx-d"><p class="w">실패 재시도 상한입니다(기본 6). 넘으면 Job이 Failed가 됩니다.</p><p class="y">DB가 아직 준비 중이면 처음 몇 번은 실패할 수 있어 재시도가 필요합니다.</p></div></li><li><div class="cx-code">restartPolicy: OnFailure</div><div class="cx-d"><p class="w">실패하면 <b>같은 Pod 안에서</b> 컨테이너를 다시 시작합니다. Job은 Always를 쓸 수 없습니다.</p><p class="y"><code>Never</code>면 실패할 때마다 <b>새 Pod</b>가 생깁니다. 끝나는 작업이라 Always는 의미가 없습니다.</p></div></li><li><div class="cx-code">printf … &gt; /tmp/my.cnf + --defaults-extra-file</div><div class="cx-d"><p class="w">비밀번호를 임시 설정 파일에 써서 mysql에 넘깁니다.</p><p class="y"><code>-p비밀번호</code>로 넘기면 프로세스 목록에 노출되고 경고가 출력됩니다.</p></div></li><li><div class="cx-code">--default-character-set=utf8mb4</div><div class="cx-d"><p class="w">한글 상품명을 올바른 문자 집합으로 보냅니다.</p><p class="y">빼면 한글이 깨져 저장됩니다.</p></div></li><li><div class="cx-code">configMap 볼륨 → /seed</div><div class="cx-d"><p class="w">SQL 파일을 ConfigMap에 담아 파일로 마운트합니다.</p><p class="y">SQL을 이미지에 넣지 않아도 되고, 내용이 바뀌면 ConfigMap만 갱신하면 됩니다.</p></div></li><li><div class="cx-code">(주의) 완료된 Job 다시 apply</div><div class="cx-d"><p class="w"><code>unchanged</code>로 끝나고 재실행되지 않습니다.</p><p class="y">Job의 template은 바꿀 수 없고 이미 완료 상태입니다. 다시 돌리려면 삭제 후 생성합니다.</p></div></li></ol></div></details><details class="cx" open><summary><span class="cx-tag">코드 해설</span>CronJob — 2분마다 리포트</summary><div class="cx-body"><pre><code>spec:
+  schedule: "*/2 * * * *"
+  timeZone: "Asia/Seoul"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      backoffLimit: 2
+      template:
+        spec:
+          restartPolicy: Never
+
+kubectl create job shop-report-manual --from=cronjob/shop-report -n shop</code></pre><ol class="cx-l"><li><div class="cx-code">schedule: "*/2 * * * *"</div><div class="cx-d"><p class="w">분 · 시 · 일 · 월 · 요일 순서입니다. <code>*/2</code>는 "2분마다"입니다.</p><p class="y">예) <code>0 3 * * 1-5</code> 평일 03:00, <code>0 9 1 * *</code> 매월 1일 09:00.</p></div></li><li><div class="cx-code">timeZone: "Asia/Seoul"</div><div class="cx-d"><p class="w">스케줄을 한국 시간 기준으로 해석합니다.</p><p class="y">지정하지 않으면 kube-controller-manager의 시간대(보통 UTC)라 9시간 차이가 납니다.</p></div></li><li><div class="cx-code">concurrencyPolicy: Forbid</div><div class="cx-d"><p class="w">이전 Job이 아직 실행 중이면 이번 실행을 건너뜁니다.</p><p class="y">Allow(기본)는 겹쳐 실행, Replace는 이전 것을 중단하고 새로 실행합니다. 리포트가 겹쳐 DB에 부담을 주지 않게 합니다.</p></div></li><li><div class="cx-code">successful/failedJobsHistoryLimit</div><div class="cx-d"><p class="w">완료된 Job을 성공 3개 · 실패 1개만 남깁니다(기본값과 같음).</p><p class="y">2분마다 Job이 생기므로 정리하지 않으면 Job·Pod가 계속 쌓입니다.</p></div></li><li><div class="cx-code">jobTemplate</div><div class="cx-d"><p class="w">CronJob은 직접 Pod를 만들지 않고 <b>Job을 찍어 내는 틀</b>을 가집니다.</p><p class="y">그래서 들여쓰기가 CronJob → Job → Pod 3단입니다.</p></div></li><li><div class="cx-code">create job --from=cronjob/…</div><div class="cx-d"><p class="w">CronJob 틀로 Job을 즉시 한 번 만듭니다.</p><p class="y">스케줄을 기다리지 않고 테스트할 때 씁니다.</p></div></li></ol></div></details></section>
 <div class="box key"><span class="lbl">★ 이 Lab의 핵심</span><p>DaemonSet 개수는 taint가 정한다. StatefulSet은 이름과 DNS가 고정된다. <b>완료된 Job은 다시 apply해도 재실행되지 않는다</b>(삭제 후 재생성).</p></div>
 <details class="more"><summary>심화 · 확장(Part 3)</summary><ul>
 <li><code>rollout pause</code> 중 변경 두 개를 모아 <code>resume</code> 시 revision 1 증가</li>
@@ -1788,6 +2376,50 @@ kubectl create configmap shop-web-html -n shop --from-file=index.html=app/shop-w
 <div class="task"><h5>태스크 3 · shop-web 프록시와 NodePort</h5><p>ConfigMap <code>shop-web-nginx</code>(<code>default.conf</code>: <code>/api</code>를 <code>shop-api</code>로 프록시)를 <code>/etc/nginx/conf.d</code>에 마운트, Service <code>shop-web</code> NodePort <b>30080</b>. nginx는 기동 시 upstream 이름을 조회하므로 <b>shop-api Service가 먼저</b> 있어야 함. 세 노드 내부 IP:30080 모두 응답(externalTrafficPolicy <code>Cluster</code>).</p></div>
 <div class="task"><h5>태스크 4 · 보안 그룹과 브라우저</h5><p><code>cap-k8s-node-sg</code>에 TCP 30080 ← <b>내 IP/32</b>(자기 참조 규칙 유지). 브라우저로 노드 퍼블릭 IP:30080 → 상품 카드 5개 · <code>데이터 mysql</code>.</p></div>
 <div class="task"><h5>태스크 5 · LoadBalancer와 Headless</h5><p><code>lab06-lb</code>(LoadBalancer)는 클라우드 컨트롤러가 없어 <code>EXTERNAL-IP &lt;pending&gt;</code>이지만 자동 할당된 NodePort로는 접속됨 → 삭제. <code>shop-api</code>(ClusterIP 하나)와 <code>shop-db</code>(헤드리스 → Pod IP)의 DNS 응답 비교.</p></div>
+<section class="cx-sec"><div class="cx-head"><h4>🔍 코드 해설 — 이 코드가 하는 일과 쓰는 이유</h4><button class="btn cx-toggle" type="button">모두 접기</button></div><p class="muted">따라하기 버전의 실제 명령·manifest에서 핵심 줄만 골라 <b>하는 일</b>과 <b>왜</b>를 나란히 적었습니다.</p><details class="cx" open><summary><span class="cx-tag">코드 해설</span>ClusterIP Service — shop-api</summary><div class="cx-body"><pre><code>apiVersion: v1
+kind: Service
+metadata:
+  name: shop-api
+  namespace: shop
+spec:
+  selector:
+    app: shop
+    tier: api
+  ports:
+    - name: http
+      port: 5000
+      targetPort: 5000
+
+kubectl get endpointslice -n shop -l kubernetes.io/service-name=shop-api
+kubectl run lab06-curl -n shop --rm -i --restart=Never --image=busybox:1.37 -- wget -qO- http://shop-api:5000/api/version</code></pre><ol class="cx-l"><li><div class="cx-code">type 생략 = ClusterIP</div><div class="cx-d"><p class="w">클러스터 안에서만 쓰는 고정 가상 IP와 DNS 이름(<code>shop-api</code>)을 줍니다.</p><p class="y">API는 외부에 직접 공개할 필요가 없습니다. 화면(nginx)만 API를 부르면 됩니다.</p></div></li><li><div class="cx-code">selector app=shop, tier=api</div><div class="cx-d"><p class="w">라벨이 <b>모두</b> 맞는 Ready Pod를 대상으로 삼습니다.</p><p class="y">오타가 하나라도 있으면(<code>tier: apii</code>) EndpointSlice가 비어 접속이 거부됩니다(curl exit 7).</p></div></li><li><div class="cx-code">port / targetPort</div><div class="cx-d"><p class="w"><code>port</code>는 Service가 받는 포트, <code>targetPort</code>는 컨테이너가 듣는 포트입니다.</p><p class="y">둘이 같을 필요는 없습니다. <code>targetPort: http</code>처럼 컨테이너 포트 <b>이름</b>을 쓰면 포트 번호가 바뀌어도 Service를 고치지 않아도 됩니다.</p></div></li><li><div class="cx-code">ports.name: http</div><div class="cx-d"><p class="w">포트에 이름을 붙입니다.</p><p class="y">여러 포트를 가진 Service는 이름이 필수이고, Gateway·모니터링 도구가 이름으로 포트를 찾습니다.</p></div></li><li><div class="cx-code">get endpointslice -l kubernetes.io/service-name=…</div><div class="cx-d"><p class="w">Service가 실제로 보낼 Pod IP 목록입니다.</p><p class="y">연결 문제의 첫 점검 지점입니다. <b>비어 있으면 selector 문제</b>, 있으면 포트나 앱 문제입니다.</p></div></li><li><div class="cx-code">run … --rm -i --restart=Never</div><div class="cx-d"><p class="w">일회용 Pod를 띄워 명령 하나 실행하고 끝나면 지웁니다.</p><p class="y">ClusterIP는 클러스터 안에서만 열리므로 안에서 테스트해야 합니다.</p></div></li></ol></div></details><details class="cx" open><summary><span class="cx-tag">코드 해설</span>nginx 프록시 — 화면과 API 연결</summary><div class="cx-body"><pre><code>server {
+    listen 80;
+    location / {
+        root /usr/share/nginx/html;
+    }
+    location /api/ {
+        proxy_pass http://shop-api:5000;
+    }
+}
+
+kubectl create configmap shop-web-nginx -n shop --from-file=default.conf=$HOME/shop/shop-web-default.conf
+        volumeMounts:
+          - name: nginx-conf
+            mountPath: /etc/nginx/conf.d</code></pre><ol class="cx-l"><li><div class="cx-code">location /api/ { proxy_pass http://shop-api:5000; }</div><div class="cx-d"><p class="w"><code>/api/</code>로 시작하는 요청을 shop-api Service로 넘깁니다.</p><p class="y">브라우저는 nginx 하나에만 접속하고, nginx가 클러스터 안에서 API를 대신 호출합니다. API Pod IP가 바뀌어도 <b>Service 이름</b>은 그대로라 설정을 고칠 필요가 없습니다.</p></div></li><li><div class="cx-code">--from-file=default.conf=경로</div><div class="cx-d"><p class="w">파일 내용을 <code>default.conf</code>라는 키로 ConfigMap에 넣습니다.</p><p class="y">키 이름이 마운트된 폴더 안의 <b>파일 이름</b>이 됩니다.</p></div></li><li><div class="cx-code">mountPath: /etc/nginx/conf.d</div><div class="cx-d"><p class="w">nginx가 설정을 읽는 폴더를 ConfigMap으로 덮습니다.</p><p class="y">이미지를 다시 만들지 않고 설정만 교체합니다. 폴더 전체가 덮이므로 원래 있던 파일은 보이지 않게 됩니다.</p></div></li></ol></div></details><details class="cx" open><summary><span class="cx-tag">코드 해설</span>NodePort Service — 외부 공개</summary><div class="cx-body"><pre><code>apiVersion: v1
+kind: Service
+metadata:
+  name: shop-web
+  namespace: shop
+spec:
+  type: NodePort
+  selector:
+    app: shop
+    tier: web
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+      nodePort: 30080
+      protocol: TCP</code></pre><ol class="cx-l"><li><div class="cx-code">type: NodePort</div><div class="cx-d"><p class="w">ClusterIP에 더해 <b>모든 노드</b>의 같은 포트를 엽니다.</p><p class="y">kubeadm 클러스터에는 클라우드 LB가 자동으로 붙지 않아 외부 공개의 가장 기본 방법입니다.</p></div></li><li><div class="cx-code">nodePort: 30080</div><div class="cx-d"><p class="w">노드에 열릴 포트입니다(기본 범위 30000~32767). 생략하면 무작위로 정해집니다.</p><p class="y">보안 그룹 규칙·문서에 쓰기 위해 고정합니다. <code>kubectl get svc</code>의 <code>80:30080/TCP</code>는 "Service 80, 노드 30080"입니다.</p></div></li><li><div class="cx-code">흐름</div><div class="cx-d"><p class="w">노드IP:30080 → Service:80 → Pod:80.</p><p class="y">shop-web Pod가 cap-node1에만 있어도 세 노드 모두 응답합니다. kube-proxy가 다른 노드의 Pod로 넘겨 주기 때문입니다(<code>externalTrafficPolicy: Cluster</code>).</p></div></li><li><div class="cx-code">(주의) 보안 그룹</div><div class="cx-d"><p class="w">쿠버네티스 설정과 별개로 AWS 방화벽도 열어야 합니다.</p><p class="y">30080은 <b>내 IP/32</b>만 허용합니다. <code>0.0.0.0/0</code>은 전 세계에 공개됩니다.</p></div></li></ol></div></details></section>
 <div class="box key"><span class="lbl">★ 이 Lab의 핵심</span><p>드디어 화면과 API가 연결됩니다. Service가 안 되면 <b>EndpointSlice → 라벨 → 포트 → 보안 그룹</b> 순으로. 환경 변수로 넣은 설정은 <b>Pod를 다시 만들어야</b> 반영됩니다.</p></div>
 <details class="more"><summary>심화 문제(<code>adv</code>)</summary><ol>
 <li><b>블루/그린</b>: <code>adv-blue</code>·<code>adv-green</code> Deployment를 두고 <b>Service selector만</b> 바꿔 한 번에 전환</li>
@@ -1803,6 +2435,39 @@ kubectl create configmap shop-web-html -n shop --from-file=index.html=app/shop-w
 <div class="task"><h5>태스크 1 · Liveness (<code>/healthz</code>, 5초·1초·3회)</h5><p>적용 후 기본값으로 채워진 필드를 <code>-o yaml</code>로 확인. Pod 하나에 <code>POST /api/chaos/hang</code>(앱을 멈춤) → 1분 안에 <b>RESTARTS +1</b>, Events에 Liveness 실패·재시작 사유, <code>logs --previous</code>로 재시작 전 로그.</p></div>
 <div class="task"><h5>태스크 2 · Readiness (<code>/readyz</code> — DB 연결 포함, 5초·2초·2회)</h5><p>shop-db Service selector를 잠시 바꿔 DB에 닿지 못하게(<b>데이터를 잃지 않는 방법</b>) → shop-api <b>0/1이지만 RESTARTS는 그대로</b>, EndpointSlice 모두 <code>ready=false</code>, NodePort API 실패 → selector 복구하면 <b>명령 없이 자동 회복</b>.</p></div>
 <div class="task"><h5>태스크 3 · Startup</h5><p><code>STARTUP_DELAY=20</code> + startupProbe 2초×5회(=10초 예산) → 새 Pod 재시작 루프, 하지만 <b>옛 Pod가 서비스를 유지</b>(maxUnavailable 0) → 예산을 30초 이상으로, <code>STARTUP_DELAY=10</code> → 롤아웃 완료.</p></div>
+<section class="cx-sec"><div class="cx-head"><h4>🔍 코드 해설 — 이 코드가 하는 일과 쓰는 이유</h4><button class="btn cx-toggle" type="button">모두 접기</button></div><p class="muted">따라하기 버전의 실제 명령·manifest에서 핵심 줄만 골라 <b>하는 일</b>과 <b>왜</b>를 나란히 적었습니다.</p><details class="cx" open><summary><span class="cx-tag">코드 해설</span>세 가지 Probe가 들어간 컨테이너 설정 (최종본)</summary><div class="cx-body"><pre><code>containers:
+  - name: api
+    image: ghcr.io/worldvit/skillboost-api:v2
+    ports:
+      - name: http
+        containerPort: 5000
+    env:
+      - name: STARTUP_DELAY
+        value: "10"
+    startupProbe:
+      httpGet:
+        path: /healthz
+        port: http
+      periodSeconds: 2
+      failureThreshold: 15
+    livenessProbe:
+      httpGet:
+        path: /healthz
+        port: http
+      periodSeconds: 5
+      timeoutSeconds: 1
+      failureThreshold: 3
+    readinessProbe:
+      httpGet:
+        path: /readyz
+        port: http
+      periodSeconds: 5
+      timeoutSeconds: 2
+      failureThreshold: 2</code></pre><ol class="cx-l"><li><div class="cx-code">ports.name: http + port: http</div><div class="cx-d"><p class="w">Probe가 포트 <b>이름</b>으로 대상을 찾습니다.</p><p class="y">컨테이너 포트 번호가 바뀌어도 Probe 세 곳을 고칠 필요가 없습니다.</p></div></li><li><div class="cx-code">startupProbe (2초 × 15회 = 30초)</div><div class="cx-d"><p class="w">앱이 처음 뜨는 동안만 검사합니다. 성공할 때까지 liveness·readiness는 <b>시작하지 않습니다.</b></p><p class="y">기동이 느린 앱을 liveness가 "죽었다"고 오해해 재시작하는 것을 막습니다. 예산(<code>periodSeconds × failureThreshold</code>)이 기동 시간보다 짧으면 계속 재시작됩니다(실습의 10초 예산 실험).</p></div></li><li><div class="cx-code">livenessProbe /healthz</div><div class="cx-d"><p class="w">"프로세스가 살아 있나"를 5초마다 묻고, 3번 연속 실패(약 15초)하면 kubelet이 <b>컨테이너를 재시작</b>합니다.</p><p class="y">프로세스는 떠 있지만 멈춰 버린(hang) 상태를 자동 복구합니다. 실습의 <code>/api/chaos/hang</code>으로 확인합니다.</p></div></li><li><div class="cx-code">timeoutSeconds: 1</div><div class="cx-d"><p class="w">1초 안에 응답이 없으면 실패로 셉니다(기본 1).</p><p class="y">멈춘 앱은 응답을 아예 안 하므로 타임아웃으로 실패가 쌓입니다.</p></div></li><li><div class="cx-code">readinessProbe /readyz</div><div class="cx-d"><p class="w">"지금 손님을 받아도 되나"를 묻고, 실패하면 Pod를 <b>EndpointSlice에서 뺍니다</b>(재시작 없음).</p><p class="y">DB에 연결할 수 없을 때 재시작해도 해결되지 않습니다. 트래픽만 빼고 DB가 돌아오면 자동으로 다시 넣습니다.</p></div></li><li><div class="cx-code">/healthz vs /readyz</div><div class="cx-d"><p class="w">healthz는 자기 자신만, readyz는 의존성(DB)까지 확인합니다.</p><p class="y">liveness에 DB 검사를 넣으면 DB 장애 하나로 <b>모든 API Pod가 재시작</b>되는 연쇄 장애가 납니다.</p></div></li></ol></div></details><details class="cx" open><summary><span class="cx-tag">코드 해설</span>장애 만들기와 관찰</summary><div class="cx-body"><pre><code>curl -s -X POST http://$POD_IP:5000/api/chaos/hang
+kubectl get events -n shop --field-selector involvedObject.name=$POD --sort-by=.lastTimestamp | tail -4
+kubectl logs $POD -n shop --previous --tail=2
+kubectl patch svc shop-db -n shop --type merge -p '{"spec":{"selector":{"tier":"db-maintenance"}}}'
+kubectl get endpointslice -n shop -l kubernetes.io/service-name=shop-api -o jsonpath='{range .items[*].endpoints[*]}{.addresses[0]}{" ready="}{.conditions.ready}{"\n"}{end}'</code></pre><ol class="cx-l"><li><div class="cx-code">POST /api/chaos/hang</div><div class="cx-d"><p class="w">실습 앱이 일부러 응답을 멈추게 하는 장애 주입 API입니다.</p><p class="y">실제 장애를 기다리지 않고 Probe 동작을 재현합니다.</p></div></li><li><div class="cx-code">events --field-selector involvedObject.name=…</div><div class="cx-d"><p class="w">특정 Pod에 대한 이벤트만 시간순으로 봅니다.</p><p class="y"><code>Liveness probe failed</code> → <code>Killing</code> → <code>Started</code> 순서로 재시작 과정이 남습니다.</p></div></li><li><div class="cx-code">logs --previous</div><div class="cx-d"><p class="w">재시작되기 <b>전</b> 컨테이너의 로그를 봅니다.</p><p class="y">현재 컨테이너는 새로 시작해 원인 로그가 없습니다. 죽기 직전 로그는 이전 컨테이너에 있습니다.</p></div></li><li><div class="cx-code">patch svc shop-db … selector tier=db-maintenance</div><div class="cx-d"><p class="w">DB Service가 아무 Pod도 가리키지 않게 만들어 "DB 접속 불가"를 흉내 냅니다.</p><p class="y">DB를 실제로 죽이지 않고 readiness만 실패시키는 안전한 실험입니다. 끝나면 반드시 <code>tier: db</code>로 되돌립니다.</p></div></li><li><div class="cx-code">endpoints[*].conditions.ready</div><div class="cx-d"><p class="w">EndpointSlice 안 각 Pod의 ready 여부입니다.</p><p class="y">readiness 실패 시 Pod는 Running이지만 <code>ready=false</code>가 되어 트래픽에서 빠지는 것을 확인합니다.</p></div></li></ol></div></details></section>
 <div class="box key"><span class="lbl">★ 이 Lab의 핵심</span><p>멈춘 앱 → liveness가 <b>재시작</b>. DB 장애 → readiness가 <b>트래픽만 제외</b>하고 회복되면 자동 복귀. 느린 기동 → startup 예산 = <code>failureThreshold × periodSeconds</code>.</p></div>
 <div class="box warn"><span class="lbl">⚠ 정리 전 확인</span><p>shop-db Service selector는 반드시 <code>app=shop, tier=db</code>로 복구합니다.</p></div>
 </article>
@@ -1821,6 +2486,59 @@ kubectl create configmap shop-web-html -n shop --from-file=index.html=app/shop-w
 <li>CPU limit 2 요구 → <b>403 거부</b></li>
 <li>768Mi × 5 Deployment → 일부만 생성, 사유는 <b>ReplicaSet 이벤트</b>에서</li></ul></div>
 <div class="task"><h5>태스크 3 · HPA</h5><p>manifest에서 <code>replicas</code> 제거(<b>Pod 수가 줄지 않게</b> <code>apply set-last-applied</code>) → HPA <code>autoscaling/v2</code> 2~5개, CPU 50%, 축소 안정화 60초 → <code>POST /api/chaos/cpu?seconds=120</code> 여러 번 → 5개까지 확장(이벤트에 사유) → 부하 종료 후 2개로 복귀. 확장 중에도 Quota를 넘지 않음.</p></div>
+<section class="cx-sec"><div class="cx-head"><h4>🔍 코드 해설 — 이 코드가 하는 일과 쓰는 이유</h4><button class="btn cx-toggle" type="button">모두 접기</button></div><p class="muted">따라하기 버전의 실제 명령·manifest에서 핵심 줄만 골라 <b>하는 일</b>과 <b>왜</b>를 나란히 적었습니다.</p><details class="cx" open><summary><span class="cx-tag">코드 해설</span>metrics-server 설치와 자원 설정</summary><div class="cx-body"><pre><code>kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/download/v0.9.0/components.yaml
+kubectl patch deploy metrics-server -n kube-system --type json \
+  -p '[{"op":"add","path":"/spec/template/spec/containers/0/args/-","value":"--kubelet-insecure-tls"}]'
+
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi</code></pre><ol class="cx-l"><li><div class="cx-code">metrics-server</div><div class="cx-d"><p class="w">각 노드 kubelet에서 CPU·메모리 사용량을 모아 <code>kubectl top</code>과 HPA에 제공합니다.</p><p class="y">이것이 없으면 <code>kubectl top</code>이 오류를 내고 HPA의 TARGETS가 <code>&lt;unknown&gt;</code>입니다.</p></div></li><li><div class="cx-code">--type json + "path": ".../args/-"</div><div class="cx-d"><p class="w">JSON Patch로 args 배열 <b>맨 끝(-)</b>에 옵션 하나를 추가합니다.</p><p class="y">merge patch로 배열을 건드리면 배열 전체가 교체되어 기존 옵션이 사라집니다.</p></div></li><li><div class="cx-code">--kubelet-insecure-tls</div><div class="cx-d"><p class="w">kubelet 인증서 검증을 건너뜁니다.</p><p class="y">kubeadm 기본 kubelet 인증서는 노드 IP가 SAN에 없어 검증에 실패합니다. 실습용 설정이며 운영에서는 인증서를 제대로 발급합니다.</p></div></li><li><div class="cx-code">requests (cpu 100m, memory 128Mi)</div><div class="cx-d"><p class="w">스케줄러가 노드를 고를 때 쓰는 <b>예약량</b>입니다. 100m = 0.1코어.</p><p class="y">노드의 Allocatable에서 requests 합계를 빼고 남은 곳에만 배치합니다. HPA 사용률의 분모이기도 합니다.</p></div></li><li><div class="cx-code">limits (cpu 500m, memory 256Mi)</div><div class="cx-d"><p class="w">넘을 수 없는 <b>상한</b>입니다.</p><p class="y">CPU는 넘으면 <b>느려지고(스로틀링)</b>, 메모리는 넘으면 <b>OOMKilled</b>(exit 137)로 컨테이너가 재시작됩니다. 메모리는 나눠 쓸 수 없는 자원이기 때문입니다.</p></div></li><li><div class="cx-code">QoS 클래스</div><div class="cx-d"><p class="w">requests=limits면 Guaranteed, 일부만 있으면 Burstable, 아무것도 없으면 BestEffort입니다.</p><p class="y">노드 메모리가 부족하면 BestEffort → Burstable → Guaranteed 순서로 먼저 축출됩니다.</p></div></li></ol></div></details><details class="cx" open><summary><span class="cx-tag">코드 해설</span>LimitRange와 ResourceQuota</summary><div class="cx-body"><pre><code>apiVersion: v1
+kind: LimitRange
+metadata: {name: shop-limits, namespace: shop}
+spec:
+  limits:
+    - type: Container
+      defaultRequest: {cpu: 50m, memory: 64Mi}
+      default:        {cpu: 200m, memory: 256Mi}
+      max:            {cpu: "1", memory: 1Gi}
+---
+apiVersion: v1
+kind: ResourceQuota
+metadata: {name: shop-quota, namespace: shop}
+spec:
+  hard:
+    requests.cpu: "2"
+    requests.memory: 3Gi
+    limits.cpu: "6"
+    limits.memory: 6Gi
+    pods: "20"
+    services.nodeports: "2"</code></pre><ol class="cx-l"><li><div class="cx-code">LimitRange defaultRequest / default</div><div class="cx-d"><p class="w">자원을 적지 않은 컨테이너에 requests·limits <b>기본값</b>을 채워 넣습니다.</p><p class="y">누군가 resources 없이 배포해도 BestEffort Pod가 노드를 독점하지 않습니다. 채워진 값은 <code>kubernetes.io/limit-ranger</code> 어노테이션으로 확인합니다.</p></div></li><li><div class="cx-code">LimitRange max</div><div class="cx-d"><p class="w">컨테이너 하나가 요청할 수 있는 상한입니다.</p><p class="y">넘으면 Pod 생성 자체가 <b>거부</b>됩니다(Forbidden). Deployment라면 Pod가 안 생기고 ReplicaSet 이벤트에 <code>FailedCreate</code>가 남습니다.</p></div></li><li><div class="cx-code">ResourceQuota hard</div><div class="cx-d"><p class="w">네임스페이스 <b>전체 합계</b>의 상한입니다.</p><p class="y">한 팀이 클러스터 자원을 다 쓰지 못하게 합니다. 개별 컨테이너 상한(LimitRange)과 역할이 다릅니다.</p></div></li><li><div class="cx-code">requests.cpu 등이 있는 Quota</div><div class="cx-d"><p class="w">이 Quota가 있으면 모든 Pod가 해당 값을 <b>반드시</b> 적어야 합니다.</p><p class="y">그래서 LimitRange 기본값과 함께 씁니다. 그렇지 않으면 resources 없는 Pod가 모두 거부됩니다.</p></div></li><li><div class="cx-code">services.nodeports: "2"</div><div class="cx-d"><p class="w">NodePort Service 개수도 제한할 수 있습니다.</p><p class="y">30080·31080 두 개를 쓰므로 세 번째 NodePort는 거부됩니다.</p></div></li></ol></div></details><details class="cx" open><summary><span class="cx-tag">코드 해설</span>HPA — 부하에 따라 Pod 수 조정</summary><div class="cx-body"><pre><code>sed -i '/^  replicas: 2$/d' ~/shop/shop-api-deploy.yaml
+kubectl apply set-last-applied -f ~/shop/shop-api-deploy.yaml
+
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata: {name: shop-api, namespace: shop}
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: shop-api
+  minReplicas: 2
+  maxReplicas: 5
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 50
+  behavior:
+    scaleDown:
+      stabilizationWindowSeconds: 60</code></pre><ol class="cx-l"><li><div class="cx-code">replicas 줄 삭제 + set-last-applied</div><div class="cx-d"><p class="w">manifest와 last-applied 기록에서 replicas를 없앱니다.</p><p class="y">replicas가 남아 있으면 <code>apply</code>할 때마다 HPA가 늘려 놓은 Pod 수가 2로 <b>되돌아갑니다</b>. Pod 수의 주인을 HPA 하나로 정리하는 작업입니다.</p></div></li><li><div class="cx-code">scaleTargetRef</div><div class="cx-d"><p class="w">조정할 대상(Deployment shop-api)입니다.</p><p class="y">HPA는 Pod를 직접 만들지 않고 대상의 replicas 값만 바꿉니다.</p></div></li><li><div class="cx-code">averageUtilization: 50</div><div class="cx-d"><p class="w">Pod들의 평균 CPU 사용량이 <b>requests의 50%</b>를 넘으면 늘립니다.</p><p class="y">기준이 requests이므로 requests가 없으면 계산할 수 없습니다. 원하는 수 = ceil(현재 수 × 현재 사용률 / 목표 사용률).</p></div></li><li><div class="cx-code">min 2 / max 5</div><div class="cx-d"><p class="w">최소 2개는 유지하고 최대 5개까지만 늘립니다.</p><p class="y">최소값은 가용성, 최대값은 비용과 Quota 보호를 위해 둡니다.</p></div></li><li><div class="cx-code">scaleDown.stabilizationWindowSeconds: 60</div><div class="cx-d"><p class="w">줄이기 전에 60초 동안의 추천값 중 가장 큰 값을 씁니다(기본 300초).</p><p class="y">부하가 잠깐 줄었다 다시 오를 때 Pod 수가 들쭉날쭉(flapping)하지 않게 합니다. 실습에서는 관찰 시간을 줄이려고 짧게 잡았습니다.</p></div></li></ol></div></details></section>
 <div class="box key"><span class="lbl">★ 이 Lab의 핵심</span><p>CPU는 조여지고 메모리는 죽는다. Quota 거부 사유는 Pod가 아니라 <b>ReplicaSet 이벤트</b>에. HPA를 쓰면 manifest의 <code>replicas</code>를 <b>안전하게</b> 빼야 한다.</p></div>
 </article>
 
@@ -1838,6 +2556,25 @@ kubectl create configmap shop-web-html -n shop --from-file=index.html=app/shop-w
 <tr><td>6(선택)</td><td>설정 이름 정리 후 새 Pod가 시작 못 함</td><td>Pod 상태 이름(<code>CreateContainerConfigError</code>)과 Events</td></tr>
 </table></div>
 <div class="task"><h5>디버깅 도구 (8교시)</h5><p>shop-api Pod에 busybox <b>임시 컨테이너</b>를 붙여 api 컨테이너의 gunicorn 프로세스 확인(<code>--target</code>), Pod 명세의 <code>ephemeralContainers</code>에 남는 것 확인, <code>kubectl debug node/cap-node1</code>로 SSH 없이 <code>/host/etc/hostname</code> 읽기 → 디버그 Pod 삭제.</p></div>
+<section class="cx-sec"><div class="cx-head"><h4>🔍 코드 해설 — 이 코드가 하는 일과 쓰는 이유</h4><button class="btn cx-toggle" type="button">모두 접기</button></div><p class="muted">따라하기 버전의 실제 명령·manifest에서 핵심 줄만 골라 <b>하는 일</b>과 <b>왜</b>를 나란히 적었습니다.</p><details class="cx" open><summary><span class="cx-tag">코드 해설</span>진단할 때 쓰는 명령과 읽는 법</summary><div class="cx-body"><pre><code>kubectl get pods -n shop -o wide
+kubectl describe pod &lt;POD&gt; -n shop | sed -n '/^Events/,$p'
+kubectl get events -n shop --sort-by=.lastTimestamp | tail -15
+kubectl logs &lt;POD&gt; -n shop -c api --previous
+kubectl describe rs -n shop -l tier=api | grep -A3 FailedCreate
+kubectl get endpointslice -n shop -l kubernetes.io/service-name=shop-api
+kubectl debug -it &lt;POD&gt; -n shop --image=busybox:1.37 --target=api
+kubectl debug node/cap-node1 -it --image=busybox:1.37</code></pre><ol class="cx-l"><li><div class="cx-code">get pods -o wide</div><div class="cx-d"><p class="w">STATUS·RESTARTS·NODE를 먼저 봅니다.</p><p class="y">상태 이름이 원인 범위를 알려 줍니다. ImagePullBackOff는 이미지, CrashLoopBackOff는 앱, Pending은 배치, CreateContainerConfigError는 설정 참조 문제입니다.</p></div></li><li><div class="cx-code">sed -n '/^Events/,$p'</div><div class="cx-d"><p class="w">describe 출력에서 Events부터 끝까지만 잘라 봅니다.</p><p class="y">describe는 길어서 맨 아래 Events가 가장 중요한 단서입니다.</p></div></li><li><div class="cx-code">logs --previous</div><div class="cx-d"><p class="w">직전에 죽은 컨테이너의 로그를 봅니다.</p><p class="y">CrashLoopBackOff는 현재 컨테이너가 막 시작한 상태라 로그가 비어 있을 수 있습니다.</p></div></li><li><div class="cx-code">describe rs … FailedCreate</div><div class="cx-d"><p class="w">Pod가 <b>아예 안 만들어질 때</b>는 Pod가 없어 describe할 대상이 없습니다.</p><p class="y">LimitRange·Quota 위반은 Pod를 만드는 주체인 <b>ReplicaSet 이벤트</b>에 남습니다.</p></div></li><li><div class="cx-code">get endpointslice</div><div class="cx-d"><p class="w">Pod는 Running인데 502·접속 불가면 확인합니다.</p><p class="y">비어 있으면 Service selector와 Pod 라벨이 어긋난 것입니다.</p></div></li><li><div class="cx-code">kubectl debug --target=api</div><div class="cx-d"><p class="w">디버그 컨테이너를 기존 Pod에 붙여 <b>같은 프로세스 공간</b>을 봅니다.</p><p class="y">앱 이미지에 셸·도구가 없어도(distroless) 안을 들여다볼 수 있습니다.</p></div></li><li><div class="cx-code">kubectl debug node/…</div><div class="cx-d"><p class="w">노드에 특수 Pod를 띄워 호스트 파일 시스템(<code>/host</code>)에 접근합니다.</p><p class="y">SSH 없이 노드의 kubelet 로그·파일을 확인할 수 있습니다.</p></div></li></ol></div></details><details class="cx" open><summary><span class="cx-tag">코드 해설</span>장애별 원인과 고치는 방법</summary><div class="cx-body"><pre><code># ① 이미지 태그 오타          → ImagePullBackOff
+image: nginx:1.30-alpline
+# ② 잘못된 실행 명령           → CrashLoopBackOff (exit code 4)
+command: ["gunicorn", "app:application"]
+# ③ 없는 노드 라벨             → Pending (0/3 nodes …)
+nodeSelector: {tier: fornt}
+# ④ Service selector 오타      → EndpointSlice 비어 있음, 502
+selector: {app: shop, tier: apl}
+# ⑤ LimitRange max 초과        → FailedCreate (ReplicaSet 이벤트)
+limits: {memory: 2Gi}
+# ⑥ 없는 ConfigMap 참조        → CreateContainerConfigError
+configMapRef: {name: shop-cofig}</code></pre><ol class="cx-l"><li><div class="cx-code">① 1.30-alpline</div><div class="cx-d"><p class="w">레지스트리에 없는 태그라 이미지를 받지 못합니다.</p><p class="y">Events의 <code>Failed to pull image … not found</code>로 확인하고 태그를 고칩니다. 기존 Pod는 maxUnavailable 0 덕분에 계속 서비스합니다.</p></div></li><li><div class="cx-code">② app:application</div><div class="cx-d"><p class="w">컨테이너가 시작하자마자 오류로 끝나 재시작이 반복됩니다.</p><p class="y"><code>logs --previous</code>에서 앱 오류를 봅니다. patch로 넣은 필드는 last-applied에 없어 <code>apply</code>로 지워지지 않으므로 <code>rollout undo</code>로 되돌립니다.</p></div></li><li><div class="cx-code">③ fornt</div><div class="cx-d"><p class="w">그런 라벨을 가진 노드가 없어 배치할 곳이 없습니다.</p><p class="y">Events의 <code>0/3 nodes are available: … didn't match Pod's node affinity/selector</code>를 읽습니다.</p></div></li><li><div class="cx-code">④ apl</div><div class="cx-d"><p class="w">Service가 고를 Pod가 없어 EndpointSlice가 비고, nginx는 upstream 연결 실패로 502를 냅니다.</p><p class="y">Pod는 모두 Running이라 Pod만 보면 놓칩니다. <b>Service → EndpointSlice → Pod 라벨</b> 순서로 따라갑니다.</p></div></li><li><div class="cx-code">⑤ 2Gi &gt; max 1Gi</div><div class="cx-d"><p class="w">정책 위반이라 API 서버가 Pod 생성을 거부합니다.</p><p class="y">Deployment는 READY가 늘지 않고 Pod는 보이지 않습니다. ReplicaSet describe의 <code>FailedCreate … maximum memory usage per Container is 1Gi</code>가 단서입니다.</p></div></li><li><div class="cx-code">⑥ shop-cofig</div><div class="cx-d"><p class="w">참조한 ConfigMap이 없어 컨테이너를 만들 수 없습니다.</p><p class="y">Events의 <code>configmap "shop-cofig" not found</code>로 확인합니다. ConfigMap을 만들거나 이름을 고치면 kubelet이 재시도해 자동으로 시작됩니다.</p></div></li></ol></div></details></section>
 <div class="box key"><span class="lbl">★ 이 Lab의 핵심</span><p>"Pod가 없으면 ReplicaSet, Pending이면 Pod Events, 재시작이면 logs --previous와 종료 코드, 접속 불가면 EndpointSlice". 복구는 <b><code>~/shop</code>의 파일로</b> 되돌리고(undo를 여러 번 하면 꼬임), 판단 근거를 기록하는 것이 산출물.</p></div>
 </article>
 
@@ -1852,6 +2589,58 @@ kubectl create configmap shop-web-html -n shop --from-file=index.html=app/shop-w
 <li>v1 카나리 Deployment·Service <code>lab10-canary</code> + <code>lab10-canary-route</code>: <code>/api/version</code>만 shop-api 8 : 카나리 2 → 40회 중 약 20% v1</li>
 <li>보안 그룹: 30080 규칙 삭제, <b>31080(내 IP) 추가</b> → 외부 진입점을 하나로</li>
 </ul></div>
+<section class="cx-sec"><div class="cx-head"><h4>🔍 코드 해설 — 이 코드가 하는 일과 쓰는 이유</h4><button class="btn cx-toggle" type="button">모두 접기</button></div><p class="muted">따라하기 버전의 실제 명령·manifest에서 핵심 줄만 골라 <b>하는 일</b>과 <b>왜</b>를 나란히 적었습니다.</p><details class="cx" open><summary><span class="cx-tag">코드 해설</span>Helm values와 NGF 설치</summary><div class="cx-body"><pre><code>nginxGateway:
+  productTelemetry:
+    enable: false
+nginx:
+  service:
+    type: NodePort
+    externalTrafficPolicy: Cluster
+    nodePorts:
+      - port: 31080
+        listenerPort: 80
+
+kubectl kustomize "https://github.com/nginx/nginx-gateway-fabric/config/crd/gateway-api/standard?ref=v2.7.1" | kubectl apply -f -
+helm install ngf oci://ghcr.io/nginx/charts/nginx-gateway-fabric --version 2.7.1 \
+  --create-namespace -n nginx-gateway -f ~/shop/ngf-values.yaml --wait
+helm upgrade ngf oci://ghcr.io/nginx/charts/nginx-gateway-fabric --version 2.7.1 -n nginx-gateway \
+  --reuse-values --set nginxGateway.config.logging.level=debug
+helm rollback ngf 1 -n nginx-gateway</code></pre><ol class="cx-l"><li><div class="cx-code">values 파일</div><div class="cx-d"><p class="w">차트의 기본 설정 중 <b>바꾸고 싶은 값만</b> 적습니다.</p><p class="y">수백 줄짜리 YAML을 직접 고치지 않고, 바꾼 내용만 파일로 관리합니다. 기본값은 <code>helm show values</code>로 봅니다.</p></div></li><li><div class="cx-code">productTelemetry.enable: false</div><div class="cx-d"><p class="w">사용 통계 전송을 끕니다.</p><p class="y">실습 환경에서 외부로 불필요한 데이터를 보내지 않습니다.</p></div></li><li><div class="cx-code">nodePorts: 31080 → listenerPort 80</div><div class="cx-d"><p class="w">Gateway 리스너 80번을 노드 31080으로 엽니다.</p><p class="y">클라우드 LB가 없는 kubeadm 환경이라 NodePort로 외부 진입점을 만듭니다. 7일차에는 ALB가 이 31080으로 트래픽을 보냅니다.</p></div></li><li><div class="cx-code">kubectl kustomize URL | kubectl apply -f -</div><div class="cx-d"><p class="w">Gateway API CRD(Gateway·HTTPRoute 등의 <b>새 리소스 종류</b>)를 먼저 설치합니다.</p><p class="y">CRD가 없으면 API 서버가 <code>kind: Gateway</code>를 모릅니다. <code>-f -</code>는 표준 입력으로 받은 YAML을 적용한다는 뜻입니다.</p></div></li><li><div class="cx-code">helm install … --wait</div><div class="cx-d"><p class="w">릴리스 이름 <code>ngf</code>로 설치하고, Pod가 Ready가 될 때까지 기다립니다.</p><p class="y">설치 명령이 끝났을 때 실제로 동작하는 상태임을 보장합니다.</p></div></li><li><div class="cx-code">helm upgrade --set</div><div class="cx-d"><p class="w">값 하나를 바꿔 새 리비전을 만듭니다.</p><p class="y"><code>--reuse-values</code>가 없으면 이전 values 파일 내용이 사라질 수 있습니다.</p></div></li><li><div class="cx-code">helm rollback ngf 1</div><div class="cx-d"><p class="w">리비전 1의 설정으로 되돌립니다(새 리비전 번호로 기록).</p><p class="y">kubectl의 <code>rollout undo</code>처럼 Helm은 릴리스 단위로 이력을 관리합니다.</p></div></li></ol></div></details><details class="cx" open><summary><span class="cx-tag">코드 해설</span>Gateway와 HTTPRoute</summary><div class="cx-body"><pre><code>apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: shop-gateway
+  namespace: shop
+spec:
+  gatewayClassName: nginx
+  listeners:
+    - name: http
+      port: 80
+      protocol: HTTP
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: shop-route
+  namespace: shop
+spec:
+  parentRefs:
+    - name: shop-gateway
+      sectionName: http
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /api
+      backendRefs:
+        - name: shop-api
+          port: 5000
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: shop-web
+          port: 80</code></pre><ol class="cx-l"><li><div class="cx-code">gatewayClassName: nginx</div><div class="cx-d"><p class="w">이 Gateway를 실제로 구현할 컨트롤러(NGF)를 지정합니다.</p><p class="y">Gateway는 "입구가 필요하다"는 선언이고, 클래스가 "누가 만들어 줄지"를 정합니다. NGF는 이를 보고 <code>shop-gateway-nginx</code> Deployment·Service를 만듭니다.</p></div></li><li><div class="cx-code">listeners: name http, port 80</div><div class="cx-d"><p class="w">입구에서 받을 프로토콜과 포트입니다.</p><p class="y">HTTPRoute가 <code>sectionName: http</code>로 이 리스너에 연결됩니다.</p></div></li><li><div class="cx-code">parentRefs</div><div class="cx-d"><p class="w">이 라우트를 어느 Gateway(리스너)에 붙일지 정합니다.</p><p class="y">인프라 담당(Gateway)과 앱 담당(HTTPRoute)이 리소스를 나눠 관리할 수 있습니다. Ingress와의 가장 큰 차이입니다.</p></div></li><li><div class="cx-code">PathPrefix /api</div><div class="cx-d"><p class="w"><code>/api</code>, <code>/api/products</code>는 일치하지만 <code>/apis</code>는 일치하지 않습니다.</p><p class="y">경로를 <b>/ 단위 요소</b>로 비교하기 때문입니다. 문자열 앞부분 비교가 아닙니다.</p></div></li><li><div class="cx-code">규칙 두 개 (/api, /)</div><div class="cx-d"><p class="w">더 구체적인(긴) 경로가 우선합니다.</p><p class="y"><code>/</code>가 먼저 적혀 있어도 <code>/api</code> 요청은 shop-api로 갑니다. nginx의 <code>location</code>과 같은 개념입니다.</p></div></li><li><div class="cx-code">backendRefs name/port</div><div class="cx-d"><p class="w">트래픽을 보낼 <b>Service</b>와 포트입니다.</p><p class="y">Pod가 아니라 Service를 가리킵니다. <code>weight</code>를 붙이면 8:2 같은 비율 분배(카나리 배포)가 됩니다.</p></div></li><li><div class="cx-code">(확인) Accepted / ResolvedRefs</div><div class="cx-d"><p class="w">Accepted는 Gateway에 붙었는지, ResolvedRefs는 백엔드 Service를 모두 찾았는지입니다.</p><p class="y">다른 네임스페이스의 Service를 가리키면 ReferenceGrant 없이는 <code>RefNotPermitted</code>가 됩니다.</p></div></li></ol></div></details></section>
 <div class="box key"><span class="lbl">★ 이 Lab의 핵심</span><p>라우팅 규칙이 nginx 설정 파일 속이 아니라 <b>쿠버네티스 객체(HTTPRoute)</b>로 바뀐다. apply 후에는 반드시 <b>status 조건</b>을 읽는다. 외부에 열린 포트는 <b>31080 하나</b>.</p></div>
 </article>
 
@@ -1872,6 +2661,54 @@ kubectl create configmap shop-web-html -n shop --from-file=index.html=app/shop-w
 <li>표식 다시 입력 → <code>shop-db-0</code> 삭제 → <b>UID가 바뀐 새 Pod에서 데이터 유지</b> 증명</li>
 </ol><p class="muted">runAsUser가 필요한 이유: mysql은 root로 시작해 chown을 시도하는데 NFS <code>root_squash</code>로 실패할 수 있고, <code>fsGroup</code>은 NFS 소유권을 바꾸지 않음.</p></div>
 <div class="task"><h5>태스크 5 · NFS 공유 볼륨(RWX)</h5><p>PV/PVC <code>shop-share</code>(1Gi·RWX) → CronJob이 <code>/report/products.log</code>에 <b>추가 기록</b>(<code>set -e</code>) → nginx <code>location /report/</code> 추가 → shop-web에 <b>읽기 전용</b> 마운트(<code>/usr/share/nginx/report</code>) → <code>http://노드:31080/report/products.log</code>에서 <code>products=5</code>. cap-node2의 Pod에서도 읽기·쓰기 가능, shop-web에선 <code>Read-only file system</code>.</p></div>
+<section class="cx-sec"><div class="cx-head"><h4>🔍 코드 해설 — 이 코드가 하는 일과 쓰는 이유</h4><button class="btn cx-toggle" type="button">모두 접기</button></div><p class="muted">따라하기 버전의 실제 명령·manifest에서 핵심 줄만 골라 <b>하는 일</b>과 <b>왜</b>를 나란히 적었습니다.</p><details class="cx" open><summary><span class="cx-tag">코드 해설</span>반복 작업을 셸 함수로 — q · dbwait</summary><div class="cx-body"><pre><code>q() { echo "$1" | kubectl exec -i -n shop shop-db-0 -c mysql -- sh -c 'printf "[client]\npassword=\"%s\"\n" "$MYSQL_PASSWORD" &gt; /tmp/q.cnf; mysql --defaults-extra-file=/tmp/q.cnf -N -u shop shop; rc=$?; rm -f /tmp/q.cnf; exit $rc'; }
+dbwait() { for i in $(seq 1 60); do [ "$(q 'SELECT 1' 2&gt;/dev/null)" = "1" ] &amp;&amp; { echo "MySQL 준비 완료"; return 0; }; sleep 5; done; echo "MySQL 준비 시간 초과"; return 1; }
+q "SELECT COUNT(*) FROM products"</code></pre><ol class="cx-l"><li><div class="cx-code">q() { … }</div><div class="cx-d"><p class="w">이름이 q인 셸 함수를 정의합니다. <code>$1</code>은 첫 번째 인자(SQL문)입니다.</p><p class="y">긴 접속 명령을 매번 치지 않고 <code>q "SQL"</code>로 줄입니다.</p></div></li><li><div class="cx-code">echo "$1" | kubectl exec -i</div><div class="cx-d"><p class="w">SQL을 표준 입력으로 Pod 안 mysql에 넘깁니다. <code>-i</code>가 있어야 입력이 전달됩니다.</p><p class="y">따옴표가 겹치는 문제 없이 어떤 SQL이든 넘길 수 있습니다.</p></div></li><li><div class="cx-code">'…$MYSQL_PASSWORD…' (작은따옴표)</div><div class="cx-d"><p class="w">작은따옴표 안의 변수는 <b>노드 셸이 아니라 Pod 안 셸</b>이 치환합니다.</p><p class="y">비밀번호는 Pod의 환경 변수에만 있으므로 노드에 비밀번호가 노출되지 않습니다.</p></div></li><li><div class="cx-code">rc=$?; rm -f …; exit $rc</div><div class="cx-d"><p class="w">mysql의 종료 코드를 저장해 두고, 임시 파일을 지운 뒤 그 코드로 끝냅니다.</p><p class="y">정리 작업 때문에 실패가 성공으로 바뀌지 않게 합니다.</p></div></li><li><div class="cx-code">-N</div><div class="cx-d"><p class="w">결과에서 열 이름(헤더)을 뺍니다.</p><p class="y">결과가 <code>1</code>처럼 값만 나와 스크립트에서 비교하기 쉽습니다.</p></div></li><li><div class="cx-code">dbwait의 for … sleep 5</div><div class="cx-d"><p class="w">5초 간격으로 최대 60번(5분) <code>SELECT 1</code>이 성공할 때까지 기다립니다.</p><p class="y">Pod가 Ready여도 MySQL 초기화가 덜 끝났을 수 있습니다. 준비됐는지 직접 물어보는 것이 정확합니다.</p></div></li></ol></div></details><details class="cx" open><summary><span class="cx-tag">코드 해설</span>emptyDir · hostPath 수명 비교</summary><div class="cx-body"><pre><code>  volumes:
+    - name: cache
+      emptyDir: {}
+
+  volumes:
+    - name: host-dir
+      hostPath:
+        path: /tmp/lab11-hostpath
+        type: DirectoryOrCreate
+
+kubectl exec lab11-emptydir -n shop -c writer -- kill 1
+sed "s/__NAME__/$P/; s/__NODE__/cap-node1/" ~/shop/lab11-hostpath.yaml | kubectl apply -f -
+kubectl wait pod/$P -n shop --for=jsonpath='{.status.phase}'=Succeeded --timeout=90s</code></pre><ol class="cx-l"><li><div class="cx-code">emptyDir</div><div class="cx-d"><p class="w">Pod가 노드에 배치될 때 만들어지고 <b>Pod가 삭제되면 사라집니다.</b> 컨테이너 재시작에는 유지됩니다.</p><p class="y"><code>kill 1</code>로 컨테이너만 재시작하면 파일 첫 줄이 그대로, Pod를 지웠다 만들면 새 파일이 됩니다.</p></div></li><li><div class="cx-code">kill 1</div><div class="cx-d"><p class="w">컨테이너의 1번 프로세스(메인 프로세스)를 끝내 컨테이너를 재시작시킵니다.</p><p class="y">Pod는 그대로 두고 컨테이너만 재시작되는 상황을 재현합니다.</p></div></li><li><div class="cx-code">hostPath + DirectoryOrCreate</div><div class="cx-d"><p class="w">노드의 폴더를 연결하고, 없으면 만듭니다.</p><p class="y">데이터가 <b>그 노드에만</b> 남습니다. 같은 노드의 다음 Pod는 기록을 보지만, 다른 노드(cap-node2)의 Pod는 빈 파일을 봅니다. DB 저장소로 쓰면 안 되는 이유입니다.</p></div></li><li><div class="cx-code">sed "s/__NAME__/…/" 파일 | kubectl apply -f -</div><div class="cx-d"><p class="w">템플릿 파일의 자리표시자를 바꿔 바로 적용합니다.</p><p class="y">거의 같은 Pod 3개를 파일 3개 없이 만듭니다.</p></div></li><li><div class="cx-code">wait --for=jsonpath='{.status.phase}'=Succeeded</div><div class="cx-d"><p class="w">한 번 실행하고 끝나는 Pod가 완료될 때까지 기다립니다.</p><p class="y">완료된 Pod는 Ready 조건이 없어 <code>condition=Ready</code>로는 기다릴 수 없습니다.</p></div></li></ol></div></details><details class="cx" open><summary><span class="cx-tag">코드 해설</span>NFS 공유와 정적 PV · PVC</summary><div class="cx-body"><pre><code>/srv/nfs/shop-db  10.20.1.11(rw,sync,no_subtree_check) 10.20.1.12(rw,sync,no_subtree_check)
+exportfs -ra
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: shop-db-pv
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: ""
+  mountOptions:
+    - nfsvers=4.1
+    - hard
+  nfs:
+    server: 10.20.1.10
+    path: /srv/nfs/shop-db
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: shop-db-data
+  namespace: shop
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: ""
+  volumeName: shop-db-pv
+  resources:
+    requests:
+      storage: 5Gi</code></pre><ol class="cx-l"><li><div class="cx-code">10.20.1.11(rw,sync,…)</div><div class="cx-d"><p class="w">워커 두 대에만 읽기·쓰기를 허용합니다. <code>sync</code>는 디스크에 쓴 뒤 응답합니다.</p><p class="y">DB 데이터는 응답 후 유실되면 안 되므로 sync를 씁니다. 대역 전체를 열지 않는 최소 허용입니다.</p></div></li><li><div class="cx-code">chown 999:999 (서버 폴더)</div><div class="cx-d"><p class="w">mysql 이미지가 쓰는 사용자 UID 999에게 폴더를 줍니다.</p><p class="y">NFS는 <b>숫자 UID</b>로 권한을 확인합니다. 기본 root_squash 때문에 root로는 쓸 수 없어 DB를 999로 실행합니다(<code>runAsUser: 999</code>).</p></div></li><li><div class="cx-code">PV에 namespace 없음</div><div class="cx-d"><p class="w">PV는 노드처럼 <b>클러스터 범위</b> 리소스입니다. PVC는 네임스페이스에 속합니다.</p><p class="y">관리자가 PV(실제 저장소)를 준비하고, 앱 팀은 PVC(사용 신청서)만 작성하는 역할 분리입니다.</p></div></li><li><div class="cx-code">persistentVolumeReclaimPolicy: Retain</div><div class="cx-d"><p class="w">PVC를 지워도 PV와 데이터를 남깁니다.</p><p class="y">DB 데이터를 실수로 지우지 않기 위해서입니다. 동적 프로비저닝 기본값은 Delete입니다.</p></div></li><li><div class="cx-code">storageClassName: ""</div><div class="cx-d"><p class="w">동적 프로비저닝을 쓰지 않겠다는 표시입니다.</p><p class="y">비워 두지 않으면 기본 StorageClass가 있을 때 새 볼륨을 자동으로 만들어 버립니다.</p></div></li><li><div class="cx-code">volumeName: shop-db-pv</div><div class="cx-d"><p class="w">이 PVC를 특정 PV에 <b>직접 지정</b>해 묶습니다.</p><p class="y">비슷한 PV가 여럿 있어도 의도한 PV에 붙습니다. 용량·accessModes가 맞아야 Bound가 됩니다.</p></div></li><li><div class="cx-code">mountOptions: nfsvers=4.1, hard</div><div class="cx-d"><p class="w">NFS 4.1로 마운트하고, 서버가 응답 없으면 오류 대신 계속 재시도합니다.</p><p class="y">soft 마운트는 일시 장애 때 쓰기 오류를 내 DB 파일이 깨질 수 있습니다.</p></div></li><li><div class="cx-code">ReadWriteOnce vs ReadWriteMany</div><div class="cx-d"><p class="w">RWO는 한 노드에서만, RWX는 여러 노드에서 동시에 읽기·쓰기입니다.</p><p class="y">shop-db는 RWO, CronJob과 shop-web이 함께 쓰는 리포트 볼륨은 RWX로 만듭니다.</p></div></li></ol></div></details></section>
 <div class="box key"><span class="lbl">★ 이 Lab의 핵심</span><p>emptyDir은 Pod와 함께, hostPath는 노드에 묶임, <b>PVC는 Pod가 바뀌어도 데이터 유지</b>. RWX는 여러 노드가 공유, 읽는 쪽은 <code>readOnly</code>. 결과물(NFS PV, 표식)은 Lab12에서 이전 검증에 씁니다.</p></div>
 <div class="tbl"><table>
 <tr><th>증상</th><th>원인</th></tr>
@@ -1909,6 +2746,27 @@ shop-db-0 ── PVC shop-db-ebs (gp3 · xfs) ── EBS      (이전 전: PVC s
 <li><code>shop-db-0</code> 삭제 후에도 유지, NFS PV는 <b>Retain으로 남음</b>(롤백 경로)</li>
 </ol></div>
 <div class="task"><h5>태스크 7 · 과정 정리</h5><p>누적 산출물 정리 → StatefulSet·PVC 삭제(EBS Delete) → <code>teardown-lab12.sh</code>. 순서: <b>ALB·대상 그룹 → 노드 SG의 ALB 참조 규칙 → ALB SG → EC2·VPC·IAM → 남은 EBS</b>(ALB가 남으면 VPC 삭제 실패).</p></div>
+<section class="cx-sec"><div class="cx-head"><h4>🔍 코드 해설 — 이 코드가 하는 일과 쓰는 이유</h4><button class="btn cx-toggle" type="button">모두 접기</button></div><p class="muted">따라하기 버전의 실제 명령·manifest에서 핵심 줄만 골라 <b>하는 일</b>과 <b>왜</b>를 나란히 적었습니다.</p><details class="cx" open><summary><span class="cx-tag">코드 해설</span>ALB 수동 연결 (CloudShell)</summary><div class="cx-body"><pre><code>aws ec2 authorize-security-group-ingress --group-id $NODE_SG \
+  --ip-permissions "IpProtocol=tcp,FromPort=31080,ToPort=31080,UserIdGroupPairs=[{GroupId=$ALB_SG,Description=alb-to-gateway}]"
+TG_ARN=$(aws elbv2 create-target-group --name cap-shop-tg --protocol HTTP --port 31080 --vpc-id $VPC_ID --target-type instance \
+  --health-check-path / --health-check-interval-seconds 10 --healthy-threshold-count 2 --unhealthy-threshold-count 2 \
+  --query 'TargetGroups[0].TargetGroupArn' --output text)
+aws elbv2 register-targets --target-group-arn $TG_ARN --targets Id=$N1_ID Id=$N2_ID
+aws elbv2 create-listener --load-balancer-arn $ALB_ARN --protocol HTTP --port 80 \
+  --default-actions Type=forward,TargetGroupArn=$TG_ARN</code></pre><ol class="cx-l"><li><div class="cx-code">UserIdGroupPairs=[{GroupId=$ALB_SG}]</div><div class="cx-d"><p class="w">IP 대역이 아니라 <b>"ALB 보안 그룹을 가진 대상"</b>에게만 31080을 엽니다.</p><p class="y">ALB의 IP는 바뀔 수 있습니다. 보안 그룹 참조는 IP와 상관없이 ALB만 허용합니다.</p></div></li><li><div class="cx-code">--port 31080 --target-type instance</div><div class="cx-d"><p class="w">대상 그룹이 EC2 인스턴스(워커 노드)의 31080 포트로 보냅니다.</p><p class="y">kubeadm 클러스터에는 AWS 컨트롤러가 없어 Pod IP를 모릅니다. 그래서 모든 노드에 열린 <b>NodePort(Gateway)</b>를 대상으로 삼습니다.</p></div></li><li><div class="cx-code">health-check 10초 · 2회</div><div class="cx-d"><p class="w">10초마다 <code>/</code>를 확인해 2번 실패하면 unhealthy, 2번 성공하면 healthy입니다.</p><p class="y">노드가 멈추면 약 20초 안에 그 노드로 트래픽을 보내지 않습니다(실습의 cap-node2 중지 실험).</p></div></li><li><div class="cx-code">register-targets N1, N2</div><div class="cx-d"><p class="w">워커 두 대를 대상으로 등록합니다. 마스터는 넣지 않습니다.</p><p class="y">마스터는 일반 워크로드를 받지 않는 노드이므로 진입점에서도 뺍니다.</p></div></li><li><div class="cx-code">create-listener … Type=forward</div><div class="cx-d"><p class="w">ALB의 80번으로 들어온 요청을 대상 그룹으로 전달합니다.</p><p class="y">흐름: 사용자 → ALB:80 → 노드:31080 → Gateway → HTTPRoute → Service → Pod.</p></div></li><li><div class="cx-code">--query … --output text</div><div class="cx-d"><p class="w">결과 JSON에서 ARN만 꺼내 변수에 담습니다.</p><p class="y">다음 명령이 이 ARN을 써야 하므로 사람이 복사하지 않게 합니다.</p></div></li></ol></div></details><details class="cx" open><summary><span class="cx-tag">코드 해설</span>EBS CSI와 gp3 StorageClass</summary><div class="cx-body"><pre><code>apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: gp3
+provisioner: ebs.csi.aws.com
+volumeBindingMode: WaitForFirstConsumer
+reclaimPolicy: Delete
+allowVolumeExpansion: true
+parameters:
+  type: gp3
+  csi.storage.k8s.io/fstype: xfs</code></pre><ol class="cx-l"><li><div class="cx-code">provisioner: ebs.csi.aws.com</div><div class="cx-d"><p class="w">이 클래스의 볼륨을 EBS CSI 드라이버가 만듭니다.</p><p class="y">드라이버가 PVC를 보고 AWS API로 EBS 볼륨을 생성·연결합니다. 노드 역할에 <code>AmazonEBSCSIDriverPolicyV2</code> 권한이 필요한 이유입니다.</p></div></li><li><div class="cx-code">volumeBindingMode: WaitForFirstConsumer</div><div class="cx-d"><p class="w">Pod가 노드에 배치될 때까지 볼륨 생성을 미룹니다. 그동안 PVC는 <b>Pending</b>입니다.</p><p class="y">EBS는 <b>한 가용 영역(AZ)</b>에서만 붙습니다. 미리 만들면 Pod가 다른 AZ 노드에 배치될 경우 붙일 수 없습니다.</p></div></li><li><div class="cx-code">reclaimPolicy: Delete</div><div class="cx-d"><p class="w">PVC를 지우면 PV와 실제 EBS 볼륨도 삭제됩니다.</p><p class="y">연습 볼륨이 남아 비용이 나가지 않게 합니다. 중요한 데이터는 Retain을 검토합니다.</p></div></li><li><div class="cx-code">allowVolumeExpansion: true</div><div class="cx-d"><p class="w">PVC의 용량을 나중에 늘릴 수 있게 합니다.</p><p class="y">DB 데이터가 커질 때 볼륨을 새로 만들지 않고 확장합니다(줄이기는 불가).</p></div></li><li><div class="cx-code">type: gp3 / fstype: xfs</div><div class="cx-d"><p class="w">EBS 볼륨 종류와 포맷할 파일 시스템입니다.</p><p class="y">gp3는 gp2보다 저렴하고 성능을 따로 정할 수 있습니다. MySQL은 xfs를 권장합니다.</p></div></li><li><div class="cx-code">fsGroup: 999 (StatefulSet)</div><div class="cx-d"><p class="w">마운트한 볼륨의 그룹 소유권을 999로 바꿉니다.</p><p class="y">새 EBS 볼륨은 root 소유라 999로 실행하는 MySQL이 쓸 수 없습니다. <code>fsGroupChangePolicy: OnRootMismatch</code>는 이미 맞으면 다시 바꾸지 않아 재시작이 빠릅니다.</p></div></li></ol></div></details><details class="cx" open><summary><span class="cx-tag">코드 해설</span>NFS → EBS 데이터 이전</summary><div class="cx-body"><pre><code>kubectl exec -n shop shop-db-0 -c mysql -- sh -c '… mysqldump --defaults-extra-file=/tmp/d.cnf -u shop --single-transaction --no-tablespaces shop …' &gt; ~/shop/backup/shop-lab12.sql
+sed -i 's/claimName: shop-db-data/claimName: shop-db-ebs/' ~/shop/shop-db-sts.yaml
+kubectl apply -f ~/shop/shop-db-sts.yaml
+kubectl exec -i -n shop shop-db-0 -c mysql -- sh -c '… mysql … -u shop shop …' &lt; ~/shop/backup/shop-lab12.sql</code></pre><ol class="cx-l"><li><div class="cx-code">mysqldump --single-transaction</div><div class="cx-d"><p class="w">테이블을 잠그지 않고 한 시점의 일관된 스냅숏으로 백업합니다.</p><p class="y">서비스 중에도 백업할 수 있습니다(InnoDB).</p></div></li><li><div class="cx-code">--no-tablespaces</div><div class="cx-d"><p class="w">테이블스페이스 정보를 빼고 백업합니다.</p><p class="y">일반 사용자(shop)에게는 PROCESS 권한이 없어 이 옵션이 없으면 오류가 납니다.</p></div></li><li><div class="cx-code">… &gt; 파일 (Pod 밖으로 리다이렉트)</div><div class="cx-d"><p class="w">Pod 안 mysqldump의 출력을 <b>노드의 파일</b>로 받습니다.</p><p class="y">볼륨을 바꾸면 Pod 안 데이터는 사라지므로 백업은 반드시 Pod 밖에 둡니다.</p></div></li><li><div class="cx-code">claimName 교체</div><div class="cx-d"><p class="w">StatefulSet이 쓸 PVC를 NFS용에서 EBS용으로 바꿉니다.</p><p class="y">템플릿이 바뀌어 Pod가 새로 만들어지고, 새 Pod는 빈 EBS 볼륨에서 MySQL을 초기화합니다.</p></div></li><li><div class="cx-code">exec -i … &lt; 파일</div><div class="cx-d"><p class="w">노드의 백업 파일을 표준 입력으로 Pod 안 mysql에 넣어 복원합니다.</p><p class="y">백업과 반대 방향입니다. <code>-i</code>가 없으면 입력이 전달되지 않습니다.</p></div></li></ol></div></details></section>
 <div class="box key"><span class="lbl">★ 이 Lab의 핵심</span><p>클라우드 컨트롤러가 없으면 LB를 <b>손으로</b> 연결한다. 헬스체크가 장애 노드를 뺀다. <b>백업 → 전환 → 복원 → 검증</b>, 옛 볼륨은 보존. 삭제는 의존 순서대로.</p></div>
 <div class="tbl"><table>
 <tr><th>증상</th><th>원인</th></tr>
@@ -1940,6 +2798,58 @@ EKS cap-eks (컨트롤 플레인 AWS 관리)
 <div class="task"><h5>태스크 6 · Ingress로 ALB 자동 생성</h5><p>Ingress <code>shop</code>(<code>ingressClassName: alb</code>, internet-facing, target-type <b>ip</b>, HTTP 80, 헬스체크 <code>/</code>, 태그) → <code>/api</code>→shop-api, <code>/</code>→shop-web. 2~4분 기다리면(그동안 000·502는 정상) ALB DNS로 응답. 대상 그룹의 대상이 <b>Pod IP</b>인 것을 12장 수동 ALB와 비교.</p></div>
 <div class="task"><h5>태스크 7 · 노드 그룹 운영</h5><p><code>ng-app</code>을 3대로 → 새 노드가 다른 AZ에 → shop-web 4개로 늘리면 대상 그룹이 <b>Pod IP 4개로 자동 갱신</b> → 2개·2대로 복귀.</p></div>
 <div class="task"><h5>태스크 8 · 채점과 정리</h5><p><code>labE-eks/verify.sh</code> 16/16 → <code>teardown-labE.sh</code>가 <b>Ingress → PVC → 클러스터</b> 순서로 삭제(컨트롤러가 만든 ALB·SG는 CloudFormation 스택 밖이라 먼저 지우지 않으면 VPC 삭제가 막힘) → 잔여 리소스 확인.</p></div>
+<section class="cx-sec"><div class="cx-head"><h4>🔍 코드 해설 — 이 코드가 하는 일과 쓰는 이유</h4><button class="btn cx-toggle" type="button">모두 접기</button></div><p class="muted">따라하기 버전의 실제 명령·manifest에서 핵심 줄만 골라 <b>하는 일</b>과 <b>왜</b>를 나란히 적었습니다.</p><details class="cx" open><summary><span class="cx-tag">코드 해설</span>eksctl 클러스터 정의</summary><div class="cx-body"><pre><code>apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+metadata:
+  name: cap-eks
+  region: ap-northeast-2
+iam:
+  withOIDC: true
+autoModeConfig:
+  enabled: false
+addons:
+  - name: vpc-cni
+  - name: coredns
+  - name: kube-proxy
+  - name: eks-pod-identity-agent
+  - name: aws-ebs-csi-driver
+addonsConfig:
+  autoApplyPodIdentityAssociations: true
+managedNodeGroups:
+  - name: ng-app
+    instanceType: m7i-flex.large
+    desiredCapacity: 2
+    labels:
+      tier: front</code></pre><ol class="cx-l"><li><div class="cx-code">kind: ClusterConfig</div><div class="cx-d"><p class="w">eksctl이 읽는 설정 파일입니다(쿠버네티스 리소스가 아님).</p><p class="y">명령 옵션을 길게 나열하지 않고 파일로 남겨 재현할 수 있게 합니다.</p></div></li><li><div class="cx-code">withOIDC: true</div><div class="cx-d"><p class="w">클러스터의 OIDC 공급자를 IAM에 등록합니다.</p><p class="y">IRSA(ServiceAccount에 IAM 역할 연결)의 전제 조건입니다. Pod가 노드 역할이 아닌 <b>자기 역할</b>로 AWS API를 호출합니다.</p></div></li><li><div class="cx-code">autoModeConfig.enabled: false</div><div class="cx-d"><p class="w">EKS Auto Mode를 쓰지 않고 노드 그룹을 직접 관리합니다.</p><p class="y">실습에서 노드·애드온 구성을 눈으로 확인하기 위해서입니다.</p></div></li><li><div class="cx-code">addons (vpc-cni 등 5개)</div><div class="cx-d"><p class="w">AWS가 관리하는 필수 구성요소입니다.</p><p class="y">kubeadm에서 직접 설치했던 Calico·CoreDNS·kube-proxy·EBS CSI를 EKS에서는 애드온으로 받습니다. vpc-cni는 Pod에 <b>VPC의 실제 IP</b>를 줍니다.</p></div></li><li><div class="cx-code">autoApplyPodIdentityAssociations</div><div class="cx-d"><p class="w">애드온에 필요한 IAM 권한을 Pod Identity로 자동 연결합니다.</p><p class="y">EBS CSI 같은 애드온이 노드 역할 권한 없이도 동작합니다.</p></div></li><li><div class="cx-code">managedNodeGroups / labels tier=front</div><div class="cx-d"><p class="w">AWS가 관리하는 워커 노드 그룹과 노드 라벨입니다.</p><p class="y">기존 manifest의 <code>nodeSelector: tier=front</code>를 그대로 쓰기 위해 같은 라벨을 붙입니다.</p></div></li></ol></div></details><details class="cx" open><summary><span class="cx-tag">코드 해설</span>AWS Load Balancer Controller가 만드는 ALB — Ingress</summary><div class="cx-body"><pre><code>apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: shop
+  namespace: shop
+  annotations:
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
+    alb.ingress.kubernetes.io/healthcheck-path: /
+    alb.ingress.kubernetes.io/tags: Project=capstone,Owner=cap
+spec:
+  ingressClassName: alb
+  rules:
+    - http:
+        paths:
+          - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: shop-api
+                port:
+                  number: 5000
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: shop-web
+                port:
+                  number: 80</code></pre><ol class="cx-l"><li><div class="cx-code">ingressClassName: alb</div><div class="cx-d"><p class="w">이 Ingress를 AWS Load Balancer Controller가 처리하게 합니다.</p><p class="y">컨트롤러가 Ingress를 보고 ALB·리스너·대상 그룹을 <b>자동으로</b> 만듭니다. Lab12에서 CLI로 하나씩 만든 작업을 대신합니다.</p></div></li><li><div class="cx-code">scheme: internet-facing</div><div class="cx-d"><p class="w">인터넷에서 접속 가능한 ALB를 만듭니다.</p><p class="y"><code>internal</code>이면 VPC 안에서만 접근합니다.</p></div></li><li><div class="cx-code">target-type: ip</div><div class="cx-d"><p class="w">대상 그룹에 노드가 아니라 <b>Pod IP</b>를 직접 등록합니다.</p><p class="y">vpc-cni 덕분에 Pod IP가 VPC 주소라 가능합니다. NodePort를 거치지 않아 한 단계가 줄고, Service는 ClusterIP여도 됩니다.</p></div></li><li><div class="cx-code">listen-ports / healthcheck-path</div><div class="cx-d"><p class="w">ALB가 열 포트와 헬스 체크 경로입니다.</p><p class="y">값이 JSON 문자열이라 작은따옴표로 감쌉니다.</p></div></li><li><div class="cx-code">tags</div><div class="cx-d"><p class="w">생성되는 AWS 리소스에 태그를 붙입니다.</p><p class="y">비용 추적과 정리(teardown) 때 찾기 쉽습니다.</p></div></li><li><div class="cx-code">pathType: Prefix</div><div class="cx-d"><p class="w"><code>/api</code>로 시작하는 경로를 shop-api로 보냅니다.</p><p class="y">Gateway의 PathPrefix처럼 경로 요소 단위로 비교합니다.</p></div></li></ol></div></details></section>
 <div class="box key"><span class="lbl">★ 이 Lab의 핵심</span><p><b>manifest는 거의 그대로</b>, 클러스터 고유 설정(노드 라벨·NFS·수동 ALB)만 관리형 기능으로 바꾼다. 권한은 Pod Identity(애드온)·IRSA(컨트롤러)로 <b>ServiceAccount 단위</b>. Ingress 하나로 ALB가 자동으로 생기고 갱신된다.</p></div>
 <div class="tbl"><table>
 <tr><th>증상</th><th>원인</th></tr>
@@ -1954,6 +2864,43 @@ EKS cap-eks (컨트롤 플레인 AWS 관리)
 </section>
 
 <!-- ======================= 부록 ======================= -->
+<!-- ======================= 예상 문제 ======================= -->
+<section class="part" id="quiz">
+<div class="part-title"><h2>예상 문제 40</h2><span>Docker 성취도 평가와 같은 형식 · 4지선다</span></div>
+
+<div class="box note"><span class="lbl">📎 Docker 성취도 평가 분석 → 쿠버네티스에 그대로 옮긴 것</span>
+<div class="tbl"><table>
+<tr><th>Docker 시험</th><th>이 예상 문제</th></tr>
+<tr><td>20문항 · 4지선다 · 문항당 5점 · 30분</td><td>40문항 · 4지선다 · 문항당 2.5점 · <b>권장 60분</b></td></tr>
+<tr><td>개념 "옳은 것 / 옳지 않은 것"</td><td>개념 15문항 (공식 문서 · 이론 핵심 문장)</td></tr>
+<tr><td>명령어 고르기 (build · run · push …)</td><td>명령어 9문항 (kubectl · helm)</td></tr>
+<tr><td>포트 매핑 <code>-p 8080:80</code>의 의미</td><td>port · targetPort · nodePort 방향</td></tr>
+<tr><td>compose YAML 해석 + 같은 YAML 후속 문제</td><td>YAML 해석 13문항 (Service 후속 문제 포함)</td></tr>
+<tr><td>순서 문제 (tag → login → push)</td><td>순서·트러블슈팅 3문항</td></tr>
+</table></div>
+<p><b>Docker 시험에서 많이 틀린 함정</b>과 쿠버네티스 대응: <code>latest</code> = 최신 보장? (아님 → 이미지 태그·pullPolicy 문제) · <code>-p 호스트:컨테이너</code> 방향 (→ nodePort → port → targetPort) · compose 서비스 이름이 호스트 이름 (→ Service 이름이 DNS 이름) · <code>compose up -d</code> 같은 옵션 의미 (→ <code>--previous</code>, <code>--ignore-daemonsets</code> 등).</p></div>
+
+<div class="quiz-bar" id="quizBar">
+  <div class="qb-score"><b id="qScore">0</b> / <span id="qDone">0</span> 정답 <span class="qb-pts" id="qPts">0점</span></div>
+  <div class="qb-prog"><i id="qProg"></i></div>
+  <div class="qb-btns">
+    <select class="btn" id="qFilter" aria-label="유형 거르기">
+      <option value="all">전체 유형</option>
+      <option value="개념">개념</option>
+      <option value="명령어">명령어</option>
+      <option value="YAML">YAML 해석</option>
+      <option value="순서·장애">순서·장애</option>
+      <option value="wrong">틀린 문제만</option>
+    </select>
+    <button class="btn" id="qReveal">정답 모두 보기</button>
+    <button class="btn" id="qReset">다시 풀기</button>
+  </div>
+</div>
+<p class="muted qhelp">보기를 누르면 바로 채점되고 해설이 열립니다. 풀이 상태는 이 브라우저에만 저장됩니다.</p>
+<div id="quizList"></div>
+<noscript><p>예상 문제는 JavaScript가 켜져 있어야 표시됩니다.</p></noscript>
+</section>
+
 <section class="part" id="cheatsheet">
 <div class="part-title"><h2>명령어 치트시트</h2><span>자주 쓰는 것만</span></div>
 <div class="grid2">
@@ -2069,7 +3016,7 @@ kubeadm certs check-expiration</code></pre></div>
 </table></div>
 
 <footer>
-<p>출처: 노션 「Kubernetes(7days)」 — 이론(1~8일차·부록), 실습(Lab01~Lab12 지시형·LabE 지시형). 강사 전용 노트는 포함하지 않았습니다. 버전 정보(v1.36, containerd 2.x, Calico v3.32.1, NGF 2.7.1 등)는 원문 기준입니다.</p>
+<p>출처: 노션 「Kubernetes(7days)」 — 이론(1~8일차·부록), 실습(Lab01~Lab12·LabE 지시형과 따라하기), 강의 보충 자료(19. ReplicaSet·Deployment, 20. DaemonSet·StatefulSet·Job·CronJob, 23. Kubernetes Services·Network), 쿠버네티스 공식 문서(개요·컴포넌트). 예상 문제는 같은 강사의 Docker 성취도 평가 형식을 본떠 새로 만든 것입니다. 강사 전용 노트는 포함하지 않았습니다. 버전 정보(v1.36, containerd 2.x, Calico v3.32.1, NGF 2.7.1 등)는 원문 기준입니다.</p>
 </footer>
 </section>
 
@@ -2117,6 +3064,439 @@ kubeadm certs check-expiration</code></pre></div>
     links.forEach(function(a,i){a.classList.toggle('active',i===idx);});
   }
   window.addEventListener('scroll',spy,{passive:true}); spy();
+})();
+</script>
+<button id="toTop" type="button" aria-label="맨 위로">↑</button>
+<script>
+const QUIZ = [
+/* ---------- 개념 ---------- */
+{t:'개념', q:'쿠버네티스에 대한 설명으로 <b>옳지 않은</b> 것은?',
+ o:['원하는 상태(desired state)를 선언하면 현재 상태와 계속 비교해 맞춰 간다.',
+    '실패한 컨테이너를 재시작하고 응답하지 않는 컨테이너를 교체하는 자가 치유 기능이 있다.',
+    '소스 코드를 받아 애플리케이션을 빌드하고 배포까지 해 주는 전통적인 올인원 PaaS이다.',
+    '컨테이너별 CPU·메모리 요청량을 보고 노드에 알맞게 배치(빈 패킹)한다.'],
+ a:2, e:'공식 문서 "쿠버네티스가 아닌 것": 쿠버네티스는 <b>소스 코드를 배포하지 않고 애플리케이션을 빌드하지 않습니다.</b> CI/CD는 조직이 선택합니다. 전통적인 올인원 PaaS도 아닙니다.'},
+{t:'개념', q:'컨트롤 플레인·노드 구성요소와 역할의 연결로 <b>옳지 않은</b> 것은?',
+ o:['kube-apiserver — 모든 요청의 단일 입구. 인증·검증 후 etcd에 기록',
+    'etcd — 클러스터의 모든 상태를 저장하는 키-값 저장소',
+    'kube-scheduler — 노드가 정해지지 않은 새 Pod를 실행할 노드를 선택',
+    'kube-proxy — 노드에서 컨테이너를 직접 생성·실행하고 Pod 상태를 보고'],
+ a:3, e:'컨테이너를 실행하고 상태를 보고하는 것은 <b>kubelet</b>(현장 반장)입니다. kube-proxy는 Service로 들어온 트래픽을 Pod로 보내는 <b>네트워크 규칙</b>(iptables)을 관리합니다.'},
+{t:'개념', q:'Pod에 대한 설명으로 <b>옳은</b> 것은?',
+ o:['한 Pod 안의 컨테이너는 서로 다른 IP를 가지므로 Service를 통해서만 통신한다.',
+    '한 Pod 안의 컨테이너는 네트워크(IP·포트)를 공유해 localhost로 통신할 수 있다.',
+    '실행 중인 Pod의 환경 변수는 kubectl edit로 바로 바꿀 수 있다.',
+    'Pod를 삭제하면 컨트롤러가 없어도 같은 이름·같은 IP로 다시 만들어진다.'],
+ a:1, e:'Pod 안 컨테이너는 <b>IP는 공유, 파일 시스템은 분리</b>입니다. 실행 중 Pod의 env·볼륨은 바꿀 수 없어(Forbidden) 지우고 다시 만들어야 하며, 컨트롤러 없는 Pod는 지우면 돌아오지 않습니다.'},
+{t:'개념', q:'ConfigMap과 Secret에 대한 설명으로 <b>옳지 않은</b> 것은?',
+ o:['설정을 이미지 밖으로 분리해 같은 이미지를 여러 환경에서 쓸 수 있게 한다.',
+    'Secret의 data 값은 base64로 인코딩되어 저장된다.',
+    'base64는 암호화이므로 Secret YAML을 Git에 그대로 올려도 안전하다.',
+    '환경 변수로 넣은 값은 ConfigMap을 바꿔도 실행 중인 컨테이너에 자동 반영되지 않는다.'],
+ a:2, e:'base64는 <b>누구나 되돌릴 수 있는 인코딩</b>이지 암호화가 아닙니다(<code>echo U2hvcERCIzIwMjY= | base64 -d</code>). 환경 변수는 컨테이너 시작 시점에 한 번 들어가므로 Pod를 다시 만들어야 반영됩니다.'},
+{t:'개념', q:'컨테이너 이미지를 <code>image: nginx</code>처럼 <b>태그 없이</b> 적었을 때의 설명으로 <b>옳은</b> 것은?',
+ o:['노드에 이미 받아 둔 이미지만 사용한다(IfNotPresent).',
+    '<code>:latest</code> 태그로 간주되고, imagePullPolicy 기본값이 Always가 된다.',
+    '가장 최근에 나온 안정 버전이 항상 보장된다.',
+    '태그가 없으면 API 서버가 Pod 생성을 거부한다.'],
+ a:1, e:'Docker 시험과 같은 함정입니다. <code>latest</code>는 그냥 <b>태그 이름</b>일 뿐 최신·안정 버전을 보장하지 않습니다. 태그가 없거나 latest면 pullPolicy 기본값이 Always입니다. 운영에서는 <b>버전 태그를 고정</b>합니다(예: <code>nginx:1.30-alpine</code>).'},
+{t:'개념', q:'Label과 Annotation에 대한 설명으로 <b>옳지 않은</b> 것은?',
+ o:['라벨은 셀렉터로 리소스를 골라내는 데 쓰인다.',
+    '어노테이션도 <code>kubectl get pods -l</code> 조건에 쓸 수 있다.',
+    'Service와 Deployment는 라벨 셀렉터로 대상 Pod를 찾는다.',
+    '<code>kubernetes.io/change-cause</code> 같은 기록용 메타데이터는 어노테이션에 둔다.'],
+ a:1, e:'셀렉터(<code>-l</code>)는 <b>라벨만</b> 대상으로 합니다. 어노테이션은 사람·도구를 위한 메모라서 조회 조건으로 쓸 수 없습니다.'},
+{t:'개념', q:'cordon과 drain에 대한 설명으로 <b>옳은</b> 것은?',
+ o:['cordon하면 그 노드의 기존 Pod가 즉시 다른 노드로 옮겨진다.',
+    'drain은 노드를 cordon한 뒤 기존 Pod를 축출한다.',
+    'drain 후 컨트롤러 없이 직접 만든 Pod도 다른 노드에서 자동으로 다시 만들어진다.',
+    'uncordon하면 축출됐던 Pod가 원래 노드로 자동으로 돌아온다.'],
+ a:1, e:'cordon은 <b>새 Pod만</b> 막고, drain은 cordon + <b>기존 Pod 축출</b>입니다. 다른 노드에 다시 만드는 것은 컨트롤러(Deployment 등)이며, 직접 만든 Pod는 돌아오지 않습니다. uncordon은 "다시 받아도 된다"는 표시일 뿐 Pod를 옮기지 않습니다.'},
+{t:'개념', q:'taint의 effect에 대한 설명으로 <b>옳은</b> 것은?',
+ o:['NoSchedule은 이미 실행 중인 Pod도 즉시 쫓아낸다.',
+    'NoExecute는 toleration 없는 기존 Pod를 축출하며, tolerationSeconds로 머무를 시간을 줄 수 있다.',
+    '어떤 taint를 허용하는 toleration이 있으면 그 노드에 반드시 배치된다.',
+    'PreferNoSchedule은 조건이 맞지 않으면 Pod를 Pending으로 둔다.'],
+ a:1, e:'NoSchedule은 새 Pod만 거부하고 기존 Pod는 그대로입니다. toleration은 "들어갈 <b>자격</b>"이지 "가야 할 <b>목표</b>"가 아니므로, 특정 노드로 보내려면 nodeSelector·affinity를 함께 씁니다. PreferNoSchedule은 "되도록 피함"이라 Pending을 만들지 않습니다.'},
+{t:'개념', q:'Deployment와 ReplicaSet에 대한 설명으로 <b>옳지 않은</b> 것은?',
+ o:['Deployment는 Pod 템플릿(버전)이 바뀔 때마다 새 ReplicaSet을 만든다.',
+    'replicas만 바꾸면 새 ReplicaSet 없이 개수만 조정된다.',
+    'ReplicaSet은 라벨로 Pod를 세므로 같은 라벨의 Pod를 직접 만들면 초과분이 삭제된다.',
+    '<code>kubectl set image rs/…</code>로 ReplicaSet의 이미지를 바꾸면 기존 Pod가 자동으로 새 이미지로 교체된다.'],
+ a:3, e:'ReplicaSet은 <b>개수만</b> 맞춥니다. 이미지를 바꿔도 템플릿만 바뀌고 기존 Pod는 그대로이며, Pod를 지워야 새 이미지로 생성됩니다. 이 교체를 자동으로 해 주는 것이 Deployment(롤링 업데이트)입니다.'},
+{t:'개념', q:'replicas 3, maxSurge 25%, maxUnavailable 25%인 Deployment를 업데이트할 때 Pod 수에 대한 설명으로 <b>옳은</b> 것은?',
+ o:['Available 최소 2개 · 전체 최대 4개', 'Available 최소 3개 · 전체 최대 4개', 'Available 최소 2개 · 전체 최대 3개', 'Available 최소 3개 · 전체 최대 5개'],
+ a:1, e:'maxSurge는 <b>올림</b>: 3×0.25=0.75 → 1, maxUnavailable은 <b>내림</b>: 0.75 → 0. 따라서 Pod는 최대 3+1=4개, Available은 3-0=3개 아래로 내려가지 않습니다.'},
+{t:'개념', q:'Service 타입에 대한 설명으로 <b>옳지 않은</b> 것은?',
+ o:['ClusterIP는 클러스터 내부에서만 접근할 수 있는 가상 IP를 준다.',
+    'NodePort는 모든 노드의 같은 포트(기본 30000~32767)를 연다.',
+    'LoadBalancer 타입은 ClusterIP와 NodePort 기능을 포함한다.',
+    'ExternalName은 외부 트래픽을 Pod로 전달하기 위해 ClusterIP를 할당하고 프록시한다.'],
+ a:3, e:'ExternalName은 DNS에 <b>CNAME 레코드</b>만 등록합니다. ClusterIP·셀렉터·프록시가 없습니다. 외부 DB 주소 같은 것을 클러스터 안 이름으로 감출 때 씁니다.'},
+{t:'개념', q:'Probe에 대한 설명으로 <b>옳은</b> 것은?',
+ o:['readinessProbe가 계속 실패하면 kubelet이 컨테이너를 재시작한다.',
+    'livenessProbe가 failureThreshold만큼 연속 실패하면 컨테이너가 재시작된다.',
+    'startupProbe가 진행 중일 때에도 liveness와 readiness가 함께 검사된다.',
+    'Probe를 하나도 설정하지 않으면 Pod는 Ready가 될 수 없다.'],
+ a:1, e:'liveness 실패 → <b>재시작</b>, readiness 실패 → <b>트래픽에서 제외</b>(재시작 없음). startupProbe가 성공하기 전에는 나머지 Probe가 시작되지 않습니다. Probe가 없으면 컨테이너가 뜨는 즉시 Ready로 간주됩니다.'},
+{t:'개념', q:'QoS 클래스가 <b>Guaranteed</b>가 되는 경우는?',
+ o:['모든 컨테이너에 requests만 설정했다.',
+    '모든 컨테이너에 CPU·메모리 requests와 limits를 같은 값으로 설정했다.',
+    '어떤 컨테이너에도 requests·limits를 설정하지 않았다.',
+    'CPU만 requests = limits로 설정하고 메모리는 설정하지 않았다.'],
+ a:1, e:'모든 컨테이너의 CPU·메모리 <b>requests = limits</b>면 Guaranteed, 일부만 있으면 Burstable, 아무것도 없으면 BestEffort입니다. 노드 메모리가 부족하면 BestEffort부터 축출됩니다.'},
+{t:'개념', q:'컨테이너가 limits를 넘었을 때의 동작으로 <b>옳은</b> 것은?',
+ o:['CPU limit을 넘으면 컨테이너가 OOMKilled로 종료된다.',
+    '메모리 limit을 넘으면 OOMKilled로 종료되고, CPU limit을 넘으면 스로틀링(느려짐)된다.',
+    'CPU·메모리 모두 스로틀링만 되고 종료되지는 않는다.',
+    '둘 다 Pod가 삭제되고 다른 노드로 옮겨진다.'],
+ a:1, e:'CPU는 시간을 나눠 쓸 수 있어 <b>느려지게</b> 하고, 메모리는 나눌 수 없어 커널이 프로세스를 <b>강제 종료</b>(OOMKilled, exit 137)합니다. 컨테이너는 같은 Pod에서 재시작됩니다.'},
+{t:'개념', q:'HPA(HorizontalPodAutoscaler)가 CPU 사용률로 동작하기 위한 설명으로 <b>옳지 않은</b> 것은?',
+ o:['metrics-server 같은 메트릭 API가 설치되어 있어야 한다.',
+    '대상 컨테이너에 CPU requests가 있어야 한다(사용률 = 사용량 ÷ requests).',
+    'HPA를 쓰더라도 Deployment manifest에 replicas를 고정해 두는 것이 안전하다.',
+    'minReplicas ~ maxReplicas 범위 안에서 Pod 수를 조정한다.'],
+ a:2, e:'manifest에 replicas가 남아 있으면 <code>kubectl apply</code>할 때마다 HPA가 늘려 둔 Pod 수가 그 값으로 <b>되돌아갑니다</b>. HPA를 쓸 때는 replicas를 manifest와 last-applied에서 빼서 Pod 수의 주인을 HPA 하나로 둡니다.'},
+/* ---------- 명령어 ---------- */
+{t:'명령어', q:'CrashLoopBackOff 상태인 Pod에서 <b>재시작되기 직전</b> 컨테이너의 로그를 보는 명령은?',
+ o:['<code>kubectl logs POD -f</code>', '<code>kubectl logs POD --previous</code>', '<code>kubectl describe pod POD --logs</code>', '<code>kubectl logs POD --tail=0</code>'],
+ a:1, e:'<code>--previous</code>(<code>-p</code>)는 이전 컨테이너 인스턴스의 로그입니다. 현재 컨테이너는 막 다시 시작해 원인 로그가 없을 수 있습니다. <code>-f</code>는 실시간 따라가기입니다.'},
+{t:'명령어', q:'잘못된 이미지로 배포된 Deployment <code>shop-api</code>를 <b>직전 버전</b>으로 되돌리는 명령은?',
+ o:['<code>kubectl rollout restart deploy/shop-api</code>', '<code>kubectl rollout undo deploy/shop-api</code>', '<code>kubectl rollout history deploy/shop-api --revert</code>', '<code>kubectl delete rs --last</code>'],
+ a:1, e:'<code>rollout undo</code>는 직전 리비전으로, <code>--to-revision=N</code>은 특정 리비전으로 되돌립니다. <code>restart</code>는 같은 템플릿으로 Pod만 다시 만듭니다. 되돌린 뒤에는 <b>파일도</b> 고쳐야 다음 apply에서 불량 버전이 다시 배포되지 않습니다.'},
+{t:'명령어', q:'파일을 적용하기 <b>전에</b> 현재 클러스터 상태와 무엇이 다른지 확인하는 명령은?',
+ o:['<code>kubectl get -f shop-api-deploy.yaml</code>', '<code>kubectl diff -f shop-api-deploy.yaml</code>', '<code>kubectl describe -f shop-api-deploy.yaml</code>', '<code>kubectl explain -f shop-api-deploy.yaml</code>'],
+ a:1, e:'<code>kubectl diff</code>는 <code>git diff</code>처럼 바뀔 줄을 보여 줍니다. <code>explain</code>은 필드 설명서이고 <code>-f</code>를 받지 않습니다.'},
+{t:'명령어', q:'DaemonSet Pod와 emptyDir를 쓰는 Pod, 컨트롤러 없는 Pod가 있는 cap-node1을 점검을 위해 비우려 한다. 알맞은 명령은?',
+ o:['<code>kubectl cordon cap-node1 --force</code>',
+    '<code>kubectl drain cap-node1 --ignore-daemonsets --delete-emptydir-data --force</code>',
+    '<code>kubectl delete node cap-node1 --drain</code>',
+    '<code>kubectl taint nodes cap-node1 drain=true</code>'],
+ a:1, e:'DaemonSet Pod는 지워도 다시 생기므로 <code>--ignore-daemonsets</code>, emptyDir 데이터 손실 승인은 <code>--delete-emptydir-data</code>, 컨트롤러 없는 Pod 삭제 승인은 <code>--force</code>입니다. 점검 후 <code>kubectl uncordon</code>으로 되돌립니다.'},
+{t:'명령어', q:'cap-node2를 <b>DB 전용 노드</b>로 만들기 위해 taint를 붙이는 명령으로 <b>옳은</b> 것은?',
+ o:['<code>kubectl label nodes cap-node2 dedicated=db:NoSchedule</code>',
+    '<code>kubectl taint nodes cap-node2 dedicated=db:NoSchedule</code>',
+    '<code>kubectl taint nodes cap-node2 dedicated:db=NoSchedule</code>',
+    '<code>kubectl cordon cap-node2 dedicated=db</code>'],
+ a:1, e:'형식은 <code>key=value:effect</code>입니다. 제거는 끝에 <code>-</code>를 붙여 <code>kubectl taint nodes cap-node2 dedicated=db:NoSchedule-</code>입니다.'},
+{t:'명령어', q:'CronJob <code>shop-report</code>를 예정 시각까지 기다리지 않고 <b>지금 한 번</b> 실행하는 명령은?',
+ o:['<code>kubectl run shop-report --from=cronjob/shop-report</code>',
+    '<code>kubectl create job shop-report-manual --from=cronjob/shop-report</code>',
+    '<code>kubectl rollout restart cronjob/shop-report</code>',
+    '<code>kubectl apply -f shop-report-cronjob.yaml --now</code>'],
+ a:1, e:'<code>create job --from=cronjob/…</code>은 CronJob의 jobTemplate으로 Job을 즉시 만듭니다. 테스트가 끝나면 수동 Job은 지웁니다.'},
+{t:'명령어', q:'Service <code>shop-api</code>가 실제로 트래픽을 보낼 <b>Pod IP 목록</b>을 확인하는 명령은?',
+ o:['<code>kubectl get endpointslice -l kubernetes.io/service-name=shop-api</code>',
+    '<code>kubectl get svc shop-api --pods</code>',
+    '<code>kubectl get pods --selector-of=svc/shop-api</code>',
+    '<code>kubectl describe node | grep shop-api</code>'],
+ a:0, e:'EndpointSlice에는 셀렉터와 일치하고 <b>Ready인</b> Pod IP만 들어갑니다. 비어 있으면 셀렉터 오타이거나 Ready인 Pod가 없는 것입니다.'},
+{t:'명령어', q:'Helm 릴리스 <code>ngf</code>를 업그레이드한 뒤 문제가 생겨 <b>첫 번째 리비전</b>으로 되돌리려 한다. 알맞은 명령은?',
+ o:['<code>helm undo ngf</code>', '<code>helm rollback ngf 1</code>', '<code>helm upgrade ngf --revision 1</code>', '<code>helm uninstall ngf --keep 1</code>'],
+ a:1, e:'<code>helm rollback &lt;릴리스&gt; &lt;리비전&gt;</code>입니다. 이력은 <code>helm history ngf</code>로 확인하며, 되돌린 결과는 새 리비전 번호로 기록됩니다.'},
+{t:'명령어', q:'파드 상태와 원인의 연결로 <b>옳지 않은</b> 것은?',
+ o:['ImagePullBackOff — 이미지 이름·태그 오타, 레지스트리 인증 실패',
+    'CrashLoopBackOff — 컨테이너가 시작한 뒤 계속 오류로 종료',
+    'Pending — 조건에 맞는 노드가 없음(nodeSelector·taint·자원 부족)',
+    'CreateContainerConfigError — 노드의 디스크 용량 부족'],
+ a:3, e:'CreateContainerConfigError는 참조한 <b>ConfigMap·Secret이 없거나 키가 틀릴 때</b> 납니다(Lab09의 <code>shop-cofig</code>). Events에 <code>configmap "…" not found</code>가 찍힙니다.'},
+/* ---------- YAML ---------- */
+{t:'YAML', q:'다음 Service에 대한 해석으로 <b>옳은</b> 것은?',
+ code:`apiVersion: v1
+kind: Service
+metadata:
+  name: shop-web
+  namespace: shop
+spec:
+  type: NodePort
+  selector:
+    app: shop
+    tier: web
+  ports:
+    - port: 80
+      targetPort: 8080
+      nodePort: 30080`,
+ o:['클러스터 밖에서는 <code>노드IP:80</code>으로 접속한다.',
+    '<code>노드IP:30080</code> → Service 80 → Pod 컨테이너 8080 순서로 전달된다.',
+    'Pod의 컨테이너는 30080 포트로 요청을 받아야 한다.',
+    'NodePort 타입에는 ClusterIP가 할당되지 않는다.'],
+ a:1, e:'Docker의 <code>-p 호스트:컨테이너</code>처럼 <b>방향</b>을 묻는 문제입니다. nodePort(노드) → port(Service) → targetPort(컨테이너). NodePort도 ClusterIP를 함께 가집니다.'},
+{t:'YAML', q:'(위 Service에 이어서) <b>같은 shop 네임스페이스</b>의 다른 Pod에서 이 Service를 호출하는 주소로 <b>옳은</b> 것은?',
+ o:['<code>http://shop-web:30080</code>', '<code>http://shop-web:80</code>', '<code>http://shop-web:8080</code>', '<code>http://localhost:30080</code>'],
+ a:1, e:'Docker compose에서 <b>서비스 이름이 호스트 이름</b>이었던 것처럼, 쿠버네티스에서는 <b>Service 이름이 DNS 이름</b>입니다. 클러스터 안에서는 Service의 <code>port</code>(80)로 부릅니다. 다른 네임스페이스라면 <code>shop-web.shop</code>을 씁니다.'},
+{t:'YAML', q:'다음 Deployment를 <code>kubectl apply</code> 했을 때의 결과로 <b>옳은</b> 것은?',
+ code:`apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shop-api
+spec:
+  replicas: 3
+  selector:
+    matchLabels: {app: shop, tier: api}
+  template:
+    metadata:
+      labels: {app: shop, tier: web}
+    spec:
+      containers:
+        - name: api
+          image: ghcr.io/worldvit/skillboost-api:v1`,
+ o:['정상 생성되고 Pod 3개가 Running이 된다.',
+    'selector가 템플릿 라벨과 맞지 않아 API 서버가 생성을 거부한다.',
+    'Pod 3개는 생성되지만 Deployment가 Pod를 찾지 못해 계속 새로 만든다.',
+    '쿠버네티스가 템플릿 라벨을 tier: api로 자동으로 고친다.'],
+ a:1, e:'selector는 템플릿 라벨에 <b>반드시 포함</b>되어야 합니다. 아니면 <code>selector does not match template labels</code>로 거부됩니다. selector는 만든 뒤 바꿀 수도 없습니다.'},
+{t:'YAML', q:'replicas 3인 Deployment에 아래 전략을 적용했다. 업데이트 동작으로 <b>옳은</b> 것은?',
+ code:`strategy:
+  type: RollingUpdate
+  rollingUpdate:
+    maxSurge: 0
+    maxUnavailable: 1`,
+ o:['업데이트 중 Pod가 최대 4개까지 늘어난다.',
+    '새 Pod를 먼저 띄워 Ready가 되면 옛 Pod를 내린다.',
+    '옛 Pod 1개를 먼저 내리고 새 Pod를 만든다. Pod 수는 3을 넘지 않는다.',
+    '옛 Pod를 모두 동시에 내린다(Recreate와 같다).'],
+ a:2, e:'surge 0이면 추가 Pod를 띄울 수 없으므로 하나를 먼저 내리고(Available 최소 2) 그 자리에 새 Pod를 만듭니다. 자원이 빠듯한 클러스터에 맞는 설정입니다. 전부 내렸다 올리는 것은 <code>type: Recreate</code>입니다.'},
+{t:'YAML', q:'앱 기동에 약 20초가 걸린다. 아래 startupProbe를 쓰면 어떻게 되는가?',
+ code:`startupProbe:
+  httpGet:
+    path: /healthz
+    port: http
+  periodSeconds: 2
+  failureThreshold: 5`,
+ o:['20초 뒤 정상적으로 Ready가 된다.',
+    'startupProbe가 실패하면 readiness만 false가 되고 재시작은 없다.',
+    '약 10초(2초 × 5회) 안에 성공하지 못해 컨테이너가 재시작되고, 이를 반복한다.',
+    'startupProbe는 처음 한 번만 검사하므로 기동 시간과 상관없다.'],
+ a:2, e:'startupProbe의 예산은 <b>periodSeconds × failureThreshold</b>입니다. 10초 < 20초라 kubelet이 컨테이너를 죽이고 재시작합니다(Lab07). <code>failureThreshold: 15</code>(30초)처럼 기동 시간보다 넉넉히 잡습니다.'},
+{t:'YAML', q:'다음 Job에 대한 설명으로 <b>옳은</b> 것은?',
+ code:`apiVersion: batch/v1
+kind: Job
+spec:
+  completions: 6
+  parallelism: 2
+  backoffLimit: 4
+  template:
+    spec:
+      restartPolicy: Never`,
+ o:['동시에 최대 2개 Pod가 실행되고, 총 6번 성공하면 Job이 완료된다.',
+    '6개 Pod가 동시에 실행된다.',
+    '실패하면 같은 Pod 안에서 컨테이너가 재시작된다.',
+    '4번 성공하면 Job이 완료된다.'],
+ a:0, e:'completions는 총 성공 횟수, parallelism은 동시 실행 수, backoffLimit은 실패 재시도 상한입니다. restartPolicy가 <b>Never</b>면 실패할 때마다 <b>새 Pod</b>가 생기고, OnFailure면 같은 Pod에서 컨테이너가 재시작됩니다.'},
+{t:'YAML', q:'CronJob의 <code>schedule: "0 3 * * 1-5"</code>와 <code>timeZone: "Asia/Seoul"</code>의 의미로 <b>옳은</b> 것은?',
+ o:['매월 1일~5일 03:00(한국 시간)', '월요일~금요일 03:00(한국 시간)', '3분마다, 1~5시 사이', '매일 03:00과 01:00~05:00 정각'],
+ a:1, e:'필드 순서는 <b>분 · 시 · 일 · 월 · 요일</b>입니다. 다섯 번째 요일 자리의 <code>1-5</code>는 월~금입니다. timeZone이 없으면 컨트롤러 시간대(보통 UTC) 기준이라 9시간 차이가 납니다.'},
+{t:'YAML', q:'다음 PV와 PVC를 적용했더니 PVC가 계속 <b>Pending</b>이다. 가장 알맞은 원인은?',
+ code:`kind: PersistentVolume
+metadata:
+  name: shop-db-pv
+spec:
+  capacity: {storage: 5Gi}
+  accessModes: [ReadWriteOnce]
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: ""
+  nfs: {server: 10.20.1.10, path: /srv/nfs/shop-db}
+---
+kind: PersistentVolumeClaim
+metadata:
+  name: shop-db-data
+  namespace: shop
+spec:
+  accessModes: [ReadWriteOnce]
+  storageClassName: ""
+  volumeName: shop-db-pv
+  resources:
+    requests: {storage: 10Gi}`,
+ o:['PV에 namespace가 없어서', 'PVC가 요청한 용량(10Gi)이 PV 용량(5Gi)보다 커서', 'reclaimPolicy가 Retain이어서', 'storageClassName이 빈 문자열이어서'],
+ a:1, e:'PVC는 <b>요청 용량 이상이고 accessModes가 맞는</b> PV에만 묶입니다. PV는 클러스터 범위라 namespace가 없는 것이 정상이고, <code>storageClassName: ""</code>는 동적 프로비저닝을 쓰지 않겠다는 정상 설정입니다.'},
+{t:'YAML', q:'아래 StorageClass로 PVC를 만들었더니 Pending이었다가, 이 PVC를 쓰는 Pod를 만들자 Bound가 되었다. 이유로 <b>옳은</b> 것은?',
+ code:`apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: gp3
+provisioner: ebs.csi.aws.com
+volumeBindingMode: WaitForFirstConsumer
+reclaimPolicy: Delete
+parameters:
+  type: gp3`,
+ o:['EBS CSI 드라이버에 오류가 있어서 재시도한 것이다.',
+    'Pod가 배치될 노드(가용 영역)가 정해진 뒤 볼륨을 만들도록 설정했기 때문이다.',
+    'reclaimPolicy가 Delete라서 처음에는 볼륨을 만들지 않는다.',
+    'gp3 볼륨은 Pod가 있어야만 만들 수 있는 AWS 제약 때문이다.'],
+ a:1, e:'EBS는 <b>한 AZ</b>에서만 붙습니다. <code>WaitForFirstConsumer</code>는 Pod가 배치될 노드가 정해진 뒤 그 AZ에 볼륨을 만듭니다. Pod 없이 PVC만 있으면 Pending이 정상입니다.'},
+{t:'YAML', q:'HTTPRoute의 아래 설정에 대한 설명으로 <b>옳은</b> 것은?',
+ code:`rules:
+  - matches:
+      - path: {type: Exact, value: /api/version}
+    backendRefs:
+      - name: shop-api
+        port: 5000
+        weight: 8
+      - name: shop-api-v2
+        port: 5000
+        weight: 2`,
+ o:['<code>/api/version</code> 요청의 약 80%는 shop-api, 약 20%는 shop-api-v2로 간다.',
+    '요청 8개를 shop-api로 보낸 뒤 다음 2개를 v2로 보내는 순서가 보장된다.',
+    'shop-api가 실패할 때만 shop-api-v2로 간다.',
+    '<code>/api/version/abc</code> 요청도 이 규칙에 일치한다.'],
+ a:0, e:'weight는 <b>비율</b>입니다(8:2 → 80%:20%). 새 버전에 일부 트래픽만 보내는 <b>카나리 배포</b>에 씁니다. <code>Exact</code>는 경로가 정확히 같아야 하므로 <code>/api/version/abc</code>는 일치하지 않습니다.'},
+{t:'YAML', q:'StatefulSet <code>shop-db</code>(serviceName: shop-db, namespace: shop)의 0번 Pod에 붙는 <b>DNS 이름</b>으로 <b>옳은</b> 것은?',
+ o:['<code>shop-db.shop-db-0.shop.svc.cluster.local</code>', '<code>shop-db-0.shop-db.shop.svc.cluster.local</code>', '<code>shop-db-0.shop.svc.cluster.local</code>', '<code>shop-db-0.cluster.local</code>'],
+ a:1, e:'형식은 <b>Pod이름.헤드리스서비스.네임스페이스.svc.cluster.local</b>입니다. Headless Service(<code>clusterIP: None</code>)와 <code>serviceName</code>이 있어야 생깁니다. 같은 네임스페이스에서는 <code>shop-db-0.shop-db</code>로 줄여 씁니다.'},
+{t:'YAML', q:'아래 설정에 대한 설명으로 <b>옳은</b> 것은?',
+ code:`spec:
+  initContainers:
+    - name: log-agent
+      image: busybox:1.37
+      restartPolicy: Always
+      command: ["sh", "-c", "tail -F /var/log/nginx/access.log"]
+  containers:
+    - name: nginx
+      image: nginx:1.30-alpine`,
+ o:['log-agent가 실행을 마치고 종료해야 nginx가 시작된다.',
+    'log-agent는 nginx보다 먼저 시작해 함께 계속 실행되는 네이티브 사이드카이며, READY는 2/2로 표시된다.',
+    'Pod 전체의 restartPolicy가 Always로 바뀐다는 뜻이다.',
+    'initContainers에는 restartPolicy를 쓸 수 없어 오류가 난다.'],
+ a:1, e:'<code>initContainers</code> + <code>restartPolicy: Always</code>가 <b>네이티브 사이드카</b>입니다. 일반 init 컨테이너와 달리 끝나지 않고, 앱보다 먼저 시작해 나중에 종료됩니다. 로그를 공유하려면 두 컨테이너에 같은 emptyDir을 마운트해야 합니다.'},
+{t:'YAML', q:'다음 Pod를 실행했을 때 로그에 출력되는 내용은? (Pod 이름은 lab03-cmd)',
+ code:`spec:
+  restartPolicy: Never
+  containers:
+    - name: app
+      image: busybox:1.37
+      env:
+        - name: GREETING
+          value: "hello"
+      command: ["echo"]
+      args: ["$(GREETING)", "$HOSTNAME"]`,
+ o:['<code>hello lab03-cmd</code>', '<code>$(GREETING) $HOSTNAME</code>', '<code>hello $HOSTNAME</code>', '변수를 찾지 못해 오류로 종료된다.'],
+ a:2, e:'<code>$(VAR)</code>는 <b>쿠버네티스가</b> env 값으로 치환합니다. <code>$HOSTNAME</code>은 셸 문법인데 셸 없이 echo를 실행했으므로 글자 그대로 출력됩니다. <code>["sh","-c","echo $GREETING $HOSTNAME"]</code>이면 둘 다 치환됩니다.'},
+/* ---------- 순서·장애 ---------- */
+{t:'순서·장애', q:'<code>kubectl apply -f pod.yaml</code> 뒤에 일어나는 일을 순서대로 나열한 것은?<br>(가) kubelet이 containerd로 컨테이너를 실행한다<br>(나) 스케줄러가 노드를 골라 결과를 기록한다<br>(다) API 서버가 검증한 뒤 etcd에 저장한다<br>(라) kubelet이 Pod 상태를 API 서버에 보고한다',
+ o:['(다) → (나) → (가) → (라)', '(나) → (다) → (가) → (라)', '(다) → (가) → (나) → (라)', '(가) → (다) → (나) → (라)'],
+ a:0, e:'API 서버 저장(이때 <code>created</code> 응답) → 스케줄러가 노드 결정 → 그 노드의 kubelet이 실행 → 상태 보고. <code>created</code>는 "접수됐다"이지 "떴다"가 아닙니다.'},
+{t:'순서·장애', q:'kubeadm으로 클러스터를 설치하는 순서로 <b>옳은</b> 것은?<br>(가) 마스터에서 <code>kubeadm init</code><br>(나) 모든 노드에서 swap 끄기 · 커널 모듈 · containerd · kubeadm 설치<br>(다) CNI(Calico) 설치<br>(라) 워커에서 <code>kubeadm join</code>',
+ o:['(가) → (나) → (다) → (라)', '(나) → (가) → (라) → (다)', '(다) → (나) → (가) → (라)', '(라) → (가) → (나) → (다)'],
+ a:1, e:'노드 준비가 먼저이고, 그다음 init → join → CNI 순서로 진행했습니다(Lab02). CNI가 설치되기 전에는 노드가 <code>NotReady</code>로 보이는 것이 정상입니다.'},
+{t:'순서·장애', q:'<code>curl http://shop-api:5000</code>이 실패하고, <code>kubectl get endpointslice -l kubernetes.io/service-name=shop-api</code>의 ENDPOINTS가 비어 있다. Pod는 모두 Running이다. 가장 먼저 확인할 것은?',
+ o:['Service selector와 Pod 라벨이 일치하는지(<code>--show-labels</code>)', 'CoreDNS Pod가 실행 중인지', 'AWS 보안 그룹에 5000 포트가 열려 있는지', 'ClusterIP로 ping이 되는지'],
+ a:0, e:'EndpointSlice가 비어 있으면 Service가 고를 Pod가 없다는 뜻입니다. 대부분 <b>selector 오타</b>(Lab06의 <code>tier: apii</code>, Lab09의 <code>tier: apl</code>)이거나 Ready인 Pod가 없는 경우입니다. ClusterIP는 가상 IP라 ping이 원래 되지 않습니다.'}
+];
+</script>
+<script>
+(function(){
+  function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+  function store(k,v){try{ if(v===undefined) return localStorage.getItem(k); localStorage.setItem(k,v);}catch(e){return null}}
+
+  // ---- code highlighting (comments, YAML keys, strings, commands, flags) ----
+  var RE=/(^|[ \t])(#(?![!{]).*$)|("(?:[^"\\\n]|\\.)*"|'[^'\n]*')|^([ \t]*(?:- )?)([A-Za-z_][\w.\-\/]*)(?=:(?:[ \t]|$))|^([ \t]*)(kubectl|helm|aws|eksctl|curl|sed|cat|echo|apt|apt-get|systemctl|kubeadm|git|bash|sudo|mkdir|cp|modprobe|sysctl|containerd|exportfs|for|while|done|do|if|then|else|fi|sleep|grep|export|source|chown|chmod|truncate|q|dbwait)(?=[ \t]|$)|([ \t])(--?[A-Za-z][\w.\-]*)/gm;
+  function hlText(t){
+    var out='',last=0,m;RE.lastIndex=0;
+    while((m=RE.exec(t))){
+      if(m[0]===''){RE.lastIndex++;continue;}
+      out+=esc(t.slice(last,m.index));
+      if(m[2]!==undefined) out+=esc(m[1])+'<span class="cm">'+esc(m[2])+'</span>';
+      else if(m[3]!==undefined) out+='<span class="s">'+esc(m[3])+'</span>';
+      else if(m[5]!==undefined) out+=esc(m[4])+'<span class="k">'+esc(m[5])+'</span>';
+      else if(m[7]!==undefined) out+=esc(m[6])+'<span class="x">'+esc(m[7])+'</span>';
+      else if(m[9]!==undefined) out+=esc(m[8])+'<span class="f">'+esc(m[9])+'</span>';
+      last=m.index+m[0].length;
+    }
+    return out+esc(t.slice(last));
+  }
+  function highlight(code){
+    if(code.dataset.hl) return; code.dataset.hl='1';
+    [].slice.call(code.childNodes).forEach(function(n){
+      if(n.nodeType!==3) return;
+      var span=document.createElement('span'); span.innerHTML=hlText(n.nodeValue);
+      while(span.firstChild) code.insertBefore(span.firstChild,n);
+      code.removeChild(n);
+    });
+  }
+  document.querySelectorAll('pre code').forEach(highlight);
+
+  // ---- reading progress + back to top ----
+  var bar=document.getElementById('progress'), top=document.getElementById('toTop');
+  function onScroll(){
+    var h=document.documentElement.scrollHeight-innerHeight;
+    if(bar) bar.style.width=(h>0?scrollY/h*100:0)+'%';
+    if(top) top.classList.toggle('show',scrollY>900);
+  }
+  addEventListener('scroll',onScroll,{passive:true}); onScroll();
+  if(top) top.addEventListener('click',function(){scrollTo({top:0,behavior:'smooth'});});
+
+  // ---- code explanation: fold / unfold all in one lab ----
+  document.querySelectorAll('.cx-toggle').forEach(function(b){
+    b.addEventListener('click',function(){
+      var ds=b.closest('.cx-sec').querySelectorAll('details.cx'), open=b.textContent==='모두 펼치기';
+      ds.forEach(function(d){d.open=open;}); b.textContent=open?'모두 접기':'모두 펼치기';
+    });
+  });
+
+  // ---- quiz ----
+  var list=document.getElementById('quizList');
+  if(!list||typeof QUIZ==='undefined') return;
+  var NUM=['①','②','③','④'];
+  var state={}; try{state=JSON.parse(store('k8s7-quiz')||'{}')||{};}catch(e){state={};}
+  var revealed=false;
+  function save(){store('k8s7-quiz',JSON.stringify(state));}
+  function render(){
+    var html='';
+    QUIZ.forEach(function(q,i){
+      html+='<div class="qcard" data-i="'+i+'" data-t="'+q.t+'"><div class="qhead"><div class="qnum">'+(i+1)+'</div>'+
+        '<div class="qtext"><span class="qtag">'+q.t+'</span><br>'+q.q+'</div></div>'+
+        (q.code?'<pre><code>'+esc(q.code)+'</code></pre>':'')+'<ol class="qopts">';
+      q.o.forEach(function(o,j){html+='<li><button type="button" data-j="'+j+'"><span class="on">'+NUM[j]+'</span><span>'+o+'</span></button></li>';});
+      html+='</ol><div class="qex"><b class="ans">정답 '+NUM[q.a]+'</b> — '+q.e+'</div></div>';
+    });
+    list.innerHTML=html;
+    list.querySelectorAll('pre code').forEach(highlight);
+    list.querySelectorAll('.qcard').forEach(paint);
+    score(); filter();
+  }
+  function paint(card){
+    var i=+card.dataset.i,q=QUIZ[i],pick=state[i],btns=card.querySelectorAll('.qopts button');
+    var answered=pick!==undefined, show=answered||revealed;
+    card.classList.toggle('done',show);
+    card.classList.toggle('ok',answered&&pick===q.a);
+    card.classList.toggle('no',answered&&pick!==q.a);
+    btns.forEach(function(b,j){
+      b.disabled=show;
+      b.classList.toggle('right',show&&j===q.a);
+      b.classList.toggle('wrong',answered&&j===pick&&pick!==q.a);
+    });
+  }
+  function score(){
+    var done=0,ok=0;
+    QUIZ.forEach(function(q,i){if(state[i]!==undefined){done++; if(state[i]===q.a) ok++;}});
+    document.getElementById('qScore').textContent=ok;
+    document.getElementById('qDone').textContent=done;
+    document.getElementById('qPts').textContent=(ok*100/QUIZ.length).toFixed(1).replace(/\.0$/,'')+'점';
+    document.getElementById('qProg').style.width=(done/QUIZ.length*100)+'%';
+  }
+  var sel=document.getElementById('qFilter');
+  function filter(){
+    var v=sel.value;
+    list.querySelectorAll('.qcard').forEach(function(c){
+      var i=+c.dataset.i, show=v==='all'||(v==='wrong'?(state[i]!==undefined&&state[i]!==QUIZ[i].a):c.dataset.t===v);
+      c.hidden=!show;
+    });
+  }
+  list.addEventListener('click',function(e){
+    var b=e.target.closest('.qopts button'); if(!b||b.disabled) return;
+    var card=b.closest('.qcard'), i=+card.dataset.i;
+    state[i]=+b.dataset.j; save(); paint(card); score();
+  });
+  sel.addEventListener('change',filter);
+  document.getElementById('qReveal').addEventListener('click',function(){
+    revealed=!revealed; this.textContent=revealed?'정답 숨기기':'정답 모두 보기';
+    list.querySelectorAll('.qcard').forEach(paint);
+  });
+  document.getElementById('qReset').addEventListener('click',function(){
+    state={}; revealed=false; save(); document.getElementById('qReveal').textContent='정답 모두 보기';
+    sel.value='all'; render();
+  });
+  render();
 })();
 </script>
 </body>
